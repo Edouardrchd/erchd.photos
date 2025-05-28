@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-black text-white;
+}
+
+.gallery-item {
+  @apply relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-105;
+}
+
+.gallery-item img {
+  @apply w-full h-full object-cover;
+}
