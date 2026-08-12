@@ -1,0 +1,22 @@
+[build]
+  base = "project"
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# L'application est une SPA (vue-router en mode history) : toutes les URLs
+# doivent renvoyer index.html, sinon /gallery/football renvoie une 404 quand on
+# rafraichit la page ou qu'on ouvre le lien directement.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Vite ajoute une empreinte au nom des fichiers de /assets (photos comprises),
+# donc on peut les mettre en cache indefiniment sans risque.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

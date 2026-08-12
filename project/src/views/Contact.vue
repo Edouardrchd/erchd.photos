@@ -4,36 +4,45 @@ import { ref } from 'vue';
 const name = ref('');
 const email = ref('');
 const userMessage = ref('');
+const botField = ref('');
 const message = ref('');
 const isSuccess = ref(false);
-const isError = ref(false);
+const isSending = ref(false);
 
+// Netlify Forms : le message est envoyé en POST à la racine du site, avec le
+// nom du formulaire déclaré dans index.html. Aucun serveur à faire tourner, les
+// messages arrivent dans l'onglet « Forms » du tableau de bord Netlify.
 const handleSubmit = async () => {
+  isSending.value = true;
+  message.value = '';
+
   try {
-    const response = await fetch('http://localhost:3000/api/contact', {
+    const response = await fetch('/', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify({
+      body: new URLSearchParams({
+        'form-name': 'contact',
+        'bot-field': botField.value,
         name: name.value,
         email: email.value,
         message: userMessage.value
-      }),
+      }).toString(),
     });
 
-    if (response.ok) {
-      isSuccess.value = true;
-      message.value = 'Message envoyé avec succès !';
-      name.value = '';
-      email.value = '';
-      userMessage.value = '';
-    } else {
-      throw new Error('Erreur lors de l\'envoi du message');
-    }
+    if (!response.ok) throw new Error(`Réponse ${response.status}`);
+
+    isSuccess.value = true;
+    message.value = 'Message envoyé avec succès !';
+    name.value = '';
+    email.value = '';
+    userMessage.value = '';
   } catch (error) {
-    isError.value = true;
+    isSuccess.value = false;
     message.value = 'Une erreur est survenue. Veuillez réessayer.';
+  } finally {
+    isSending.value = false;
   }
 };
 </script>
@@ -121,26 +130,40 @@ const handleSubmit = async () => {
     <div class="card">
       <span class="card__title">Contact</span>
       <p class="card__content">Envoyez-nous un message</p>
-      <form class="card__form" @submit.prevent="handleSubmit">
-        <input 
+      <form
+        class="card__form"
+        name="contact"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        @submit.prevent="handleSubmit"
+      >
+        <input type="hidden" name="form-name" value="contact">
+        <input v-model="botField" type="text" name="bot-field" class="hidden" tabindex="-1" autocomplete="off">
+        <input
           v-model="name"
-          placeholder="Votre nom" 
+          name="name"
+          placeholder="Votre nom"
           type="text"
           required
         >
-        <input 
+        <input
           v-model="email"
-          placeholder="Votre email" 
+          name="email"
+          placeholder="Votre email"
           type="email"
           required
         >
-        <textarea 
+        <textarea
           v-model="userMessage"
+          name="message"
           placeholder="Votre message"
           required
           rows="3"
         ></textarea>
-        <button type="submit" class="sign-up">Envoyer</button>
+        <button type="submit" class="sign-up" :disabled="isSending">
+          {{ isSending ? 'Envoi…' : 'Envoyer' }}
+        </button>
       </form>
       <div v-if="message" :class="['message', isSuccess ? 'success' : 'error']">
         {{ message }}
