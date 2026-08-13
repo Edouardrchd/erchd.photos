@@ -1,0 +1,18 @@
+Filigrane
+=========
+
+Depose ici un fichier `watermark.png` : c'est le filigrane incruste en bas a
+droite de chaque short.
+
+Contraintes :
+  - PNG avec canal alpha (fond transparent) ;
+  - largeur conseillee 400 a 600 px — le montage le redimensionne a un
+    cinquieme de la largeur de la video, soit 216 px sur un rendu 1080x1920 ;
+  - contraste suffisant pour rester lisible sur fond clair comme sur fond
+    sombre : un logo blanc avec une legere ombre portee fonctionne dans les
+    deux cas.
+
+Si le fichier est absent, le montage se fait sans filigrane. Aucune erreur
+n'est levee : c'est une etape optionnelle.
+
+Le chemin est configurable dans config.yaml, cle `marque.watermark`.

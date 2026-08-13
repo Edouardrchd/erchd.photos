@@ -1,0 +1,782 @@
+<title>Fabrique de Shorts</title>
+
+<style>
+  /* ---------------------------------------------------------------
+     Palette reprise du site erchd.photos : monochrome creme / encre.
+     Une seule couleur signal, reservee a ce qui encode un etat.
+     --------------------------------------------------------------- */
+  :root {
+    --ground:      #EFECE4;
+    --surface:     #F7F5EF;
+    --surface-alt: #E7E3D8;
+    --ink:         #15181A;
+    --ink-soft:    #565C5E;
+    --ink-faint:   #8A8F8C;
+    --rule:        #D3CEC2;
+    --rule-strong: #B9B2A2;
+    --signal:      #A9661C;
+    --ok:          #2E6B4A;
+    --wait:        #8A6414;
+    --block:       #97372B;
+    --code-bg:     #E7E3D8;
+    --shadow:      0 1px 2px rgba(21,24,26,.06), 0 8px 24px rgba(21,24,26,.05);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:      #0A0B0C;
+      --surface:     #111315;
+      --surface-alt: #17191B;
+      --ink:         #EDEAE3;
+      --ink-soft:    #9AA0A2;
+      --ink-faint:   #6C7274;
+      --rule:        #212326;
+      --rule-strong: #33373A;
+      --signal:      #E0A055;
+      --ok:          #74C295;
+      --wait:        #D9B15E;
+      --block:       #E38E7C;
+      --code-bg:     #17191B;
+      --shadow:      0 1px 2px rgba(0,0,0,.5), 0 8px 28px rgba(0,0,0,.4);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground:      #0A0B0C;
+    --surface:     #111315;
+    --surface-alt: #17191B;
+    --ink:         #EDEAE3;
+    --ink-soft:    #9AA0A2;
+    --ink-faint:   #6C7274;
+    --rule:        #212326;
+    --rule-strong: #33373A;
+    --signal:      #E0A055;
+    --ok:          #74C295;
+    --wait:        #D9B15E;
+    --block:       #E38E7C;
+    --code-bg:     #17191B;
+    --shadow:      0 1px 2px rgba(0,0,0,.5), 0 8px 28px rgba(0,0,0,.4);
+  }
+
+  /* ---- Typographie : pile de repli declaree par le site lui-meme ---- */
+  :root {
+    --ff-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+    --ff-sans: 'Jost', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+    --ff-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--ff-sans);
+    font-size: 17px;
+    line-height: 1.62;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: clamp(28px, 5vw, 72px) clamp(20px, 5vw, 56px) 96px;
+  }
+
+  /* ---------------- En-tete ---------------- */
+  .lede { display: flex; flex-direction: column; gap: 18px; max-width: 40rem; }
+
+  .eyebrow {
+    font-family: var(--ff-mono);
+    font-size: 12px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  h1 {
+    font-family: var(--ff-display);
+    font-weight: 400;
+    font-size: clamp(2.6rem, 7vw, 4.1rem);
+    line-height: 1.02;
+    letter-spacing: -.015em;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .standfirst {
+    font-size: clamp(1.05rem, 2.2vw, 1.22rem);
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0;
+    text-wrap: pretty;
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    font-family: var(--ff-mono);
+    font-size: 12.5px;
+    color: var(--ink-faint);
+    padding-top: 6px;
+    border-top: 1px solid var(--rule);
+    margin-top: 8px;
+  }
+
+  /* ---------------- Structure ---------------- */
+  main { display: flex; flex-direction: column; gap: 60px; margin-top: 64px; }
+
+  section { display: flex; flex-direction: column; gap: 20px; scroll-margin-top: 24px; }
+
+  h2 {
+    font-family: var(--ff-display);
+    font-weight: 400;
+    font-size: clamp(1.7rem, 3.6vw, 2.3rem);
+    line-height: 1.12;
+    letter-spacing: -.01em;
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    text-wrap: balance;
+  }
+
+  h2 .num {
+    font-family: var(--ff-mono);
+    font-size: 12px;
+    letter-spacing: .1em;
+    color: var(--signal);
+    flex: none;
+    transform: translateY(-2px);
+  }
+
+  h3 {
+    font-family: var(--ff-sans);
+    font-weight: 600;
+    font-size: 1.02rem;
+    letter-spacing: .005em;
+    margin: 10px 0 0;
+  }
+
+  p { margin: 0; max-width: 66ch; text-wrap: pretty; }
+
+  a { color: var(--ink); text-decoration-color: var(--rule-strong); text-underline-offset: 3px; }
+  a:hover { text-decoration-color: var(--signal); }
+  a:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; border-radius: 2px; }
+
+  strong { font-weight: 600; }
+
+  code {
+    font-family: var(--ff-mono);
+    font-size: .87em;
+    background: var(--code-bg);
+    padding: .12em .38em;
+    border-radius: 3px;
+  }
+
+  ul { margin: 0; padding-left: 1.1rem; max-width: 66ch; display: flex; flex-direction: column; gap: 8px; }
+  li::marker { color: var(--ink-faint); }
+
+  /* ---------------- Tableaux ---------------- */
+  .scroll { overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); }
+
+  table { border-collapse: collapse; width: 100%; font-size: 15px; min-width: 480px; }
+
+  th, td { text-align: left; padding: 11px 16px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+
+  th {
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    background: var(--surface-alt);
+    white-space: nowrap;
+  }
+
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  /* ---------------- Pastilles d'etat ---------------- */
+  .pill {
+    display: inline-block;
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid currentColor;
+    white-space: nowrap;
+  }
+  .pill.ok    { color: var(--ok); }
+  .pill.wait  { color: var(--wait); }
+  .pill.block { color: var(--block); }
+  .pill.none  { color: var(--ink-faint); border-color: var(--rule-strong); }
+
+  /* ---------------- Encadres ---------------- */
+  .note {
+    border-left: 2px solid var(--signal);
+    padding: 2px 0 2px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .note .label {
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--signal);
+  }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: var(--shadow);
+  }
+  .card h3 { margin: 0; }
+  .card p { font-size: 15px; color: var(--ink-soft); }
+
+  /* ---------------- Terminal ---------------- */
+  pre {
+    font-family: var(--ff-mono);
+    font-size: 13.5px;
+    line-height: 1.75;
+    background: var(--surface-alt);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 18px 20px;
+    overflow-x: auto;
+    margin: 0;
+    color: var(--ink);
+  }
+  pre .c { color: var(--ink-faint); }
+  pre .p { color: var(--signal); }
+
+  /* ---------------- Figure ---------------- */
+  figure { margin: 0; display: flex; flex-direction: column; gap: 14px; }
+  figure svg { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+  figcaption { font-size: 14px; color: var(--ink-soft); max-width: 62ch; }
+
+  .fig-wrap {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: clamp(18px, 3vw, 30px);
+    overflow-x: auto;
+  }
+
+  footer {
+    margin-top: 76px;
+    padding-top: 22px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--ff-mono);
+    font-size: 12.5px;
+    color: var(--ink-faint);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+
+<div class="page">
+
+  <header class="lede">
+    <div class="eyebrow">erchd.photos — module <code>automation/</code></div>
+    <h1>Fabrique de Shorts</h1>
+    <p class="standfirst">
+      Une vidéo longue entre, cinq shorts verticaux sous-titrés sortent — titre,
+      description et hashtags rédigés, publiés sur Instagram, TikTok et YouTube.
+      Voici ce qu'il faut brancher, dans quel ordre, et ce que ça coûte vraiment.
+    </p>
+    <div class="meta">
+      <span>7 étages</span>
+      <span>6 connexions</span>
+      <span>≈ 4 € / mois</span>
+      <span>Montage vérifié par exécution réelle</span>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============================================================ -->
+    <section id="mecanisme">
+      <h2><span class="num">01</span> Le mécanisme</h2>
+
+      <p>
+        Sept étages. Chacun écrit son résultat sur disque, ce qui rend la chaîne
+        reprenable : si le montage échoue, la transcription et la sélection ne
+        sont ni rejouées ni repayées. Les services externes s'attachent étage
+        par étage — aucun n'est appelé deux fois pour la même donnée.
+      </p>
+
+      <div class="fig-wrap">
+        <figure>
+          <svg viewBox="0 0 580 660" role="img"
+               aria-label="Schéma des sept étages de la chaîne : source, transcription, sélection, montage, rédaction, validation humaine, publication. Chaque étage indique la donnée qu'il transmet au suivant et le service externe qu'il appelle. La validation humaine interrompt le flux entre la rédaction et la publication.">
+            <defs>
+              <marker id="fleche" viewBox="0 0 10 10" refX="9" refY="5"
+                      markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/>
+              </marker>
+              <marker id="flecheS" viewBox="0 0 10 10" refX="9" refY="5"
+                      markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--signal)"/>
+              </marker>
+            </defs>
+
+            <g font-family="var(--ff-sans)" font-size="13.5" fill="currentColor">
+
+              <!-- Etage 1 : Source -->
+              <rect x="40" y="24" width="200" height="54" rx="4"
+                    fill="none" stroke="currentColor" stroke-width="1.25"/>
+              <text x="58" y="46" font-size="11" font-family="var(--ff-mono)" fill="var(--ink-faint)">01</text>
+              <text x="82" y="47">Source</text>
+              <text x="58" y="65" font-size="11.5" fill="var(--ink-soft)">contrôle de licence</text>
+              <line x1="240" y1="51" x2="296" y2="51" stroke="currentColor"
+                    stroke-width="1" stroke-dasharray="3 3" opacity=".55"/>
+              <text x="304" y="55" font-size="11.5" fill="var(--ink-soft)">YouTube Data API</text>
+
+              <!-- 1 -> 2 -->
+              <line x1="140" y1="78" x2="140" y2="105" stroke="currentColor"
+                    stroke-width="1.25" marker-end="url(#fleche)"/>
+              <text x="152" y="97" font-size="11" font-family="var(--ff-mono)" fill="var(--ink-faint)">audio 16 kHz</text>
+
+              <!-- Etage 2 : Transcription -->
+              <rect x="40" y="110" width="200" height="54" rx="4"
+                    fill="none" stroke="currentColor" stroke-width="1.25"/>
+              <text x="58" y="132" font-size="11" font-family="var(--ff-mono)" fill="var(--ink-faint)">02</text>
+              <text x="82" y="133">Transcription</text>
+              <text x="58" y="151" font-size="11.5" fill="var(--ink-soft)">horodatage au mot</text>
+              <line x1="240" y1="137" x2="296" y2="137" stroke="currentColor"
+                    stroke-width="1" stroke-dasharray="3 3" opacity=".55"/>
+              <text x="304" y="141" font-size="11.5" fill="var(--ink-soft)">Whisper (local)</text>
+
+              <!-- 2 -> 3 -->
+              <line x1="140" y1="164" x2="140" y2="191" stroke="currentColor"
+                    stroke-width="1.25" marker-end="url(#fleche)"/>
+              <text x="152" y="183" font-size="11" font-family="var(--ff-mono)" fill="var(--ink-faint)">mots horodatés</text>
+
+              <!-- Etage 3 : Selection -->
+              <rect x="40" y="196" width="200" height="54" rx="4"
+                    fill="none" stroke="currentColor" stroke-width="1.25"/>
+              <text x="58" y="218" font-size="11" font-family="var(--ff-mono)" fill="var(--ink-faint)">03</text>
+              <text x="82" y="219">Sélection</text>
+              <text x="58" y="237" font-size="11.5" fill="var(--ink-soft)">extraits autonomes</text>
+              <line x1="240" y1="223" x2="296" y2="223" stroke="currentColor"
+                    stroke-width="1" stroke-dasharray="3 3" opacity=".55"/>
+              <text x="304" y="227" font-size="11.5" fill="var(--ink-soft)">API Anthropic</text>
+
+              <!-- 3 -> 4 -->
+              <line x1="140" y1="250" x2="140" y2="277" stroke="currentColor"
+                    stroke-width="1.25" marker-end="url(#fleche)"/>
+              <text x="152" y="269" font-size="11" font-family="var(--ff-mono)" fill="var(--ink-faint)">fenêtres début/fin</text>
+
+              <!-- Etage 4 : Montage -->
+              <rect x="40" y="282" width="200" height="54" rx="4"
+                    fill="none" stroke="currentColor" stroke-width="1.25"/>
+              <text x="58" y="304" font-size="11" font-family="var(--ff-mono)" fill="var(--ink-faint)">04</text>
+              <text x="82" y="305">Montage</text>
+              <text x="58" y="323" font-size="11.5" fill="var(--ink-soft)">9:16 + sous-titres</text>
+              <line x1="240" y1="309" x2="296" y2="309" stroke="currentColor"
+                    stroke-width="1" stroke-dasharray="3 3" opacity=".55"/>
+              <text x="304" y="313" font-size="11.5" fill="var(--ink-soft)">ffmpeg (local)</text>
+
+              <!-- 4 -> 5 -->
+              <line x1="140" y1="336" x2="140" y2="363" stroke="currentColor"
+                    stroke-width="1.25" marker-end="url(#fleche)"/>
+              <text x="152" y="355" font-size="11" font-family="var(--ff-mono)" fill="var(--ink-faint)">MP4 1080×1920</text>
+
+              <!-- Etage 5 : Redaction -->
+              <rect x="40" y="368" width="200" height="54" rx="4"
+                    fill="none" stroke="currentColor" stroke-width="1.25"/>
+              <text x="58" y="390" font-size="11" font-family="var(--ff-mono)" fill="var(--ink-faint)">05</text>
+              <text x="82" y="391">Rédaction</text>
+              <text x="58" y="409" font-size="11.5" fill="var(--ink-soft)">titre · desc · hashtags</text>
+              <line x1="240" y1="395" x2="296" y2="395" stroke="currentColor"
+                    stroke-width="1" stroke-dasharray="3 3" opacity=".55"/>
+              <text x="304" y="399" font-size="11.5" fill="var(--ink-soft)">API Anthropic</text>
+
+              <!-- 5 -> 6 -->
+              <line x1="140" y1="422" x2="140" y2="449" stroke="currentColor"
+                    stroke-width="1.25" marker-end="url(#fleche)"/>
+              <text x="152" y="441" font-size="11" font-family="var(--ff-mono)" fill="var(--ink-faint)">légendes ×3</text>
+
+              <!-- Etage 6 : Validation (porte humaine, en couleur signal) -->
+              <rect x="40" y="454" width="200" height="54" rx="4"
+                    fill="none" stroke="var(--signal)" stroke-width="1.75"/>
+              <text x="58" y="476" font-size="11" font-family="var(--ff-mono)" fill="var(--signal)">06</text>
+              <text x="82" y="477" fill="var(--signal)">Validation</text>
+              <text x="58" y="495" font-size="11.5" fill="var(--signal)">porte humaine</text>
+              <line x1="240" y1="481" x2="296" y2="481" stroke="var(--signal)"
+                    stroke-width="1" stroke-dasharray="3 3"/>
+              <text x="304" y="485" font-size="11.5" fill="var(--signal)">toi</text>
+
+              <!-- 6 -> 7 -->
+              <line x1="140" y1="508" x2="140" y2="535" stroke="var(--signal)"
+                    stroke-width="1.75" marker-end="url(#flecheS)"/>
+              <text x="152" y="527" font-size="11" font-family="var(--ff-mono)" fill="var(--signal)">feu vert</text>
+
+              <!-- Etage 7 : Publication -->
+              <rect x="40" y="540" width="200" height="54" rx="4"
+                    fill="none" stroke="currentColor" stroke-width="1.25"/>
+              <text x="58" y="562" font-size="11" font-family="var(--ff-mono)" fill="var(--ink-faint)">07</text>
+              <text x="82" y="563">Publication</text>
+              <text x="58" y="581" font-size="11.5" fill="var(--ink-soft)">3 plateformes</text>
+              <line x1="240" y1="567" x2="296" y2="567" stroke="currentColor"
+                    stroke-width="1" stroke-dasharray="3 3" opacity=".55"/>
+              <text x="304" y="558" font-size="11.5" fill="var(--ink-soft)">R2 → URL publique</text>
+              <text x="304" y="577" font-size="11.5" fill="var(--ink-soft)">Instagram · TikTok</text>
+              <text x="304" y="593" font-size="11.5" fill="var(--ink-soft)">YouTube</text>
+
+              <!-- Legende du trait discontinu -->
+              <line x1="40" y1="628" x2="76" y2="628" stroke="currentColor"
+                    stroke-width="1" stroke-dasharray="3 3" opacity=".55"/>
+              <text x="84" y="632" font-size="11" font-family="var(--ff-mono)" fill="var(--ink-faint)">appel à un service externe</text>
+            </g>
+          </svg>
+          <figcaption>
+            L'étage 06 est le seul point d'arrêt : sans <code>valider</code>, la
+            donnée ne descend pas vers la publication. Le stockage objet n'est
+            pas une commodité — l'API d'Instagram ne reçoit pas de fichier, elle
+            télécharge la vidéo depuis une URL publique.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <section id="connexions">
+      <h2><span class="num">02</span> Les six connexions</h2>
+
+      <p>
+        Trois sont des formalités, trois demandent une validation humaine par la
+        plateforme. Les délais sont longs et parallélisables : <strong>lance les
+        demandes Meta et TikTok le premier jour</strong>, elles tourneront
+        pendant que tu construis le reste.
+      </p>
+
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th>Rôle</th>
+              <th>Mise en place</th>
+              <th>Validation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Anthropic</td>
+              <td>sélection + rédaction</td>
+              <td class="num">15 min</td>
+              <td><span class="pill ok">immédiat</span></td>
+            </tr>
+            <tr>
+              <td>Cloudflare R2</td>
+              <td>URL publique de la vidéo</td>
+              <td class="num">20 min</td>
+              <td><span class="pill ok">immédiat</span></td>
+            </tr>
+            <tr>
+              <td>YouTube Data v3</td>
+              <td>publication Shorts</td>
+              <td class="num">30 min</td>
+              <td><span class="pill ok">immédiat</span></td>
+            </tr>
+            <tr>
+              <td>Meta / Instagram</td>
+              <td>publication Reels</td>
+              <td class="num">1 h</td>
+              <td><span class="pill block">2 à 6 semaines</span></td>
+            </tr>
+            <tr>
+              <td>TikTok</td>
+              <td>publication</td>
+              <td class="num">1 h</td>
+              <td><span class="pill wait">1 à 3 semaines</span></td>
+            </tr>
+            <tr>
+              <td>Transcription hébergée</td>
+              <td>optionnel — sinon local</td>
+              <td class="num">10 min</td>
+              <td><span class="pill none">sans objet</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        YouTube fonctionne seul dans l'intervalle, sans validation : c'est la
+        plateforme la moins contraignante et un bon terrain de rodage.
+      </p>
+
+      <h3>Les deux pièges qui cassent une chaîne de ce type</h3>
+
+      <div class="cards">
+        <div class="card">
+          <h3>Les jetons expirent en silence</h3>
+          <p>
+            L'<code>access_token</code> TikTok vaut <strong>24 heures</strong>,
+            celui d'Instagram 60 jours. Un jeton mort ne déclenche aucune
+            alerte : l'erreur n'apparaît qu'à la publication suivante.
+            <code>python -m src.tokens</code> est fait pour tourner en tâche
+            planifiée.
+          </p>
+        </div>
+        <div class="card">
+          <h3>TikTok non audité ne publie pas en public</h3>
+          <p>
+            Tant que l'audit n'est pas passé, l'API force la visibilité à
+            <code>SELF_ONLY</code> et exige un compte privé au moment de
+            publier. Le code le détecte et bascule proprement plutôt que
+            d'échouer — mais l'automatisation de bout en bout n'existe
+            qu'après validation.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <section id="partage">
+      <h2><span class="num">03</span> Ce dont j'ai besoin de ton côté</h2>
+
+      <p>
+        La ligne de partage est simple : <strong>tout ce qui engage ton identité
+        ou ta responsabilité juridique te revient ; le reste, je peux le
+        prendre.</strong>
+      </p>
+
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr><th>Tâche</th><th>Moi</th><th>Toi</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Écrire, corriger, tester le code</td><td>✔</td><td></td></tr>
+            <tr><td>Concevoir les prompts de sélection et de rédaction</td><td>✔</td><td></td></tr>
+            <tr><td>Écrire les workflows CI et scripts de jetons</td><td>✔</td><td></td></tr>
+            <tr><td>Diagnostiquer une erreur d'API depuis son message</td><td>✔</td><td></td></tr>
+            <tr><td>Créer les comptes développeur</td><td></td><td>✔</td></tr>
+            <tr><td>Accepter les CGU, passer la vérification d'identité</td><td></td><td>✔</td></tr>
+            <tr><td>Cliquer dans les consoles Meta, TikTok, Google</td><td></td><td>✔</td></tr>
+            <tr><td>Enregistrer la démo vidéo pour l'App Review Meta</td><td></td><td>✔</td></tr>
+            <tr><td>Décider ce qui se publie</td><td></td><td>✔</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note">
+        <div class="label">Sécurité — à lire une fois</div>
+        <p>
+          Ne colle jamais une clé d'API dans une conversation. Mets-les toi-même
+          dans <code>automation/.env</code> (déjà dans <code>.gitignore</code>)
+          ou dans GitHub Secrets. Je peux écrire, corriger et tester
+          l'intégralité du code sans jamais voir une clé : le code lit des
+          variables d'environnement, pas des valeurs en dur. Si une clé a déjà
+          circulé quelque part, révoque-la et régénère-la.
+        </p>
+      </div>
+
+      <h3>Quatre décisions qui affineraient la chaîne</h3>
+      <ul>
+        <li><strong>Deux ou trois vidéos réelles.</strong> L'angle éditorial est calé sur « photo de sport, explication technique » — le voir sur ta façon de parler permettrait de l'ajuster.</li>
+        <li><strong>Le rythme visé.</strong> 2 shorts/semaine et 2/jour ne mènent pas à la même architecture.</li>
+        <li><strong>Le filigrane et la police.</strong> <code>templates/watermark.png</code> est à fournir ; Montserrat ExtraBold doit être installée sur la machine de rendu.</li>
+        <li><strong>Le niveau d'automatisation.</strong> La porte de validation est active par défaut ; je recommande de la garder les premières semaines.</li>
+      </ul>
+    </section>
+
+    <!-- ============================================================ -->
+    <section id="droits">
+      <h2><span class="num">04</span> Droits : le garde-fou</h2>
+
+      <p>
+        Tu m'as autorisé à utiliser des services externes, ce que j'ai fait.
+        Mais l'autorisation que tu peux me donner ne couvre pas les droits d'un
+        tiers sur sa vidéo — d'où ce garde-fou, qui protège surtout tes comptes.
+      </p>
+
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr><th>Cas</th><th>Mode</th><th>Verdict</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tes propres vidéos</td>
+              <td><code>proprietaire</code></td>
+              <td><span class="pill ok">recommandé</span> — une vidéo de 15 min donne 5 à 8 shorts</td>
+            </tr>
+            <tr>
+              <td>Vidéos tierces sous Creative Commons</td>
+              <td><code>creative_commons</code></td>
+              <td><span class="pill wait">utilisable</span> — attribution générée automatiquement</td>
+            </tr>
+            <tr>
+              <td>Vidéos tierces sous licence standard</td>
+              <td>non implémenté</td>
+              <td><span class="pill block">écarté</span> — CGU YouTube, droit d'auteur, Content ID</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        Le troisième cas n'est pas implémenté délibérément, et l'argument
+        décisif n'est même pas juridique : Content ID et ses équivalents chez
+        Meta et TikTok détectent le contenu réutilisé <strong>y compris
+        recadré, sous-titré et ré-encodé</strong>. Bâtir une audience sur un
+        compte qui peut fermer pour récidive est un mauvais investissement.
+      </p>
+
+      <p>
+        En mode <code>creative_commons</code>, le code interroge l'API YouTube
+        pour lire la licence <strong>avant tout téléchargement</strong> et
+        refuse de continuer si elle n'est pas CC. Si tu veux exploiter du
+        contenu tiers, la voie propre est la licence directe : beaucoup de
+        créateurs et de clubs accordent une autorisation écrite pour une demande
+        précise.
+      </p>
+    </section>
+
+    <!-- ============================================================ -->
+    <section id="budget">
+      <h2><span class="num">05</span> Budget</h2>
+
+      <p>
+        Environ <strong>4 € par mois</strong> pour 20 shorts sur trois
+        plateformes — l'essentiel tourne en local.
+      </p>
+
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr><th>Poste</th><th>Solution</th><th>Coût mensuel</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Transcription</td><td>faster-whisper, local</td><td class="num">0 €</td></tr>
+            <tr><td>Sélection + rédaction</td><td>API Anthropic</td><td class="num">≈ 3 €</td></tr>
+            <tr><td>Montage</td><td>ffmpeg, local</td><td class="num">0 €</td></tr>
+            <tr><td>Stockage / diffusion</td><td>Cloudflare R2</td><td class="num">≈ 0,50 €</td></tr>
+            <tr><td>Publication</td><td>API officielles</td><td class="num">0 €</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        Les alternatives payantes existent mais se justifient rarement à cette
+        échelle : une API de rendu vidéo coûte ~50 €/mois pour éviter
+        d'installer ffmpeg, un agrégateur de publication ~149 €/mois pour éviter
+        deux formulaires qu'on remplit une fois. Elles deviennent pertinentes
+        au-delà d'une centaine de shorts par mois, ou si tu gères les comptes de
+        plusieurs clubs.
+      </p>
+
+      <div class="note">
+        <div class="label">Le vrai coût est ailleurs</div>
+        <p>
+          Les semaines de validation des plateformes, et ton heure mensuelle de
+          relecture — 2 à 3 minutes par short. C'est plus que tout le reste
+          réuni, et c'est le poste sur lequel il ne faut pas économiser au
+          début : c'est là que tu affines l'angle éditorial.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <section id="etat">
+      <h2><span class="num">06</span> Ce qui est vérifié, ce qui ne l'est pas</h2>
+
+      <p>
+        La chaîne de montage a été exécutée pour de vrai (ffmpeg 7.0.2) : rendu
+        1080×1920 conforme, durée exacte, sous-titres ASS incrustés avec
+        coloration du mot prononcé, dans les deux modes de recadrage. Le reste
+        est écrit contre la documentation en vigueur des API mais n'a pas pu
+        être exécuté ici, faute de comptes et de jetons.
+      </p>
+
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr><th>Composant</th><th>État</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Génération des sous-titres ASS</td><td><span class="pill ok">testé</span></td></tr>
+            <tr><td>Montage ffmpeg — <code>blur_pad</code> et <code>crop_centre</code></td><td><span class="pill ok">testé</span></td></tr>
+            <tr><td>Ingestion + contrôle de licence</td><td><span class="pill none">écrit</span></td></tr>
+            <tr><td>Transcription (Whisper / AssemblyAI)</td><td><span class="pill none">écrit</span></td></tr>
+            <tr><td>Sélection par LLM, sortie contrainte</td><td><span class="pill none">écrit</span></td></tr>
+            <tr><td>Rédaction des métadonnées ×3</td><td><span class="pill none">écrit</span></td></tr>
+            <tr><td>Connecteurs Instagram · TikTok · YouTube</td><td><span class="pill none">écrit</span></td></tr>
+            <tr><td>CLI, doctor, rafraîchissement des jetons</td><td><span class="pill none">écrit</span></td></tr>
+            <tr><td>Recadrage avec suivi du sujet (<code>crop_suivi</code>)</td><td><span class="pill block">non implémenté</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        <code>crop_suivi</code> est le seul manque assumé : un recadrage qui
+        suit le sujet sans lissage de trajectoire tremble et rend un résultat
+        pire qu'un cadrage fixe. Il lève une exception explicite plutôt que de
+        produire silencieusement du mauvais travail. En photo de sport où l'on
+        parle face caméra, <code>blur_pad</code> suffit et préserve la
+        composition de l'image — qui est souvent le sujet même du propos.
+      </p>
+    </section>
+
+    <!-- ============================================================ -->
+    <section id="demarrage">
+      <h2><span class="num">07</span> Démarrer</h2>
+
+      <pre><span class="c"># Installation</span>
+cd automation
+python3 -m venv .venv &amp;&amp; source .venv/bin/activate
+pip install -r requirements.txt
+cp config.example.yaml config.yaml   <span class="c"># réglages, versionnable</span>
+cp .env.example .env                 <span class="c"># secrets, jamais versionné</span>
+python -m src.doctor                 <span class="c"># contrôle de l'environnement</span>
+
+<span class="c"># Le cycle</span>
+python -m src.cli <span class="p">preparer</span> "https://www.youtube.com/watch?v=XXXXXXXXXXX"
+python -m src.cli <span class="p">revue</span> --detail
+open var/rendus/XXXXXXXXXXX-01.mp4   <span class="c"># visionner avant de valider</span>
+python -m src.cli <span class="p">valider</span> XXXXXXXXXXX-01 XXXXXXXXXXX-03
+python -m src.cli <span class="p">publier</span></pre>
+
+      <p>
+        <code>doctor</code> sépare volontairement ce qui est nécessaire à la
+        <strong>préparation</strong> (ffmpeg, clé Anthropic) de ce qui ne l'est
+        qu'à la <strong>publication</strong> (jetons des plateformes). Tu peux
+        donc monter des shorts dès aujourd'hui, avant même d'avoir obtenu les
+        accès Meta et TikTok.
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    <span>erchd.photos</span>
+    <span>module <code>automation/</code></span>
+    <span>détail complet dans <code>docs/01-connexions.md</code></span>
+  </footer>
+
+</div>

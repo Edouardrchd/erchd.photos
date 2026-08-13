@@ -1,0 +1,90 @@
+# =========================================================================
+#  Configuration editoriale et technique de la chaine.
+#  Copier en `config.yaml`. Ce fichier ne contient AUCUN secret : il peut
+#  etre versionne.
+# =========================================================================
+
+marque:
+  nom: "erchd.photos"
+  # Filigrane applique en bas a droite (PNG transparent, 1080px de large max)
+  watermark: "templates/watermark.png"
+  site: "https://erchd.photos"
+  handle_instagram: "@erchd.photos"
+
+langue:
+  source: "fr"        # langue parlee dans la video d'origine
+  sortie: "fr"        # langue des sous-titres et des metadonnees
+
+# --- Etape 1 : source ----------------------------------------------------
+source:
+  # 'proprietaire'  : videos de ta propre chaine YouTube (cas 100% propre)
+  # 'creative_commons' : videos filtrees CC-BY sur YouTube (attribution obligatoire)
+  # 'fichier'       : fichier local deja en ta possession
+  # Voir docs/02-droits.md avant de changer cette valeur.
+  mode: "proprietaire"
+  # Repertoire de travail (videos brutes, transcriptions, rendus)
+  workdir: "var"
+
+# --- Etape 2 : transcription --------------------------------------------
+transcription:
+  provider: "faster-whisper"   # faster-whisper | assemblyai
+  modele: "large-v3"           # tiny | base | small | medium | large-v3
+  # 'auto' laisse la librairie choisir (cuda si dispo, sinon cpu)
+  device: "auto"
+
+# --- Etape 3 : selection des moments ------------------------------------
+selection:
+  modele_llm: "claude-opus-5"
+  effort: "high"               # low | medium | high | xhigh | max
+  nb_extraits: 5               # nombre de shorts proposes par video source
+  duree_min_s: 20
+  duree_max_s: 75              # < 90 s : limite de l'API Reels d'Instagram
+  # Consigne editoriale injectee dans le prompt de selection.
+  angle: >
+    Photographie de sport. Privilegie les moments ou l'on explique un choix
+    technique (cadrage, lumiere, anticipation du geste), une anecdote de
+    terrain, ou une erreur a ne pas commettre. Ecarte les passages
+    d'introduction, les remerciements et les transitions.
+
+# --- Etape 4 : montage ---------------------------------------------------
+montage:
+  format: "1080x1920"
+  fps: 30
+  # 'blur_pad'      : video centree sur un fond flou (garde tout le cadre)
+  # 'crop_centre'   : recadrage plein cadre au centre
+  # 'crop_suivi'    : recadrage suivant le sujet (necessite le modele de detection)
+  recadrage: "blur_pad"
+  bitrate_video: "6M"
+  bitrate_audio: "192k"
+  # Normalisation loudness (EBU R128) : indispensable pour TikTok/Reels
+  loudnorm: true
+
+sous_titres:
+  police: "Montserrat ExtraBold"   # doit etre installee sur la machine de rendu
+  taille: 92
+  couleur: "&H00FFFFFF"            # blanc, format ASS (BGR + alpha)
+  couleur_active: "&H0028B4FF"     # orange, mot en cours de prononciation
+  contour: 6
+  ombre: 3
+  # Position verticale en pourcentage de la hauteur (0 = haut, 100 = bas)
+  position_v: 72
+  mots_par_ecran: 3
+
+# --- Etape 5 : metadonnees ----------------------------------------------
+metadonnees:
+  modele_llm: "claude-opus-5"
+  hashtags_max: 8
+  # Suffixe ajoute a toutes les descriptions
+  signature: "📷 Plus de photos : erchd.photos"
+
+# --- Etape 6 : publication ----------------------------------------------
+publication:
+  # Rien n'est publie tant que `valider` n'est pas passe a true pour un extrait
+  # (voir docs/04-runbook.md - porte de validation humaine).
+  validation_humaine: true
+  plateformes:
+    instagram: true
+    tiktok: true
+    youtube: true
+  # Fenetres de publication (heure locale Europe/Paris)
+  creneaux: ["12:30", "18:45"]

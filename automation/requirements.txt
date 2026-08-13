@@ -1,0 +1,19 @@
+# Chaine d'automatisation shorts - dependances Python
+# Installation : pip install -r requirements.txt
+# Prerequis systeme : ffmpeg >= 6.0 (apt install ffmpeg / brew install ffmpeg)
+
+anthropic>=0.69.0          # generation des coupes, titres, descriptions
+yt-dlp>=2025.1.15          # recuperation de la video source (voir docs/02-droits.md)
+requests>=2.32.0           # appels REST Meta / TikTok
+boto3>=1.35.0              # stockage objet S3 / Cloudflare R2 (URL publique)
+PyYAML>=6.0.2              # fichier de configuration
+pydantic>=2.9.0            # schemas de sortie structuree
+
+# Publication YouTube (OAuth + upload resumable)
+google-api-python-client>=2.150.0
+google-auth-oauthlib>=1.2.1
+google-auth-httplib2>=0.2.0
+
+# Transcription : au choix, une seule est necessaire
+faster-whisper>=1.1.0      # option A - local, gratuit, GPU optionnel
+# assemblyai>=0.35.0       # option B - API hebergee, decommenter si utilisee

@@ -4,3 +4,15 @@ Thumbs.db
 .vscode/
 .idea/
 node_modules/
+
+# --- Chaine d'automatisation shorts ---------------------------------------
+# Secrets : ne doivent jamais quitter la machine.
+automation/.env
+# Configuration locale (copiee depuis config.example.yaml).
+automation/config.yaml
+# Repertoire de travail : videos sources, rendus, transcriptions.
+automation/var/
+__pycache__/
+*.pyc
+.venv/
+venv/
