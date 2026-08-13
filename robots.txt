@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# Remplacez par votre adresse une fois le site en ligne :
-Sitemap: https://VOTRE-DOMAINE/sitemap.xml
+Sitemap: https://edouardvisuals.com/sitemap.xml

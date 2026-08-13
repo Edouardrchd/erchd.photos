@@ -14,10 +14,18 @@
 <meta name="theme-color" content="#0A0B0C">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta property="og:image" content="og-image.jpg">
+<!-- Adresse du site. Les apercus de lien (WhatsApp, LinkedIn, Facebook...) et
+     les moteurs de recherche exigent une adresse complete, pas un chemin
+     relatif. Si le domaine change, remplacer les 4 lignes ci-dessous, ainsi
+     que robots.txt et sitemap.xml. -->
+<link rel="canonical" href="https://edouardvisuals.com/">
+<meta property="og:url" content="https://edouardvisuals.com/">
+<meta property="og:site_name" content="Edouard Richard">
+<meta property="og:image" content="https://edouardvisuals.com/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta name="twitter:image" content="og-image.jpg">
+<meta property="og:image:alt" content="Edouard Richard, photographe sportif — hockey, basket, football, boxe.">
+<meta name="twitter:image" content="https://edouardvisuals.com/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link id="font-base" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Jost:wght@200;300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -166,6 +174,15 @@ h1,h2,h3{font-family:var(--ff-d);font-weight:400;letter-spacing:-.02em;text-wrap
   transition:border-color .35s,background .35s var(--e),color .35s}
 .ghost:hover{border-color:var(--acc);background:var(--acc);color:var(--acc-ink)}
 .ghost svg{width:13px;height:13px;flex:none}
+/* bouton rond clair/sombre, visible par tous les visiteurs */
+.iconbtn{padding:9px;border-radius:999px}
+.iconbtn svg{width:15px;height:15px}
+#modebtn .i-moon{display:none}
+html[data-theme="tirage"] #modebtn .i-sun{display:none}
+html[data-theme="tirage"] #modebtn .i-moon{display:block}
+/* Le panneau « Réglages » est reserve au proprietaire du site : il n'apparait
+   qu'une fois le mode debloque (voir ADMIN dans le script, en bas de page). */
+html:not(.admin) #twbtn{display:none}
 /* tant que la barre est posée sur une photo, son texte reste clair,
    quel que soit le thème choisi */
 .nav:not(.stuck) .mk,.nav:not(.stuck) .nl a,.nav:not(.stuck) .ghost{color:var(--on-photo)}
@@ -605,6 +622,14 @@ html.cur-on *{cursor:none!important}
     <a href="#contact" data-s="contact">Contact</a>
   </nav>
   <div class="tools">
+    <button class="ghost iconbtn" id="modebtn" title="Passer en clair / sombre" aria-label="Passer en affichage clair ou sombre">
+      <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+        <circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M19.1 4.9l-1.9 1.9M6.8 17.2l-1.9 1.9"/>
+      </svg>
+      <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+        <path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1Z"/>
+      </svg>
+    </button>
     <button class="ghost" id="twbtn" aria-controls="tw" aria-expanded="false" title="Réglages d'affichage (R)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
         <path d="M3 7h11M18 7h3M3 17h4M11 17h10"/><circle cx="16" cy="7" r="2.4"/><circle cx="9" cy="17" r="2.4"/>
@@ -1128,6 +1153,34 @@ var rm = matchMedia('(prefers-reduced-motion: reduce)').matches;
 var $  = function(s,c){return (c||document).querySelector(s)};
 var $$ = function(s,c){return [].slice.call((c||document).querySelectorAll(s))};
 
+/* ======================= 0. MODE PROPRIETAIRE ======================= */
+/* Le panneau « Réglages » n'est pas destine aux visiteurs : ils ne voient que
+   le bouton clair/sombre. Pour l'afficher sur VOTRE navigateur, ouvrez une
+   fois le site avec ?reglages a la fin de l'adresse :
+
+       https://edouardvisuals.com/?reglages     ouvre l'acces
+       https://edouardvisuals.com/?reglages=0   le referme
+
+   Le choix est memorise dans ce navigateur, l'adresse est aussitot nettoyee.
+   A savoir : cela masque le bouton, cela ne protege pas un secret. Quelqu'un
+   qui lit le code source de la page peut retrouver ce parametre. C'est sans
+   consequence, les reglages ne modifient que l'affichage local du visiteur. */
+var ADMIN_KEY = 'er-portfolio-admin';
+(function(){
+  var m = /[?&]reglages(?:=([01]))?(?:&|$)/.exec(location.search);
+  if(m){
+    try{
+      if(m[1] === '0') localStorage.removeItem(ADMIN_KEY);
+      else localStorage.setItem(ADMIN_KEY,'1');
+    }catch(e){}
+    history.replaceState(null,'',location.pathname + location.hash);
+  }
+  var on = false;
+  try{ on = localStorage.getItem(ADMIN_KEY) === '1' }catch(e){}
+  root.classList.toggle('admin', on);
+})();
+function isAdmin(){ return root.classList.contains('admin') }
+
 /* ======================= 1. RÉGLAGES ======================= */
 var FONTS = {
   d:{
@@ -1204,6 +1257,13 @@ function apply(){
   var mt=document.querySelector('meta[name=theme-color]');
   if(mt) mt.setAttribute('content', S.theme==='tirage'?'#EFECE4':(S.theme==='encre'?'#000000':'#0A0B0C'));
 
+  var mb=document.getElementById('modebtn');
+  if(mb){
+    var clair = S.theme==='tirage';
+    mb.setAttribute('title', clair?'Passer en affichage sombre':'Passer en affichage clair');
+    mb.setAttribute('aria-label', mb.getAttribute('title'));
+  }
+
   sync(); layout();
   try{ localStorage.setItem(KEY, JSON.stringify(S)) }catch(e){}
 }
@@ -1238,7 +1298,17 @@ load(); apply();
 
 /* — panneau — */
 var tw=$('#tw'), scrim=$('#scrim'), twbtn=$('#twbtn');
+
+/* Bascule clair / sombre, seule commande d'affichage offerte aux visiteurs.
+   Elle reutilise le reglage « Ambiance » du panneau : les deux restent donc
+   toujours d'accord, et le choix du visiteur est memorise dans son navigateur. */
+$('#modebtn').addEventListener('click',function(){
+  S.theme = (S.theme==='tirage') ? 'nuit' : 'tirage';
+  apply();
+});
+
 function panel(o){
+  if(o && !isAdmin()) return;
   tw.classList.toggle('on',o); scrim.classList.toggle('on',o);
   tw.setAttribute('aria-hidden',!o); twbtn.setAttribute('aria-expanded',o);
   if(o) setTimeout(function(){ $('#twclose').focus() },160);
@@ -1248,7 +1318,7 @@ $('#twclose').addEventListener('click',function(){ panel(false) });
 scrim.addEventListener('click',function(){ panel(false) });
 addEventListener('keydown',function(e){
   if(e.key==='Escape' && tw.classList.contains('on')){ panel(false); twbtn.focus(); return; }
-  if((e.key==='r'||e.key==='R')
+  if((e.key==='r'||e.key==='R') && isAdmin()
      && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)
      && !document.getElementById('lb').classList.contains('on')){
     panel(!tw.classList.contains('on'));

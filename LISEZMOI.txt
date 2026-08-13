@@ -45,7 +45,7 @@ Alternatives équivalentes, au choix :
 
 
 -------------------------------------------------------------------------
-3. AVOIR VOTRE PROPRE ADRESSE (edouardrichard.fr)
+3. AVOIR VOTRE PROPRE ADRESSE (edouardvisuals.com)
 -------------------------------------------------------------------------
   1. Achetez le nom de domaine (environ 10 à 15 € par an) chez OVH, Gandi,
      Infomaniak ou Cloudflare.
@@ -53,10 +53,13 @@ Alternatives équivalentes, au choix :
   3. Netlify affiche les valeurs DNS à recopier chez votre fournisseur de
      domaine. Le certificat HTTPS est installé automatiquement.
 
-  Une fois le domaine actif, remplacez "VOTRE-DOMAINE" dans robots.txt et
-  sitemap.xml, et mettez l'adresse complète dans la balise og:image de
-  index.html (par exemple https://edouardrichard.fr/og-image.jpg) : les
-  aperçus de lien sur les réseaux sociaux ont besoin d'une adresse complète.
+  Le site est déjà configuré pour l'adresse https://edouardvisuals.com.
+  Si vous choisissez une autre adresse, remplacez-la à ces trois endroits :
+    - index.html, le bloc de 4 lignes commenté "Adresse du site" (en haut)
+    - robots.txt
+    - sitemap.xml
+  Ces adresses doivent être complètes (https://...) : les aperçus de lien sur
+  les réseaux sociaux et les moteurs de recherche refusent un chemin relatif.
 
 
 -------------------------------------------------------------------------
@@ -69,9 +72,24 @@ notes). Le fichier fait environ 1 550 lignes et suit cet ordre :
   lignes  570 à 1110  le contenu de la page (HTML)
   lignes 1110 à fin   les scripts (JavaScript)
 
-REGLAGES D'APPARENCE
-  Le bouton "Réglages" en haut à droite du site (ou la touche R) permet de
-  changer thème, couleur d'accent, polices, arrondis, colonnes, grain, etc.
+REGLAGES D'APPARENCE — RESERVES AU PROPRIETAIRE
+  Les visiteurs ne voient qu'un seul bouton dans la barre du haut : le rond
+  soleil / lune, qui bascule l'affichage entre clair et sombre.
+
+  Le panneau "Réglages" complet (thème, couleur d'accent, polices, arrondis,
+  colonnes, grain...) est masqué. Pour l'afficher sur VOTRE navigateur,
+  ouvrez une fois le site en ajoutant ?reglages à la fin de l'adresse :
+
+      https://edouardvisuals.com/?reglages      ouvre l'accès
+      https://edouardvisuals.com/?reglages=0    le referme
+
+  Le bouton "Réglages" et le raccourci clavier R apparaissent alors, et le
+  restent sur cet appareil. L'adresse est nettoyée automatiquement.
+  A savoir : cela masque le bouton, cela ne protège pas un secret. Quelqu'un
+  qui lit le code source de la page peut retrouver ce paramètre. C'est sans
+  conséquence : les réglages ne changent que l'affichage sur son propre écran,
+  jamais le site que voient les autres.
+
   Vos essais sont enregistrés dans votre navigateur seulement.
   Pour les rendre définitifs pour tous les visiteurs : cliquez sur
   "Copier le CSS", puis collez le bloc obtenu dans index.html, à la place du
