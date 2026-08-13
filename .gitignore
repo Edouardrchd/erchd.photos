@@ -1,17 +1,6 @@
-node_modules/
-dist/
-*.tsbuildinfo
-
-# Fichiers d'environnement (identifiants base de donnees, cles API...)
-.env
-.env.*
-
-# Uploads du serveur local
-uploads/
-
-# Systeme / editeurs
 .DS_Store
 Thumbs.db
 *.log
 .vscode/
 .idea/
+node_modules/

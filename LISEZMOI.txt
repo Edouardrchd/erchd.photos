@@ -1,0 +1,114 @@
+SITE — EDOUARD RICHARD, PHOTOGRAPHE SPORTIF
+===========================================
+
+Ce dossier est le site complet, prêt à être mis en ligne.
+Ce sont des fichiers statiques : aucune installation, aucune base de données,
+aucun abonnement technique.
+
+CONTENU
+  index.html            le site entier (structure, styles, scripts)
+  images/               les 25 photographies
+  404.html              page affichée si une adresse n'existe pas
+  favicon.svg           icone de l'onglet
+  apple-touch-icon.png  icone quand le site est ajouté à un écran d'accueil
+  og-image.jpg          vignette affichée quand le lien est partagé
+  robots.txt            autorise les moteurs de recherche
+  sitemap.xml           liste des pages, pour le référencement
+  LISEZMOI.txt          ce fichier
+
+
+-------------------------------------------------------------------------
+1. VOIR LE SITE SANS RIEN INSTALLER
+-------------------------------------------------------------------------
+Double-cliquez sur index.html : il s'ouvre dans votre navigateur.
+
+
+-------------------------------------------------------------------------
+2. LE METTRE EN LIGNE — LE PLUS SIMPLE (5 MINUTES, GRATUIT)
+-------------------------------------------------------------------------
+Netlify Drop, sans ligne de commande :
+
+  1. Allez sur  https://app.netlify.com/drop
+  2. Glissez-déposez le DOSSIER ENTIER "site-edouard-richard" dans la page.
+  3. Le site est en ligne en quelques secondes, à une adresse du type
+     https://nom-invente-1234.netlify.app
+  4. Créez un compte gratuit (bouton proposé juste après) pour garder le site
+     et pouvoir le remplacer plus tard. Sans compte, le lien est temporaire.
+
+  Pour publier une mise à jour : dans Netlify, onglet "Deploys", puis
+  glissez-déposez à nouveau le dossier. L'ancienne version est remplacée.
+
+Alternatives équivalentes, au choix :
+  - Vercel      https://vercel.com/new     (même principe)
+  - Cloudflare  https://pages.cloudflare.com
+  - GitHub Pages : gratuit aussi, mais demande un compte GitHub et Git.
+
+
+-------------------------------------------------------------------------
+3. AVOIR VOTRE PROPRE ADRESSE (edouardrichard.fr)
+-------------------------------------------------------------------------
+  1. Achetez le nom de domaine (environ 10 à 15 € par an) chez OVH, Gandi,
+     Infomaniak ou Cloudflare.
+  2. Dans Netlify : Site settings > Domain management > Add custom domain.
+  3. Netlify affiche les valeurs DNS à recopier chez votre fournisseur de
+     domaine. Le certificat HTTPS est installé automatiquement.
+
+  Une fois le domaine actif, remplacez "VOTRE-DOMAINE" dans robots.txt et
+  sitemap.xml, et mettez l'adresse complète dans la balise og:image de
+  index.html (par exemple https://edouardrichard.fr/og-image.jpg) : les
+  aperçus de lien sur les réseaux sociaux ont besoin d'une adresse complète.
+
+
+-------------------------------------------------------------------------
+4. MODIFIER LE SITE
+-------------------------------------------------------------------------
+Ouvrez index.html avec un éditeur de texte (VS Code, Notepad++, ou le Bloc-
+notes). Le fichier fait environ 1 550 lignes et suit cet ordre :
+
+  lignes   20 à 570   les styles (CSS)
+  lignes  570 à 1110  le contenu de la page (HTML)
+  lignes 1110 à fin   les scripts (JavaScript)
+
+REGLAGES D'APPARENCE
+  Le bouton "Réglages" en haut à droite du site (ou la touche R) permet de
+  changer thème, couleur d'accent, polices, arrondis, colonnes, grain, etc.
+  Vos essais sont enregistrés dans votre navigateur seulement.
+  Pour les rendre définitifs pour tous les visiteurs : cliquez sur
+  "Copier le CSS", puis collez le bloc obtenu dans index.html, à la place du
+  bloc ":root{ ... }" situé au tout début des styles.
+
+CHANGER UN TEXTE
+  Cherchez la phrase dans index.html et remplacez-la. C'est tout.
+
+REMPLACER UNE PHOTO
+  Déposez votre fichier dans images/ en gardant EXACTEMENT le même nom que
+  celui que vous remplacez. Rien d'autre à faire.
+
+AJOUTER UNE PHOTO
+  Dupliquez un bloc <figure class="frame"> dans la galerie voulue, changez le
+  nom du fichier, la légende et la date. Important : renseignez data-w et
+  data-h avec les dimensions réelles en pixels (clic droit sur le fichier >
+  Propriétés > Détails). La mosaïque s'en sert pour calculer les hauteurs ;
+  une valeur fausse déforme la mise en page.
+  Pensez à mettre à jour les compteurs de la série (par exemple "06 vues")
+  dans le menu, le bandeau du chapitre et le titre de la galerie.
+
+FORMULAIRE DE CONTACT
+  Par défaut, il ouvre la messagerie du visiteur avec la demande pré-remplie.
+  Pour recevoir les demandes directement par mail sans que le visiteur ait
+  une messagerie configurée :
+    1. Créez un formulaire gratuit sur https://formspree.io
+    2. Copiez l'adresse fournie (du type https://formspree.io/f/xxxxxxx)
+    3. Dans index.html, cherchez  var ENDPOINT = '';  et collez l'adresse
+       entre les guillemets.
+
+
+-------------------------------------------------------------------------
+5. BON A SAVOIR
+-------------------------------------------------------------------------
+  - Les polices viennent de Google Fonts : une connexion internet est
+    nécessaire. Hors ligne, le site bascule sur les polices du système.
+  - Les photos pèsent 4,6 Mo au total. C'est raisonnable, mais si vous en
+    ajoutez beaucoup, réduisez-les à 1600 px de large environ avant de les
+    déposer : le site restera rapide.
+  - Faites une copie du dossier avant toute grosse modification.
