@@ -1,0 +1,53 @@
+---
+import '../styles/global.css';
+import { SITE } from '../data/series';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Edouard Richard — Photographe sportif',
+  description = "Portfolio d'Edouard Richard, photographe sportif basé à Rouen : hockey sur glace, basketball, football et boxe. Sélection livrée sous 48 h."
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, SITE).href;
+const ogImage = new URL('/og-image.jpg', SITE).href;
+---
+
+<!doctype html>
+<html lang="fr" data-theme="nuit">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{title}</title>
+<meta name="description" content={description}>
+<meta name="author" content="Edouard Richard">
+<meta property="og:type" content="website">
+<meta property="og:title" content={title}>
+<meta property="og:description" content="Hockey, basketball, football, boxe. Basé à Rouen, livraison sous 48 h.">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0A0B0C">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+{/* Les apercus de lien et les moteurs de recherche exigent une adresse
+    complete. Elle vient de `site` dans astro.config.mjs : un seul endroit
+    a changer si le domaine change. */}
+<link rel="canonical" href={canonical}>
+<meta property="og:url" content={canonical}>
+<meta property="og:site_name" content="Edouard Richard">
+<meta property="og:image" content={ogImage}>
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Edouard Richard, photographe sportif — hockey, basket, football, boxe.">
+<meta name="twitter:image" content={ogImage}>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link id="font-base" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Jost:wght@200;300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<slot />
+</body>
+</html>

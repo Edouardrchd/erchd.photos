@@ -1,0 +1,47 @@
+---
+import type { Serie } from '../data/series';
+
+interface Props {
+  serie: Serie;
+}
+const { serie } = Astro.props;
+
+/**
+ * Hauteur de depart de chaque case dans la mosaique, deduite des proportions
+ * reelles du fichier. Le script recalcule ensuite la valeur exacte selon la
+ * largeur de colonne ; cette estimation evite seulement que la page saute
+ * avant que le script ne tourne.
+ */
+const span = (w: number, h: number) => Math.max(4, Math.round((20 * h) / w));
+---
+
+<section class="gal" id={serie.id}>
+  <div class="shell">
+    <header class="gal-h">
+      <div>
+        <span class="tag">{serie.numeral} — {serie.count} photographies</span>
+        <h2>{serie.title}</h2>
+      </div>
+      <span class="mono" style="color:var(--ink3)">{serie.place} — {serie.period}</span>
+    </header>
+    <div class="mosaic">
+      {serie.photos.map((p) => (
+        <figure
+          class="frame"
+          style={`--sp:${span(p.w, p.h)}`}
+          data-w={p.w}
+          data-h={p.h}
+          data-cap={p.cap}
+          data-meta={p.meta}
+          data-cat={serie.title}
+        >
+          <img loading="lazy" src={`/images/${p.file}`} alt={p.alt}>
+          <span class="frame-n num">{p.n}</span>
+          <figcaption>
+            <span class="cap">{p.cap}</span><span class="capm">{p.meta}</span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>

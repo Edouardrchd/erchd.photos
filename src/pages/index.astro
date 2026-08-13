@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Statement from '../components/Statement.astro';
+import ContactSheet from '../components/ContactSheet.astro';
+import Chapters from '../components/Chapters.astro';
+import Gallery from '../components/Gallery.astro';
+import Atelier from '../components/Atelier.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import Lightbox from '../components/Lightbox.astro';
+import Settings from '../components/Settings.astro';
+import { SERIES } from '../data/series';
+---
+
+<Base>
+  <div id="boot" aria-hidden="true">
+    <div class="boot-r">
+      <div class="boot-n">Edouard<i>Richard</i></div>
+      <div class="boot-c num" id="bootc">000</div>
+    </div>
+    <div class="boot-l"></div>
+    <div class="boot-m"><span>Planche contact — sélection 2024–2026</span><span>Rouen, FR</span></div>
+  </div>
+
+  <div id="gauge"></div>
+  <div id="grain" aria-hidden="true"></div>
+  <div id="vig" aria-hidden="true"></div>
+  <div id="cd" aria-hidden="true"></div>
+  <div id="cr" aria-hidden="true"><span>VOIR</span></div>
+
+  <Nav />
+  <Hero />
+  <Statement />
+  <ContactSheet />
+  <Chapters />
+
+  {/* Une galerie par serie decrite dans src/data/series.ts */}
+  {SERIES.map((serie) => <Gallery serie={serie} />)}
+
+  <Atelier />
+  <Contact />
+  <Footer />
+  <Lightbox />
+  <Settings />
+
+  <script src="../scripts/site.js"></script>
+</Base>

@@ -1,0 +1,20 @@
+---
+import { SERIES } from '../data/series';
+---
+
+<section class="chaps">
+  {SERIES.map((s) => (
+    <a class="chap" href={`#${s.id}`}>
+      <span class="chap-bg"><img loading="lazy" src={`/images/${s.cover}`} alt=""></span>
+      <span class="chap-v"></span>
+      <span class="chap-i">
+        <span class="chap-l"><span class="chap-n">{s.numeral}</span><span class="chap-t">{s.title}</span></span>
+        <span class="chap-r">
+          <span class="chap-meta"><span class="chap-s">{s.place}</span><span class="chap-c num">{s.count}</span></span>
+          <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </span>
+      </span>
+      <span class="chap-rule"></span>
+    </a>
+  ))}
+</section>

@@ -1,0 +1,97 @@
+<aside id="tw" aria-label="Réglages d'affichage" aria-hidden="true">
+  <div class="tw-h">
+    <h3>Réglages</h3>
+    <button class="ghost" id="twclose" aria-label="Fermer les réglages">Fermer ✕</button>
+  </div>
+  <div class="tw-b">
+
+    <div class="grp">
+      <span class="tag">Ambiance</span>
+      <div class="seg" data-set="theme">
+        <button data-v="nuit">Nuit</button><button data-v="encre">Encre</button><button data-v="tirage">Tirage clair</button>
+      </div>
+    </div>
+
+    <div class="grp">
+      <span class="tag">Couleur d'accent</span>
+      <div class="swatches" id="swatches">
+        <button class="sw" data-v="" style="background:linear-gradient(135deg,#EDEAE3 50%,#0A0B0C 50%)" title="Encre (achromatique)"></button>
+        <button class="sw" data-v="#B8973F" style="background:#B8973F" title="Or"></button>
+        <button class="sw" data-v="#8FB8C9" style="background:#8FB8C9" title="Glace"></button>
+        <button class="sw" data-v="#C4472C" style="background:#C4472C" title="Safelight"></button>
+        <button class="sw" data-v="#6E7F58" style="background:#6E7F58" title="Pelouse"></button>
+        <button class="sw" data-v="#8C7BA6" style="background:#8C7BA6" title="Néon"></button>
+        <label class="sw" title="Couleur personnalisée" id="swcustom" style="background:conic-gradient(from 210deg,#C4472C,#B8973F,#6E7F58,#8FB8C9,#8C7BA6,#C4472C)">
+          <input type="color" id="acccustom" value="#B8973F" aria-label="Couleur d'accent personnalisée">
+        </label>
+      </div>
+    </div>
+
+    <div class="grp">
+      <span class="tag">Police des titres</span>
+      <div class="seg fonts" data-set="fd">
+        <button data-v="instrument">Instrument</button><button data-v="bodoni">Bodoni</button>
+        <button data-v="fraunces">Fraunces</button><button data-v="cormorant">Cormorant</button>
+        <button data-v="archivo">Archivo</button>
+      </div>
+    </div>
+
+    <div class="grp">
+      <span class="tag">Police des textes</span>
+      <div class="seg fonts" data-set="fs">
+        <button data-v="archivo">Archivo</button><button data-v="jost">Jost</button>
+        <button data-v="inter">Inter</button><button data-v="dm">DM Sans</button>
+      </div>
+    </div>
+
+    <div class="grp">
+      <span class="tag">Police technique</span>
+      <div class="seg fonts" data-set="fm">
+        <button data-v="plex">IBM Plex</button><button data-v="space">Space Mono</button><button data-v="jetbrains">JetBrains</button>
+      </div>
+    </div>
+
+    <div class="grp">
+      <span class="tag">Mise en page</span>
+      <div class="row"><label for="r-rad">Arrondis</label><output id="o-rad">0 px</output></div>
+      <input type="range" id="r-rad" min="0" max="28" step="1">
+      <div class="row" style="margin-top:16px"><label for="r-gap">Gouttière</label><output id="o-gap">14 px</output></div>
+      <input type="range" id="r-gap" min="0" max="40" step="2">
+      <div class="row" style="margin-top:16px"><label for="r-u">Respiration</label><output id="o-u">100 %</output></div>
+      <input type="range" id="r-u" min="70" max="140" step="5">
+      <div class="row" style="margin-top:16px"><label for="r-w">Largeur du site</label><output id="o-w">1440 px</output></div>
+      <input type="range" id="r-w" min="1080" max="1920" step="20">
+      <div class="row" style="margin-top:18px"><label>Colonnes</label></div>
+      <div class="seg" data-set="cols"><button data-v="2">2</button><button data-v="3">3</button><button data-v="4">4</button></div>
+    </div>
+
+    <div class="grp">
+      <span class="tag">Typographie</span>
+      <div class="row"><label for="r-fs">Taille du texte</label><output id="o-fs">100 %</output></div>
+      <input type="range" id="r-fs" min="85" max="120" step="5">
+      <div class="row" style="margin-top:16px"><label for="r-hs">Échelle des titres</label><output id="o-hs">100 %</output></div>
+      <input type="range" id="r-hs" min="70" max="130" step="5">
+    </div>
+
+    <div class="grp">
+      <span class="tag">Traitement des images</span>
+      <div class="seg" data-set="img">
+        <button data-v="couleur">Couleur</button><button data-v="nbrepos">N&B au repos</button><button data-v="nb">N&B</button>
+      </div>
+      <div class="row" style="margin-top:18px"><label for="t-grain">Grain argentique</label><button class="sw-t" id="t-grain" role="switch" aria-label="Grain argentique"></button></div>
+      <div class="row"><label for="t-vig">Vignettage</label><button class="sw-t" id="t-vig" role="switch" aria-label="Vignettage"></button></div>
+    </div>
+
+    <div class="grp">
+      <span class="tag">Interactions</span>
+      <div class="row"><label for="t-cur">Curseur personnalisé</label><button class="sw-t" id="t-cur" role="switch" aria-label="Curseur personnalisé"></button></div>
+      <div class="row"><label for="t-anim">Animations</label><button class="sw-t" id="t-anim" role="switch" aria-label="Animations"></button></div>
+      <p class="tw-note">Raccourci : touche R pour ouvrir ou fermer ce panneau.
+        Les réglages sont enregistrés dans ce navigateur.</p>
+    </div>
+
+  </div>
+  <div class="tw-f">
+    <button class="ghost" id="twreset">Réinitialiser</button>
+    <button class="ghost" id="twcopy">Copier le CSS</button>
+  </div>

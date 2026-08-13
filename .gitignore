@@ -1,6 +1,14 @@
+node_modules/
+dist/
+.astro/
+
+# Fichiers d'environnement
+.env
+.env.*
+
+# Systeme / editeurs
 .DS_Store
 Thumbs.db
 *.log
 .vscode/
 .idea/
-node_modules/
