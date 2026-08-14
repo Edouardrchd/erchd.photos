@@ -582,6 +582,17 @@
             propre compte.
           </p>
         </div>
+        <div class="card">
+          <h3>Le PKCE de TikTok n'est pas celui de la norme</h3>
+          <p>
+            TikTok impose PKCE aux applications de bureau, mais dérive le
+            <code>code_challenge</code> par un SHA256 <strong>hexadécimal</strong>
+            là où la RFC 7636 prescrit du base64url. Toute bibliothèque OAuth
+            générique est donc rejetée — d'où la commande dédiée
+            <code>auth-tiktok</code>, qui gère aussi le port fixe de redirection
+            que TikTok compare au caractère près.
+          </p>
+        </div>
       </div>
     </section>
 
@@ -757,9 +768,13 @@
       <p>
         La chaîne de montage a été exécutée pour de vrai (ffmpeg 7.0.2) : rendu
         1080×1920 conforme, durée exacte, sous-titres ASS incrustés avec
-        coloration du mot prononcé, dans les deux modes de recadrage. Le reste
-        est écrit contre la documentation en vigueur des API mais n'a pas pu
-        être exécuté ici, faute de comptes et de jetons.
+        coloration du mot prononcé, dans les deux modes de recadrage. Le
+        parcours d'autorisation TikTok l'a été aussi, jusqu'où c'est possible
+        sans compte : conformité PKCE, serveur de retour piloté par une vraie
+        requête HTTP, et les chemins de refus (port occupé, <code>state</code>
+        falsifié, consentement refusé). Le reste est écrit contre la
+        documentation en vigueur des API mais n'a pas pu être exécuté ici,
+        faute de comptes et de jetons.
       </p>
 
       <div class="scroll">
@@ -775,6 +790,7 @@
             <tr><td>Sélection par LLM, sortie contrainte</td><td><span class="pill none">écrit</span></td></tr>
             <tr><td>Rédaction des métadonnées ×3</td><td><span class="pill none">écrit</span></td></tr>
             <tr><td>Connecteurs Instagram · TikTok · YouTube</td><td><span class="pill none">écrit</span></td></tr>
+            <tr><td>Parcours d'autorisation TikTok — PKCE, serveur de retour, refus</td><td><span class="pill ok">testé</span></td></tr>
             <tr><td>CLI, doctor, rafraîchissement des jetons</td><td><span class="pill none">écrit</span></td></tr>
             <tr><td>Recadrage avec suivi du sujet (<code>crop_suivi</code>)</td><td><span class="pill block">non implémenté</span></td></tr>
           </tbody>
@@ -802,6 +818,10 @@ pip install -r requirements.txt
 cp config.example.yaml config.yaml   <span class="c"># réglages, versionnable</span>
 cp .env.example .env                 <span class="c"># secrets, jamais versionné</span>
 python -m src.doctor                 <span class="c"># contrôle de l'environnement</span>
+
+<span class="c"># Autorisations — une seule fois, un navigateur s'ouvre</span>
+python -m src.cli <span class="p">auth-youtube</span>         <span class="c"># → YOUTUBE_REFRESH_TOKEN</span>
+python -m src.cli <span class="p">auth-tiktok</span>          <span class="c"># → TIKTOK_ACCESS_TOKEN + REFRESH</span>
 
 <span class="c"># Le cycle</span>
 python -m src.cli <span class="p">preparer</span> "https://www.youtube.com/watch?v=XXXXXXXXXXX"

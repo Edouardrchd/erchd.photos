@@ -64,8 +64,20 @@ Prérequis système : **ffmpeg ≥ 6.0** (`apt install ffmpeg` ou
 
 `doctor` sépare volontairement ce qui est nécessaire à la **préparation**
 (ffmpeg, clé Anthropic) de ce qui ne l'est qu'à la **publication** (jetons des
-plateformes). Tu peux donc monter des shorts dès aujourd'hui, avant même
-d'avoir obtenu les accès Meta et TikTok — qui prennent plusieurs semaines.
+plateformes). Tu peux donc monter des shorts avant même d'avoir ouvert le
+moindre compte développeur.
+
+### Autorisations, une seule fois
+
+```bash
+python -m src.cli auth-youtube              # -> YOUTUBE_REFRESH_TOKEN
+python -m src.cli auth-tiktok               # -> TIKTOK_ACCESS_TOKEN + REFRESH
+```
+
+Chacune ouvre un navigateur et affiche les lignes à coller dans `.env`.
+`auth-tiktok` demande la portée `video.upload` (dépôt en brouillon, aucun
+audit) ; `--mode direct` demande `video.publish`, à réserver à une application
+déjà auditée.
 
 ### Le cycle
 

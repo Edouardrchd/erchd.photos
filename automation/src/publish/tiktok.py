@@ -41,8 +41,14 @@ l'endpoint `inbox`.
 
 from __future__ import annotations
 
+import hashlib
+import secrets as alea
+import string
 import time
+import webbrowser
+from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
+from urllib.parse import parse_qs, urlencode, urlparse
 
 import requests
 
@@ -52,8 +58,18 @@ from . import ErreurPublication
 
 PLATEFORME = "tiktok"
 BASE = "https://open.tiktokapis.com/v2"
+AUTORISATION = "https://www.tiktok.com/v2/auth/authorize/"
 DELAI_MAX_S = 600
 INTERVALLE_S = 6
+
+# Les portees demandees dependent du mode : `video.upload` depose dans les
+# brouillons sans audit, `video.publish` publie directement mais exige l'audit.
+# Demander video.publish sur une application non auditee fait echouer le
+# consentement lui-meme, pas seulement la publication.
+PORTEES = {
+    "brouillon": ("user.info.basic", "video.upload"),
+    "direct": ("user.info.basic", "video.publish"),
+}
 
 
 def _entetes() -> dict[str, str]:
@@ -296,3 +312,168 @@ def rafraichir_token() -> dict:
             PLATEFORME, f"rafraichissement du token impossible : {charge}", charge
         )
     return charge
+
+
+# --------------------------------------------------------------------------
+# Parcours d'autorisation initial (une seule fois, a la mise en place)
+# --------------------------------------------------------------------------
+# TikTok impose PKCE aux applications de bureau, avec UNE PARTICULARITE qui
+# fait echouer la plupart des premieres tentatives : le `code_challenge` est
+# le SHA256 du verifieur encode en HEXADECIMAL, la ou la RFC 7636 prescrit du
+# base64url. Une implementation PKCE standard est donc rejetee ici.
+ALPHABET_VERIFIEUR = string.ascii_letters + string.digits + "-._~"
+
+PAGE_RETOUR = """<!doctype html><meta charset="utf-8">
+<title>Autorisation TikTok</title>
+<body style="font:16px/1.6 system-ui;max-width:32rem;margin:15vh auto;padding:0 1.5rem">
+<h1 style="font-size:1.3rem">C'est bon.</h1>
+<p>L'autorisation TikTok est enregistree. Tu peux fermer cet onglet et revenir
+au terminal.</p></body>"""
+
+
+def _verifieur() -> tuple[str, str]:
+    """Genere le couple (verifieur, defi) exige par PKCE.
+
+    Le verifieur fait 64 caracteres, dans la fourchette 43-128 imposee.
+    """
+    verifieur = "".join(alea.choice(ALPHABET_VERIFIEUR) for _ in range(64))
+    defi = hashlib.sha256(verifieur.encode("ascii")).hexdigest()
+    return verifieur, defi
+
+
+def _attendre_retour(port: int, chemin: str, delai_s: int = 300) -> dict[str, str]:
+    """Sert le retour du navigateur apres consentement, puis rend la main.
+
+    Le serveur tourne une seconde a la fois pour rester interruptible au
+    clavier : sans cela, un abandon en cours de parcours laisse le terminal
+    bloque cinq minutes.
+    """
+    recu: dict[str, str] = {}
+
+    class Reception(BaseHTTPRequestHandler):
+        def do_GET(self):  # noqa: N802 - signature imposee par la classe de base
+            requete = urlparse(self.path)
+            if requete.path != chemin:
+                # Le navigateur reclame aussi /favicon.ico : ne pas le prendre
+                # pour le retour d'autorisation.
+                self.send_response(404)
+                self.end_headers()
+                return
+            recu.update(
+                {cle: valeurs[0] for cle, valeurs in parse_qs(requete.query).items()}
+            )
+            self.send_response(200)
+            self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.end_headers()
+            self.wfile.write(PAGE_RETOUR.encode("utf-8"))
+
+        def log_message(self, *args):  # silence le journal ligne a ligne
+            pass
+
+    try:
+        serveur = HTTPServer(("localhost", port), Reception)
+    except OSError as erreur:
+        raise ErreurPublication(
+            PLATEFORME,
+            f"impossible d'ecouter sur le port {port} ({erreur}). Un autre "
+            f"programme l'occupe : arrete-le, ou declare une autre redirection "
+            f"sur l'application TikTok et relance avec --port.",
+        ) from erreur
+    serveur.timeout = 1
+    limite = time.monotonic() + delai_s
+    try:
+        while not recu and time.monotonic() < limite:
+            serveur.handle_request()
+    finally:
+        serveur.server_close()
+
+    if not recu:
+        raise ErreurPublication(
+            PLATEFORME, f"aucun retour de TikTok apres {delai_s} s — parcours abandonne"
+        )
+    return recu
+
+
+def _echanger_code(code: str, verifieur: str, redirection: str) -> dict:
+    reponse = requests.post(
+        f"{BASE}/oauth/token/",
+        data={
+            "client_key": secret("TIKTOK_CLIENT_KEY"),
+            "client_secret": secret("TIKTOK_CLIENT_SECRET"),
+            "code": code,
+            "grant_type": "authorization_code",
+            "redirect_uri": redirection,
+            "code_verifier": verifieur,
+        },
+        headers={"Content-Type": "application/x-www-form-urlencoded"},
+        timeout=30,
+    )
+    charge = reponse.json()
+    if "access_token" not in charge:
+        indice = ""
+        if "redirect" in str(charge).lower():
+            indice = (
+                f" — verifie que « {redirection} » figure a l'identique dans les "
+                "Redirect URI de l'application TikTok."
+            )
+        raise ErreurPublication(
+            PLATEFORME, f"echange du code refuse : {charge}{indice}", charge
+        )
+    return charge
+
+
+def parcours_autorisation(mode: str = "brouillon", port: int = 8080) -> dict:
+    """Deroule le consentement et renvoie la charge contenant les deux jetons.
+
+    A lancer une seule fois, sur une machine avec navigateur. Le port est fixe
+    (contrairement a YouTube qui en accepte un aleatoire) parce que TikTok
+    compare la redirection au caractere pres avec celle declaree sur
+    l'application.
+    """
+    portees = PORTEES.get(mode)
+    if portees is None:
+        raise ErreurPublication(
+            PLATEFORME, f"mode inconnu : {mode!r} (attendu 'brouillon' ou 'direct')"
+        )
+
+    redirection = f"http://localhost:{port}/callback"
+    verifieur, defi = _verifieur()
+    etat = alea.token_urlsafe(16)
+
+    url = AUTORISATION + "?" + urlencode(
+        {
+            "client_key": secret("TIKTOK_CLIENT_KEY"),
+            "scope": ",".join(portees),
+            "response_type": "code",
+            "redirect_uri": redirection,
+            "state": etat,
+            "code_challenge": defi,
+            "code_challenge_method": "S256",
+        }
+    )
+
+    print(f"Portees demandees : {', '.join(portees)}")
+    print(f"Redirection       : {redirection}")
+    print("\nOuverture du navigateur. Autorise avec le compte TikTok qui publiera.")
+    print(f"Si rien ne s'ouvre, copie ce lien :\n\n{url}\n")
+    webbrowser.open(url)
+
+    recu = _attendre_retour(port, "/callback")
+
+    if "error" in recu:
+        raise ErreurPublication(
+            PLATEFORME,
+            f"consentement refuse : {recu.get('error')} "
+            f"{recu.get('error_description', '')}".strip(),
+            recu,
+        )
+    if recu.get("state") != etat:
+        # Protection CSRF : un `state` different signale une reponse qui ne
+        # repond pas a la demande qu'on vient d'emettre.
+        raise ErreurPublication(PLATEFORME, "`state` inattendu — parcours interrompu")
+    if "code" not in recu:
+        raise ErreurPublication(PLATEFORME, f"retour sans code d'autorisation : {recu}")
+
+    # parse_qs a deja decode le pourcentage-encodage : le code TikTok se
+    # termine souvent par « * », transmis en %2A.
+    return _echanger_code(recu["code"], verifieur, redirection)

@@ -129,9 +129,24 @@ compte *développeur* d'Anthropic, qui facture à l'usage.
    TIKTOK_CLIENT_SECRET=...
    ```
 
-Les deux jetons (`TIKTOK_ACCESS_TOKEN` et `TIKTOK_REFRESH_TOKEN`) s'obtiennent
-ensuite par le parcours d'autorisation — dis-moi quand tu en es là, je te
-prépare la commande qui le déroule.
+9. Génère les deux jetons :
+
+   ```bash
+   cd automation
+   python -m src.cli auth-tiktok
+   ```
+
+   Un navigateur s'ouvre sur TikTok. **Autorise avec le compte qui publiera.**
+   La commande affiche alors les deux lignes à coller dans `.env` :
+
+   ```
+   TIKTOK_ACCESS_TOKEN=act.xxxxx
+   TIKTOK_REFRESH_TOKEN=rft.xxxxx
+   ```
+
+> **Le port 8080 n'est pas décoratif.** TikTok compare la redirection au
+> caractère près avec celle déclarée à l'étape 7. Si tu as enregistré un autre
+> port, passe-le : `python -m src.cli auth-tiktok --port 9000`.
 
 ---
 
@@ -246,8 +261,8 @@ ANTHROPIC_API_KEY=sk-ant-...
 # TikTok
 TIKTOK_CLIENT_KEY=...
 TIKTOK_CLIENT_SECRET=...
-TIKTOK_ACCESS_TOKEN=          # obtenu au parcours d'autorisation
-TIKTOK_REFRESH_TOKEN=         # idem
+TIKTOK_ACCESS_TOKEN=act....   # donné par `python -m src.cli auth-tiktok`
+TIKTOK_REFRESH_TOKEN=rft....  # idem
 
 # YouTube
 YOUTUBE_CLIENT_ID=...apps.googleusercontent.com
@@ -281,6 +296,13 @@ Il faudra passer l'audit :
 3. Soumettre le formulaire d'audit : description de l'usage, volumes
    attendus, et une **vidéo d'écran** montrant le parcours complet.
 4. Attendre 1 à 3 semaines, avec souvent un ou deux allers-retours.
-5. Une fois validé : `tiktok_mode: "direct"` dans `config.yaml`.
+5. Une fois validé, refaire le parcours d'autorisation pour obtenir des jetons
+   portant la nouvelle portée — les anciens restent limités au dépôt en
+   brouillon :
+
+   ```bash
+   python -m src.cli auth-tiktok --mode direct
+   ```
+6. Puis `tiktok_mode: "direct"` dans `config.yaml`.
 
 Rien d'autre ne change dans le code — le connecteur gère déjà les deux modes.

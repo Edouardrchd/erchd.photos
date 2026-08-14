@@ -6,6 +6,7 @@
     python -m src.cli valider <id> [...]     autorise la publication
     python -m src.cli publier [--id <id>]    publie les extraits valides
     python -m src.cli auth-youtube           genere le refresh token YouTube
+    python -m src.cli auth-tiktok            genere les jetons TikTok
 
 Le decoupage en deux commandes (`preparer` puis `publier`) est deliberе : la
 porte de validation humaine se situe entre les deux. Rien ne part vers une
@@ -269,6 +270,29 @@ def commande_auth_youtube(args) -> int:
 
 
 # --------------------------------------------------------------------------
+# auth-tiktok
+# --------------------------------------------------------------------------
+def commande_auth_tiktok(args) -> int:
+    """Deroule le consentement TikTok et affiche les deux jetons a coller."""
+    from .config import _charger_env
+    from .publish.tiktok import parcours_autorisation
+
+    _charger_env(configuration.RACINE / ".env")
+
+    charge = parcours_autorisation(mode=args.mode, port=args.port)
+
+    heures = int(charge.get("expires_in", 0)) // 3600
+    jours = int(charge.get("refresh_expires_in", 0)) // 86400
+    print("\nColle ces deux lignes dans automation/.env :\n")
+    print(f"TIKTOK_ACCESS_TOKEN={charge['access_token']}")
+    print(f"TIKTOK_REFRESH_TOKEN={charge['refresh_token']}")
+    print(f"\nPortees accordees : {charge.get('scope', '?')}")
+    print(f"Jeton d'acces valable {heures} h, rafraichissement valable {jours} jours.")
+    print("Ensuite, `python -m src.tokens` renouvelle l'acces sans repasser par ici.")
+    return 0
+
+
+# --------------------------------------------------------------------------
 def principal(argv: list[str] | None = None) -> int:
     analyseur = argparse.ArgumentParser(
         prog="shorts", description="Chaine video longue -> shorts publies"
@@ -294,8 +318,33 @@ def principal(argv: list[str] | None = None) -> int:
     p = sous.add_parser("auth-youtube", help="genere le refresh token YouTube")
     p.set_defaults(fonction=commande_auth_youtube)
 
+    p = sous.add_parser("auth-tiktok", help="genere les jetons TikTok")
+    p.add_argument(
+        "--mode",
+        choices=("brouillon", "direct"),
+        default="brouillon",
+        help="brouillon = scope video.upload (aucun audit) ; direct = video.publish",
+    )
+    p.add_argument(
+        "--port",
+        type=int,
+        default=8080,
+        help="doit correspondre au Redirect URI declare sur l'application",
+    )
+    p.set_defaults(fonction=commande_auth_tiktok)
+
     args = analyseur.parse_args(argv)
-    return args.fonction(args)
+    try:
+        return args.fonction(args)
+    except (configuration.SecretManquant, ErreurPublication) as erreur:
+        # Un secret absent ou une plateforme qui refuse sont des situations
+        # ordinaires de mise en place, pas des bogues : afficher la phrase
+        # utile plutot qu'une pile d'appels qui la noie.
+        print(f"\n{erreur}", file=sys.stderr)
+        return 1
+    except KeyboardInterrupt:
+        print("\nInterrompu.", file=sys.stderr)
+        return 130
 
 
 if __name__ == "__main__":

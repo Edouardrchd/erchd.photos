@@ -101,9 +101,14 @@ licence d'une vidéo avant de la télécharger.
 3. **Écran de consentement OAuth** → type *Externe*. Renseigner le nom de
    l'application, ton adresse, ton domaine. Ajouter la portée
    `https://www.googleapis.com/auth/youtube.upload`.
-4. Tant que l'application est en mode *Test*, ajoute ton propre compte Google
-   dans **Utilisateurs test**. C'est suffisant pour un usage personnel : la
-   validation Google n'est nécessaire que pour ouvrir l'outil à des tiers.
+4. Ajoute ton compte Google dans **Utilisateurs test**, puis clique sur
+   **Publier l'application** pour passer en *Production*.
+
+   Ce second geste n'est pas optionnel : laissé en mode *Test*, Google fait
+   expirer le `refresh_token` au bout de **7 jours** et la chaîne s'arrête sans
+   prévenir. Le passage en Production est immédiat et ne déclenche aucune
+   vérification tant que tu es le seul utilisateur — la validation Google ne
+   concerne que l'ouverture de l'outil à des tiers.
 5. **Identifiants → Créer des identifiants → ID client OAuth**, type
    *Application de bureau*. Noter l'ID client et le secret dans `.env`.
 6. Générer le jeton de rafraîchissement :
@@ -210,10 +215,11 @@ l'erreur n'apparaît qu'à la publication suivante.
 
 ---
 
-## 5. TikTok — Content Posting API (1 à 3 semaines)
+## 5. TikTok — Content Posting API (30 minutes en mode brouillon)
 
-C'est la connexion la plus contraignante, et la seule où **l'automatisation
-complète est impossible avant validation**.
+La seule connexion où **l'automatisation *complète* est impossible avant
+validation** — mais le mode brouillon en récupère l'essentiel sans aucune
+attente.
 
 ### Deux modes, et un seul demande l'audit
 
@@ -242,14 +248,31 @@ Le connecteur gère les deux : `publication.tiktok_mode` dans `config.yaml`.
 
 ### Mise en place
 
-1. <https://developers.tiktok.com> → **Manage apps → Connect an app**.
-2. Ajouter le produit **Content Posting API**, activer *Direct Post*.
-3. Portées à demander : `video.publish` (publication directe),
-   `video.upload` (brouillon), `user.info.basic`.
-4. Configurer l'URL de redirection OAuth et récupérer
-   `TIKTOK_CLIENT_KEY` / `TIKTOK_CLIENT_SECRET`.
-5. Dérouler le parcours OAuth pour obtenir l'`access_token` et le
-   `refresh_token`.
+1. <https://developers.tiktok.com> → **Manage apps → Connect an app**, connecté
+   avec le compte TikTok qui publiera.
+2. Ajouter le produit **Content Posting API**. **Ne pas activer *Direct Post***
+   tant que tu restes en mode brouillon : c'est lui qui déclenche l'audit.
+3. Portées : `user.info.basic` + `video.upload`. Ajouter `video.publish`
+   seulement une fois l'audit validé.
+4. Déclarer l'URL de redirection `http://localhost:8080/callback` et récupérer
+   `TIKTOK_CLIENT_KEY` / `TIKTOK_CLIENT_SECRET` dans `.env`.
+5. Dérouler le parcours OAuth :
+
+   ```bash
+   cd automation && python -m src.cli auth-tiktok
+   ```
+
+   La commande affiche les lignes `TIKTOK_ACCESS_TOKEN=` et
+   `TIKTOK_REFRESH_TOKEN=` à coller dans `.env`. Après l'audit, la rejouer avec
+   `--mode direct` pour obtenir des jetons portant `video.publish`.
+
+> **Pourquoi une commande dédiée plutôt qu'une bibliothèque OAuth générique.**
+> TikTok impose PKCE aux applications de bureau, mais dérive le
+> `code_challenge` par un SHA256 **hexadécimal** là où la RFC 7636 prescrit du
+> base64url. Toute implémentation PKCE standard est donc rejetée — c'est la
+> cause la plus fréquente d'échec sur cette intégration. Le port de la
+> redirection est fixe (`--port` pour le changer) parce que TikTok la compare
+> au caractère près avec celle déclarée à l'étape 4.
 
 ### L'audit
 
@@ -269,12 +292,15 @@ confidentialité non listé : sauter cet appel est un motif de refus.
 
 **L'`access_token` TikTok expire en 24 heures.** Le rafraîchissement doit être
 quotidien et automatisé — c'est la principale différence d'exploitation avec
-Meta.
+Meta. Le parcours `auth-tiktok` ne se rejoue pas pour autant : le
+`refresh_token` obtenu vaut un an.
 
-```python
-from src.publish.tiktok import rafraichir_token
-rafraichir_token()
+```bash
+python -m src.tokens tiktok      # écrit les nouvelles lignes sur stdout
 ```
+
+TikTok fait aussi tourner le `refresh_token` à chaque rafraîchissement : il
+faut réinjecter **les deux** valeurs, pas seulement l'`access_token`.
 
 ---
 
