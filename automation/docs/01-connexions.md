@@ -215,18 +215,30 @@ l'erreur n'apparaît qu'à la publication suivante.
 C'est la connexion la plus contraignante, et la seule où **l'automatisation
 complète est impossible avant validation**.
 
-### Les deux états d'une application
+### Deux modes, et un seul demande l'audit
 
-| | **Non auditée** | **Auditée** |
+C'est la distinction qui conditionne tout le parcours administratif.
+
+| | **Brouillon** *(défaut)* | **Direct** |
 |---|---|---|
-| Utilisateurs | 5 maximum | selon déclaration |
-| Compte au moment de publier | doit être **privé** | public autorisé |
-| Visibilité du contenu | forcée à `SELF_ONLY` | `PUBLIC_TO_EVERYONE` |
-| Passage en public | manuel, vidéo par vidéo | automatique |
+| Scope | `video.upload` | `video.publish` |
+| Audit | **aucun** | obligatoire, 1 à 3 semaines |
+| Endpoint | `/v2/post/publish/inbox/video/init/` | `/v2/post/publish/video/init/` |
+| Résultat | la vidéo arrive dans les brouillons du compte | publication publique immédiate |
+| Geste restant | ouvrir l'app, coller la légende, publier | aucun |
 
-Autrement dit : tant que l'audit n'est pas passé, tu peux téléverser
-automatiquement mais tu devras rendre chaque vidéo publique à la main.
-Le code le détecte et bascule sur `SELF_ONLY` plutôt que d'échouer.
+**Le mode brouillon permet de démarrer le jour même.** Tout est automatisé —
+découpe, recadrage, sous-titres, rédaction — sauf la publication finale, qui
+prend vingt secondes depuis le téléphone et sert de dernière relecture. La
+légende générée est écrite dans `var/rendus/<id>.tiktok.txt`, prête à copier :
+en mode brouillon, l'API n'accepte pas de `post_info`, c'est le créateur qui
+saisit la légende dans l'application.
+
+Le mode direct est celui qui demande l'audit. Tant qu'il n'est pas validé, il
+force la visibilité à `SELF_ONLY` **et** exige que le compte soit en privé au
+moment de publier — autrement dit il n'apporte rien par rapport au brouillon.
+
+Le connecteur gère les deux : `publication.tiktok_mode` dans `config.yaml`.
 
 ### Mise en place
 

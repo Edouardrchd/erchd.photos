@@ -85,42 +85,56 @@ Six connexions. Trois sont des formalités, trois demandent une validation
 humaine par la plateforme. **Le détail pas-à-pas est dans
 [docs/01-connexions.md](docs/01-connexions.md)** — ce tableau en donne la forme.
 
+**Configuration actuelle : YouTube Shorts + TikTok.** Instagram est désactivé
+dans `config.example.yaml` — l'App Review Meta demande une vérification
+d'entreprise et 2 à 6 semaines. Le connecteur reste en place, il suffit de
+repasser `instagram: true` pour le rallumer.
+
 | Service | Rôle | Mise en place | Délai de validation |
 |---|---|---|---|
 | **Anthropic** | sélection + rédaction | 15 min | aucun |
-| **Cloudflare R2** | URL publique de la vidéo | 20 min | aucun |
 | **YouTube Data v3** | publication Shorts | 30 min | aucun (quotas par défaut) |
-| **Meta / Instagram** | publication Reels | 1 h | **2 à 6 semaines** |
-| **TikTok** | publication | 1 h | **1 à 3 semaines** |
+| **TikTok** | publication en brouillon | 30 min | **aucun** — voir ci-dessous |
+| Cloudflare R2 | *inutile sans Instagram* | — | — |
+| Meta / Instagram | *désactivé* | 1 h | 2 à 6 semaines |
 | Transcription hébergée | *optionnel* | 10 min | aucun |
 
-**Conseil d'ordonnancement** : lance les demandes Meta et TikTok le premier
-jour. Elles tourneront pendant que tu construis et rodes le reste. YouTube
-fonctionne seul dans l'intervalle, et c'est un bon terrain d'essai.
+**Marche à suivre détaillée, écran par écran :
+[docs/00-demarrage.md](docs/00-demarrage.md).**
 
-### Le point non négociable : le stockage objet
+### TikTok : deux modes, un seul demande l'audit
+
+| Mode | Scope | Audit | Ce qui se passe |
+|---|---|---|---|
+| **`brouillon`** *(défaut)* | `video.upload` | **aucun** | la vidéo arrive dans les brouillons du compte, on publie depuis l'application |
+| `direct` | `video.publish` | 1 à 3 semaines | publication publique sans intervention |
+
+Le mode brouillon automatise tout sauf le dernier geste, et ne demande aucune
+validation préalable — c'est ce qui permet de démarrer le jour même. Le
+connecteur gère les deux modes ; basculer se fait par `publication.tiktok_mode`
+dans `config.yaml`, sans autre changement.
+
+### Le piège qui casse une chaîne de ce type
+
+**Les jetons expirent en silence.** L'`access_token` TikTok vaut **24 heures**
+(celui d'Instagram, 60 jours). Un jeton expiré ne déclenche aucune alerte :
+l'erreur n'apparaît qu'à la publication suivante. `python -m src.tokens` est
+fait pour tourner en tâche planifiée.
+
+Côté YouTube, il faut **publier l'écran de consentement OAuth en mode
+Production** : laissé en *Test*, le jeton de rafraîchissement expire au bout de
+7 jours.
+
+### Si tu rallumes Instagram : le stockage objet devient obligatoire
 
 L'API d'Instagram **ne reçoit pas de fichier**. On lui transmet une URL, et ce
 sont les serveurs de Meta qui téléchargent la vidéo. Un hébergement public
-joignable est donc obligatoire, même temporaire.
+joignable est donc nécessaire — d'où Cloudflare R2 plutôt qu'AWS S3 :
+**l'egress est gratuit**, or ici tout le trafic est de l'egress. Sur S3 la même
+chose se facture ~0,09 $/Go.
 
-Cloudflare R2 plutôt qu'AWS S3 pour une raison précise : **l'egress est
-gratuit**, or ici tout le trafic est de l'egress (c'est Meta qui télécharge).
-Sur S3 la même chose se facture ~0,09 $/Go.
-
-### Les deux pièges qui cassent une chaîne de ce type
-
-1. **Les jetons expirent.** L'`access_token` TikTok vaut **24 heures** —
-   le rafraîchissement doit être quotidien et automatisé. Celui d'Instagram
-   vaut 60 jours. Un jeton expiré ne déclenche aucune alerte : l'erreur
-   n'apparaît qu'à la publication suivante. `python -m src.tokens` est fait
-   pour tourner en tâche planifiée.
-
-2. **TikTok non audité ne publie pas en public.** Tant que l'audit n'est pas
-   passé, l'API force la visibilité à `SELF_ONLY` et exige que le compte soit
-   privé au moment de publier. Le code le détecte et bascule proprement plutôt
-   que d'échouer, mais l'automatisation de bout en bout n'existe qu'après
-   validation.
+YouTube et TikTok, eux, reçoivent le fichier directement : les variables
+`S3_*` peuvent rester vides.
 
 ---
 
@@ -277,6 +291,7 @@ automation/
 ├── config.example.yaml         réglages éditoriaux et techniques
 ├── .env.example                modèle de secrets
 ├── docs/
+│   ├── 00-demarrage.md         marche à suivre écran par écran (commencer ici)
 │   ├── 01-connexions.md        chemin de connexion, plateforme par plateforme
 │   ├── 02-droits.md            cadre juridique et arbre de décision
 │   ├── 03-budget.md            coûts et alternatives chiffrées

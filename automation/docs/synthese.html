@@ -303,14 +303,14 @@
     <h1>Fabrique de Shorts</h1>
     <p class="standfirst">
       Une vidéo longue entre, cinq shorts verticaux sous-titrés sortent — titre,
-      description et hashtags rédigés, publiés sur Instagram, TikTok et YouTube.
+      description et hashtags rédigés, déposés sur YouTube Shorts et TikTok.
       Voici ce qu'il faut brancher, dans quel ordre, et ce que ça coûte vraiment.
     </p>
     <div class="meta">
       <span>7 étages</span>
-      <span>6 connexions</span>
-      <span>≈ 4 € / mois</span>
-      <span>Montage vérifié par exécution réelle</span>
+      <span>3 connexions</span>
+      <span>≈ 3 € / mois</span>
+      <span>Aucun délai d'attente</span>
     </div>
   </header>
 
@@ -442,9 +442,8 @@
               <text x="58" y="581" font-size="11.5" fill="var(--ink-soft)">3 plateformes</text>
               <line x1="240" y1="567" x2="296" y2="567" stroke="currentColor"
                     stroke-width="1" stroke-dasharray="3 3" opacity=".55"/>
-              <text x="304" y="558" font-size="11.5" fill="var(--ink-soft)">R2 → URL publique</text>
-              <text x="304" y="577" font-size="11.5" fill="var(--ink-soft)">Instagram · TikTok</text>
-              <text x="304" y="593" font-size="11.5" fill="var(--ink-soft)">YouTube</text>
+              <text x="304" y="562" font-size="11.5" fill="var(--ink-soft)">YouTube (privé)</text>
+              <text x="304" y="580" font-size="11.5" fill="var(--ink-soft)">TikTok (brouillon)</text>
 
               <!-- Legende du trait discontinu -->
               <line x1="40" y1="628" x2="76" y2="628" stroke="currentColor"
@@ -454,9 +453,9 @@
           </svg>
           <figcaption>
             L'étage 06 est le seul point d'arrêt : sans <code>valider</code>, la
-            donnée ne descend pas vers la publication. Le stockage objet n'est
-            pas une commodité — l'API d'Instagram ne reçoit pas de fichier, elle
-            télécharge la vidéo depuis une URL publique.
+            donnée ne descend pas vers la publication. Rien n'est publié
+            publiquement d'emblée — le Short YouTube part en privé, la vidéo
+            TikTok arrive dans les brouillons.
           </figcaption>
         </figure>
       </div>
@@ -464,13 +463,13 @@
 
     <!-- ============================================================ -->
     <section id="connexions">
-      <h2><span class="num">02</span> Les six connexions</h2>
+      <h2><span class="num">02</span> Les trois connexions</h2>
 
       <p>
-        Trois sont des formalités, trois demandent une validation humaine par la
-        plateforme. Les délais sont longs et parallélisables : <strong>lance les
-        demandes Meta et TikTok le premier jour</strong>, elles tourneront
-        pendant que tu construis le reste.
+        Configuration retenue : <strong>YouTube Shorts + TikTok</strong>.
+        Instagram est désactivé — l'App Review Meta demande une vérification
+        d'entreprise et 2 à 6 semaines. Le connecteur reste en place, une ligne
+        de configuration suffit à le rallumer plus tard.
       </p>
 
       <div class="scroll">
@@ -480,7 +479,7 @@
               <th>Service</th>
               <th>Rôle</th>
               <th>Mise en place</th>
-              <th>Validation</th>
+              <th>Attente</th>
             </tr>
           </thead>
           <tbody>
@@ -488,68 +487,99 @@
               <td>Anthropic</td>
               <td>sélection + rédaction</td>
               <td class="num">15 min</td>
-              <td><span class="pill ok">immédiat</span></td>
-            </tr>
-            <tr>
-              <td>Cloudflare R2</td>
-              <td>URL publique de la vidéo</td>
-              <td class="num">20 min</td>
-              <td><span class="pill ok">immédiat</span></td>
+              <td><span class="pill ok">aucune</span></td>
             </tr>
             <tr>
               <td>YouTube Data v3</td>
               <td>publication Shorts</td>
               <td class="num">30 min</td>
-              <td><span class="pill ok">immédiat</span></td>
-            </tr>
-            <tr>
-              <td>Meta / Instagram</td>
-              <td>publication Reels</td>
-              <td class="num">1 h</td>
-              <td><span class="pill block">2 à 6 semaines</span></td>
+              <td><span class="pill ok">aucune</span></td>
             </tr>
             <tr>
               <td>TikTok</td>
-              <td>publication</td>
-              <td class="num">1 h</td>
-              <td><span class="pill wait">1 à 3 semaines</span></td>
+              <td>dépôt en brouillon</td>
+              <td class="num">30 min</td>
+              <td><span class="pill ok">aucune</span></td>
             </tr>
             <tr>
-              <td>Transcription hébergée</td>
-              <td>optionnel — sinon local</td>
-              <td class="num">10 min</td>
+              <td>Cloudflare R2</td>
+              <td>inutile sans Instagram</td>
+              <td class="num">—</td>
               <td><span class="pill none">sans objet</span></td>
             </tr>
           </tbody>
         </table>
       </div>
 
+      <div class="note">
+        <div class="label">Compte créateur ≠ compte développeur</div>
+        <p>
+          Avoir un compte YouTube et TikTok, c'est le compte avec lequel on
+          publie depuis son téléphone. Pour qu'un programme publie à ta place,
+          il faut en plus un <strong>compte développeur</strong> gratuit et une
+          <strong>application déclarée</strong> — une fiche avec un nom, une
+          description et la liste de ce que le programme a le droit de faire.
+          C'est elle qui produit les clés que le code utilise.
+        </p>
+      </div>
+
+      <h3>TikTok : deux modes, un seul demande l'audit</h3>
+
       <p>
-        YouTube fonctionne seul dans l'intervalle, sans validation : c'est la
-        plateforme la moins contraignante et un bon terrain de rodage.
+        C'est la distinction qui change tout, et elle permet de démarrer le jour
+        même plutôt que d'attendre trois semaines.
       </p>
 
-      <h3>Les deux pièges qui cassent une chaîne de ce type</h3>
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr><th>Mode</th><th>Scope</th><th>Audit</th><th>Ce qui se passe</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>brouillon</code> <em>(défaut)</em></td>
+              <td><code>video.upload</code></td>
+              <td><span class="pill ok">aucun</span></td>
+              <td>la vidéo arrive dans les brouillons, on publie depuis l'app</td>
+            </tr>
+            <tr>
+              <td><code>direct</code></td>
+              <td><code>video.publish</code></td>
+              <td><span class="pill wait">1 à 3 semaines</span></td>
+              <td>publication publique sans intervention</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        En mode brouillon, tout est automatisé sauf le dernier geste : découpe,
+        recadrage, sous-titres et rédaction sont faits. On ouvre l'application,
+        on colle la légende — écrite dans
+        <code>var/rendus/&lt;id&gt;.tiktok.txt</code> — et on publie. Vingt
+        secondes, qui servent aussi de dernière relecture.
+      </p>
+
+      <h3>Le piège qui casse une chaîne de ce type</h3>
 
       <div class="cards">
         <div class="card">
           <h3>Les jetons expirent en silence</h3>
           <p>
-            L'<code>access_token</code> TikTok vaut <strong>24 heures</strong>,
-            celui d'Instagram 60 jours. Un jeton mort ne déclenche aucune
-            alerte : l'erreur n'apparaît qu'à la publication suivante.
-            <code>python -m src.tokens</code> est fait pour tourner en tâche
-            planifiée.
+            L'<code>access_token</code> TikTok vaut <strong>24 heures</strong>.
+            Un jeton mort ne déclenche aucune alerte : l'erreur n'apparaît qu'à
+            la publication suivante. <code>python -m src.tokens</code> est fait
+            pour tourner en tâche planifiée.
           </p>
         </div>
         <div class="card">
-          <h3>TikTok non audité ne publie pas en public</h3>
+          <h3>L'écran OAuth Google resté en « Test »</h3>
           <p>
-            Tant que l'audit n'est pas passé, l'API force la visibilité à
-            <code>SELF_ONLY</code> et exige un compte privé au moment de
-            publier. Le code le détecte et bascule proprement plutôt que
-            d'échouer — mais l'automatisation de bout en bout n'existe
-            qu'après validation.
+            Laissé en mode Test, le jeton de rafraîchissement YouTube expire au
+            bout de <strong>7 jours</strong> et la chaîne s'arrête sans
+            prévenir. Publier l'application en <em>Production</em> est immédiat
+            et ne déclenche aucune vérification tant qu'on n'utilise que son
+            propre compte.
           </p>
         </div>
       </div>
@@ -584,15 +614,33 @@
         </table>
       </div>
 
+      <h3>Ce que tu dois m'envoyer : rien de secret</h3>
+
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr><th>Élément</th><th>Envoi</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Mots de passe YouTube / TikTok</td><td><span class="pill block">jamais</span></td></tr>
+            <tr><td>Clés d'API, jetons, secrets client</td><td><span class="pill block">jamais</span> — tu les mets toi-même dans <code>.env</code></td></tr>
+            <tr><td>Un message d'erreur du terminal</td><td><span class="pill ok">utile</span> — colle-le tel quel</td></tr>
+            <tr><td>Une capture d'un formulaire où tu bloques</td><td><span class="pill ok">utile</span></td></tr>
+            <tr><td>Deux ou trois liens de tes vidéos</td><td><span class="pill ok">utile</span> — pour caler l'angle éditorial</td></tr>
+          </tbody>
+        </table>
+      </div>
+
       <div class="note">
-        <div class="label">Sécurité — à lire une fois</div>
+        <div class="label">Pourquoi je n'en ai pas besoin</div>
         <p>
-          Ne colle jamais une clé d'API dans une conversation. Mets-les toi-même
-          dans <code>automation/.env</code> (déjà dans <code>.gitignore</code>)
-          ou dans GitHub Secrets. Je peux écrire, corriger et tester
-          l'intégralité du code sans jamais voir une clé : le code lit des
-          variables d'environnement, pas des valeurs en dur. Si une clé a déjà
-          circulé quelque part, révoque-la et régénère-la.
+          Le code ne contient aucune valeur en dur : il lit des variables
+          d'environnement. J'écris, je corrige et je teste toute la chaîne avec
+          des cases vides — c'est exactement ce qui a été fait jusqu'ici. Les
+          secrets vivent dans <code>automation/.env</code>, qui est dans
+          <code>.gitignore</code> et ne quitte jamais ta machine. Si une clé a
+          déjà circulé quelque part, révoque-la et régénère-la : deux minutes
+          sur la console concernée.
         </p>
       </div>
 
@@ -663,7 +711,7 @@
       <h2><span class="num">05</span> Budget</h2>
 
       <p>
-        Environ <strong>4 € par mois</strong> pour 20 shorts sur trois
+        Environ <strong>3 € par mois</strong> pour 20 shorts sur deux
         plateformes — l'essentiel tourne en local.
       </p>
 
@@ -676,8 +724,8 @@
             <tr><td>Transcription</td><td>faster-whisper, local</td><td class="num">0 €</td></tr>
             <tr><td>Sélection + rédaction</td><td>API Anthropic</td><td class="num">≈ 3 €</td></tr>
             <tr><td>Montage</td><td>ffmpeg, local</td><td class="num">0 €</td></tr>
-            <tr><td>Stockage / diffusion</td><td>Cloudflare R2</td><td class="num">≈ 0,50 €</td></tr>
-            <tr><td>Publication</td><td>API officielles</td><td class="num">0 €</td></tr>
+            <tr><td>Publication</td><td>API YouTube + TikTok</td><td class="num">0 €</td></tr>
+            <tr><td>Stockage objet</td><td>inutile sans Instagram</td><td class="num">0 €</td></tr>
           </tbody>
         </table>
       </div>
@@ -765,9 +813,22 @@ python -m src.cli <span class="p">publier</span></pre>
       <p>
         <code>doctor</code> sépare volontairement ce qui est nécessaire à la
         <strong>préparation</strong> (ffmpeg, clé Anthropic) de ce qui ne l'est
-        qu'à la <strong>publication</strong> (jetons des plateformes). Tu peux
-        donc monter des shorts dès aujourd'hui, avant même d'avoir obtenu les
-        accès Meta et TikTok.
+        qu'à la <strong>publication</strong> (jetons des plateformes) — les
+        lignes <code>S3_*</code> et <code>IG_*</code> resteront en jaune, c'est
+        normal, elles sont inutiles sans Instagram.
+      </p>
+
+      <p>
+        Au bout de la chaîne : le Short YouTube est téléversé <strong>en
+        privé</strong>, à passer en public depuis YouTube Studio quand il te
+        convient ; la vidéo TikTok arrive dans tes <strong>brouillons</strong>,
+        avec sa légende dans un fichier <code>.tiktok.txt</code> à côté du
+        rendu.
+      </p>
+
+      <p>
+        La marche à suivre écran par écran — quel bouton, quelle case, dans
+        quel ordre — est dans <code>docs/00-demarrage.md</code>.
       </p>
     </section>
 

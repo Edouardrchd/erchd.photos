@@ -83,8 +83,23 @@ publication:
   # (voir docs/04-runbook.md - porte de validation humaine).
   validation_humaine: true
   plateformes:
-    instagram: true
+    # Instagram desactive : l'App Review Meta demande une verification
+    # d'entreprise et 2 a 6 semaines. A rallumer plus tard si besoin.
+    instagram: false
     tiktok: true
     youtube: true
+
+  # Mode TikTok :
+  #   brouillon : la video arrive dans tes brouillons TikTok, tu publies
+  #               depuis l'application. AUCUN AUDIT REQUIS.
+  #   direct    : publication publique automatique. Necessite l'audit de
+  #               l'application par TikTok (1 a 3 semaines).
+  tiktok_mode: "brouillon"
+
+  # Visibilite des Shorts YouTube au moment du televersement :
+  #   private  : visible de toi seul — bon reglage pour les premieres fois
+  #   unlisted : accessible par lien, pratique pour faire relire
+  #   public   : publie directement
+  youtube_visibilite: "private"
   # Fenetres de publication (heure locale Europe/Paris)
   creneaux: ["12:30", "18:45"]

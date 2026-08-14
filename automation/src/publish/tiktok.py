@@ -1,31 +1,42 @@
 """Publication via la Content Posting API de TikTok.
 
-C'est la connexion la plus contraignante des trois. Deux etats possibles pour
-une application, et la difference est structurante :
+DEUX MODES, et le choix conditionne tout le parcours administratif.
 
-  NON AUDITEE   5 utilisateurs maximum, le compte doit etre en prive au
-                moment de la publication, et le contenu est force en
-                SELF_ONLY (visible de toi seul). Pour le rendre public il
-                faut passer le compte en public PUIS changer la visibilite
-                de chaque video a la main. Autrement dit : l'automatisation
-                de bout en bout n'existe pas tant que l'audit n'est pas passe.
+  BROUILLON (mode "brouillon", scope video.upload)      <- defaut
+      La video est deposee dans les brouillons du compte. Tu ouvres
+      l'application TikTok, tu ecris la legende et tu publies.
+      AUCUN AUDIT REQUIS : utilisable des le premier jour.
+      Endpoint : /v2/post/publish/inbox/video/init/
 
-  AUDITEE       publication directe et publique. Soumise a un plafond
-                journalier par createur, fixe selon les volumes declares
-                dans le formulaire d'audit.
+  DIRECT (mode "direct", scope video.publish)
+      Publication publique sans intervention. Necessite de passer l'audit
+      de l'application par TikTok (compter 1 a 3 semaines, souvent
+      plusieurs allers-retours).
+      Tant que l'audit n'est pas valide, cette voie force la visibilite a
+      SELF_ONLY et exige que le compte soit en prive au moment de publier :
+      autrement dit elle ne sert a rien avant validation.
+      Endpoint : /v2/post/publish/video/init/
+
+Recommandation : demarrer en BROUILLON. Le montage, les sous-titres et la
+redaction sont automatises ; il ne reste qu'un geste de publication depuis le
+telephone, qui est aussi une derniere relecture. Basculer en DIRECT plus tard,
+si le volume le justifie.
 
 L'audit verifie que l'integration respecte les regles d'experience imposees
 par TikTok : ecran de consentement, mention explicite que la publication se
 fera sur TikTok, respect du choix brouillon / publication directe, et
-affichage des options de creator_info.
+affichage des options renvoyees par creator_info.
 
-Le flux d'appels :
+Flux d'appels (mode direct) :
     1. POST /v2/post/publish/creator_info/query/   obligatoire, renvoie les
-       options autorisees pour ce createur (duree max, confidentialites
-       disponibles, interactions desactivees)
+       options autorisees pour ce createur
     2. POST /v2/post/publish/video/init/           ouvre la session d'upload
     3. PUT  <upload_url>                            envoi du fichier
     4. POST /v2/post/publish/status/fetch/          suivi jusqu'a PUBLISH_COMPLETE
+
+En mode brouillon, l'etape 1 est inutile (aucune option de confidentialite a
+choisir : le createur les reglera dans l'application) et l'etape 2 vise
+l'endpoint `inbox`.
 """
 
 from __future__ import annotations
@@ -68,6 +79,56 @@ def infos_createur() -> dict:
             PLATEFORME, f"creator_info refuse : {charge['error']}", charge
         )
     return charge.get("data", {})
+
+
+def _ecrire_legende(chemin_video: Path, metadonnees: Metadonnees) -> Path:
+    """Depose la legende a cote du rendu, prete a etre copiee.
+
+    En mode brouillon l'API n'accepte pas de `post_info` : c'est le createur
+    qui saisit la legende dans l'application. Sans ce fichier, le travail de
+    redaction de la chaine serait perdu au moment de publier.
+    """
+    chemin = chemin_video.with_suffix(".tiktok.txt")
+    chemin.write_text(metadonnees.description.strip() + "\n", encoding="utf-8")
+    print(f"     legende a copier : {chemin}")
+    return chemin
+
+
+def _init_brouillon(chemin: Path) -> dict:
+    """Ouvre une session d'envoi vers les brouillons du compte.
+
+    Aucun `post_info` n'est transmis : en mode brouillon, la legende, la
+    confidentialite et les autorisations d'interaction sont reglees par le
+    createur dans l'application au moment de publier. La legende generee par
+    la chaine est ecrite a cote du rendu, prete a etre copiee.
+    """
+    taille = chemin.stat().st_size
+    reponse = requests.post(
+        f"{BASE}/post/publish/inbox/video/init/",
+        headers=_entetes(),
+        json={
+            "source_info": {
+                "source": "FILE_UPLOAD",
+                "video_size": taille,
+                "chunk_size": taille,
+                "total_chunk_count": 1,
+            }
+        },
+        timeout=60,
+    )
+    charge = reponse.json()
+    erreur = charge.get("error", {})
+    if erreur.get("code") not in (None, "ok"):
+        indice = ""
+        if "scope" in str(erreur).lower():
+            indice = (
+                " — le scope `video.upload` n'est probablement pas active sur "
+                "l'application, ou le jeton a ete emis avant son activation."
+            )
+        raise ErreurPublication(
+            PLATEFORME, f"init brouillon refuse : {erreur}{indice}", charge
+        )
+    return charge["data"]
 
 
 def _init_upload(chemin: Path, metadonnees: Metadonnees, confidentialite: str) -> dict:
@@ -129,6 +190,11 @@ def _envoyer_fichier(url_upload: str, chemin: Path) -> None:
         )
 
 
+# Statuts terminaux : le mode direct aboutit a PUBLISH_COMPLETE, le mode
+# brouillon a SEND_TO_USER_INBOX (la video attend dans les brouillons).
+STATUTS_OK = {"PUBLISH_COMPLETE", "SEND_TO_USER_INBOX"}
+
+
 def _attendre_publication(publish_id: str) -> str:
     debut = time.monotonic()
     while time.monotonic() - debut < DELAI_MAX_S:
@@ -141,7 +207,7 @@ def _attendre_publication(publish_id: str) -> str:
         data = reponse.json().get("data", {})
         statut = data.get("status")
 
-        if statut == "PUBLISH_COMPLETE":
+        if statut in STATUTS_OK:
             return publish_id
         if statut == "FAILED":
             raise ErreurPublication(
@@ -157,12 +223,32 @@ def _attendre_publication(publish_id: str) -> str:
 
 
 def publier(
-    extrait: Extrait, metadonnees: Metadonnees, confidentialite: str | None = None
+    extrait: Extrait,
+    metadonnees: Metadonnees,
+    mode: str = "brouillon",
+    confidentialite: str | None = None,
 ) -> str:
+    """Envoie l'extrait sur TikTok.
+
+    mode="brouillon" : depose dans les brouillons, aucun audit requis.
+    mode="direct"    : publication publique, necessite l'audit valide.
+    """
     if not extrait.chemin_rendu:
         raise ErreurPublication(PLATEFORME, "aucun fichier rendu pour cet extrait")
 
     chemin = Path(extrait.chemin_rendu)
+
+    if mode == "brouillon":
+        _ecrire_legende(chemin, metadonnees)
+        session = _init_brouillon(chemin)
+        _envoyer_fichier(session["upload_url"], chemin)
+        return _attendre_publication(session["publish_id"])
+
+    if mode != "direct":
+        raise ErreurPublication(
+            PLATEFORME, f"mode inconnu : {mode!r} (attendu 'brouillon' ou 'direct')"
+        )
+
     infos = infos_createur()
     options = infos.get("privacy_level_options", [])
 

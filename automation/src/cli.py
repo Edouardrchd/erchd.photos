@@ -202,10 +202,18 @@ def commande_publier(args) -> int:
                 continue
             try:
                 module = _connecteur(nom)
-                identifiant = module.publier(extrait, variantes[nom])
+                identifiant = module.publier(
+                    extrait, variantes[nom], **_options(cfg, nom)
+                )
                 extrait.publications[nom] = identifiant
                 extrait.sauver(dossier)
-                print(f"  {nom:<10} OK  {identifiant}")
+                suffixe = (
+                    "  -> depose dans tes brouillons TikTok"
+                    if nom == "tiktok"
+                    and cfg.publication.get("tiktok_mode", "brouillon") == "brouillon"
+                    else ""
+                )
+                print(f"  {nom:<10} OK  {identifiant}{suffixe}")
             except ErreurPublication as erreur:
                 code_sortie = 1
                 print(f"  {nom:<10} ECHEC  {erreur}", file=sys.stderr)
@@ -221,6 +229,15 @@ def _connecteur(nom: str):
     from .publish import instagram, tiktok, youtube
 
     return {"instagram": instagram, "tiktok": tiktok, "youtube": youtube}[nom]
+
+
+def _options(cfg, nom: str) -> dict:
+    """Options de publication propres a chaque plateforme, lues dans config.yaml."""
+    if nom == "tiktok":
+        return {"mode": cfg.publication.get("tiktok_mode", "brouillon")}
+    if nom == "youtube":
+        return {"visibilite": cfg.publication.get("youtube_visibilite", "private")}
+    return {}
 
 
 # --------------------------------------------------------------------------
