@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Planche 01 — Edouard Richard</title>
+    <link rel="stylesheet" href="assets/fonts.css" />
+    <script src="vendor/gsap.min.js"></script>
+    <style>
+      /* ====================================================================
+         PLANCHE 01 — showreel 10 s, 1080x1920
+         Palette et typographie : design.md (extraites de src/styles/global.css)
+         ==================================================================== */
+      :root {
+        --bg: #0a0b0c;
+        --bg2: #111315;
+        --bg3: #191b1d;
+        --ink: #edeae3;
+        --ink2: #9c9a93;
+        --ink3: #6e6d67;
+        --rule: #212326;
+        --rule2: #33373a;
+        --on-photo: #f4f2ec;
+        --ff-d: "Instrument Serif", Georgia, serif;
+        --ff-s: "Jost", Helvetica, Arial, sans-serif;
+        --ff-m: "IBM Plex Mono", ui-monospace, monospace;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: var(--bg);
+      }
+      body {
+        font-family: var(--ff-s);
+        color: var(--ink);
+        -webkit-font-smoothing: antialiased;
+      }
+      #root {
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: var(--bg);
+      }
+      .scene {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: var(--bg);
+      }
+
+      /* ---------- plan photographique (la caméra) ---------- */
+      .plate {
+        position: absolute;
+        inset: 0;
+        will-change: transform;
+      }
+      .ph {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* ---------- tirage encadré des séries ---------- */
+      .frame {
+        position: absolute;
+        left: 100px;
+        top: 258px;
+        width: 880px;
+        height: 1120px;
+        will-change: transform;
+      }
+      .card {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        border: 2px solid var(--rule2);
+        background: var(--bg3);
+      }
+      .card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        box-shadow: inset 0 0 140px 40px rgba(10, 11, 12, 0.55);
+      }
+
+      /* ---------- voiles ---------- */
+      .scrim-b {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 980px;
+        background: radial-gradient(
+          130% 100% at 50% 100%,
+          rgba(10, 11, 12, 0.94) 0%,
+          rgba(10, 11, 12, 0.82) 34%,
+          rgba(10, 11, 12, 0.28) 68%,
+          rgba(10, 11, 12, 0) 100%
+        );
+      }
+      .scrim-t {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 420px;
+        background: radial-gradient(
+          120% 100% at 50% 0%,
+          rgba(10, 11, 12, 0.86) 0%,
+          rgba(10, 11, 12, 0.42) 55%,
+          rgba(10, 11, 12, 0) 100%
+        );
+      }
+
+      .scrim-t2 {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 420px;
+        background: radial-gradient(
+          150% 100% at 50% 0%,
+          rgba(10, 11, 12, 0.97) 0%,
+          rgba(10, 11, 12, 0.92) 48%,
+          rgba(10, 11, 12, 0.5) 80%,
+          rgba(10, 11, 12, 0) 100%
+        );
+      }
+      .scrim-b2 {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 620px;
+        background: radial-gradient(
+          150% 100% at 50% 100%,
+          rgba(10, 11, 12, 0.98) 0%,
+          rgba(10, 11, 12, 0.94) 50%,
+          rgba(10, 11, 12, 0.55) 80%,
+          rgba(10, 11, 12, 0) 100%
+        );
+      }
+
+      /* ---------- plan typographique ---------- */
+      .hud {
+        position: absolute;
+        inset: 0;
+      }
+      .rail {
+        position: absolute;
+        left: 72px;
+        right: 72px;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        font-family: var(--ff-m);
+        font-size: 24px;
+        letter-spacing: 0.17em;
+        text-transform: uppercase;
+        color: var(--ink2);
+      }
+      .rail-t {
+        top: 84px;
+        padding-bottom: 22px;
+        border-bottom: 2px solid var(--rule);
+      }
+      .rail-b {
+        bottom: 84px;
+        padding-top: 22px;
+        border-top: 2px solid var(--rule);
+      }
+      .tag {
+        font-family: var(--ff-s);
+        font-weight: 400;
+        font-size: 26px;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--ink2);
+      }
+      .wordmark {
+        font-family: var(--ff-d);
+        font-weight: 400;
+        font-style: italic;
+        letter-spacing: -0.012em;
+        color: var(--ink);
+      }
+      /* masque de révélation : la boîte de ligne fait exactement la hauteur de
+         la glyphe — pas de chevauchement de boîtes, pas de rognage. */
+      .wordmark .ln {
+        display: block;
+        overflow: hidden;
+        height: 0.98em;
+      }
+      .wordmark .ln i {
+        display: block;
+        font-style: italic;
+        line-height: 0.98;
+      }
+      .hr {
+        height: 2px;
+        width: 100%;
+        background: var(--rule2);
+        transform-origin: left center;
+      }
+
+      /* ---------- scène 1 : ouverture ---------- */
+      /* Zone de sécurité 9:16 : l'UI Instagram/TikTok mange les ~270 px du bas
+         et la colonne de droite. Aucun texte utile sous y = 1650. */
+      #s-open .open-block {
+        position: absolute;
+        left: 72px;
+        right: 150px;
+        bottom: 300px;
+      }
+      #s-open .wordmark {
+        font-size: 176px;
+        margin: 34px 0 40px;
+        color: var(--on-photo);
+      }
+      #s-open .tag {
+        color: #cfccc4;
+        font-size: 24px;
+        letter-spacing: 0.2em;
+        white-space: nowrap;
+      }
+      #s-open .open-meta {
+        display: flex;
+        gap: 46px;
+        margin-top: 30px;
+        font-family: var(--ff-m);
+        font-size: 25px;
+        letter-spacing: 0.15em;
+        color: #c2bfb8;
+      }
+
+      /* ---------- scènes 2 à 5 : les séries ---------- */
+      .num {
+        position: absolute;
+        left: 72px;
+        top: 178px;
+        font-family: var(--ff-d);
+        font-style: italic;
+        font-size: 150px;
+        line-height: 0.86;
+        color: var(--ink2);
+      }
+      .serie-block {
+        position: absolute;
+        left: 72px;
+        right: 72px;
+        top: 1436px;
+      }
+      .serie-title {
+        font-family: var(--ff-d);
+        font-weight: 400;
+        font-size: 96px;
+        line-height: 0.94;
+        letter-spacing: -0.01em;
+        color: var(--ink);
+      }
+      .cap {
+        display: flex;
+        align-items: baseline;
+        gap: 26px;
+        margin-top: 34px;
+        font-family: var(--ff-m);
+        font-size: 25px;
+        letter-spacing: 0.1em;
+        color: var(--ink2);
+      }
+      .cap-n {
+        color: var(--ink3);
+      }
+      .cap-t {
+        color: var(--ink);
+        letter-spacing: 0.04em;
+      }
+      .cap-m {
+        margin-left: auto;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+      }
+
+      /* ---------- scène 6 : la planche contact ---------- */
+      .sheet-cam {
+        position: absolute;
+        inset: 0;
+        transform-origin: 655px 730px;
+        will-change: transform;
+      }
+      .sheet {
+        position: absolute;
+        left: 87px;
+        top: 230px;
+        display: grid;
+        grid-template-columns: repeat(4, 216px);
+        grid-auto-rows: 324px;
+        gap: 14px;
+      }
+      .cell {
+        width: 216px;
+        height: 324px;
+        overflow: hidden;
+        background: var(--bg3);
+        border: 1px solid var(--rule);
+      }
+      .cell img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      #s-sheet .sheet-foot {
+        position: absolute;
+        left: 72px;
+        right: 72px;
+        bottom: 300px;
+        display: flex;
+        justify-content: space-between;
+        font-family: var(--ff-m);
+        font-size: 26px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--ink2);
+      }
+
+      /* ---------- scène 7 : carte de fin ---------- */
+      #s-end .plate {
+        opacity: 0.3;
+      }
+      #s-end .veil {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          115% 78% at 50% 46%,
+          rgba(10, 11, 12, 0.66) 0%,
+          rgba(10, 11, 12, 0.93) 58%,
+          rgba(10, 11, 12, 0.99) 100%
+        );
+      }
+      #s-end .end-block {
+        position: absolute;
+        left: 72px;
+        right: 72px;
+        top: 690px;
+      }
+      #s-end .wordmark {
+        font-size: 158px;
+        margin-bottom: 46px;
+      }
+      #s-end .end-tag {
+        margin-top: 44px;
+      }
+      #s-end .url {
+        margin-top: 96px;
+        font-family: var(--ff-m);
+        font-size: 34px;
+        letter-spacing: 0.08em;
+        color: var(--ink);
+      }
+
+      /* ---------- grain + vignettage, permanents ---------- */
+      .grain {
+        position: absolute;
+        inset: -20px;
+        background-image: url("assets/grain.png");
+        background-repeat: repeat;
+        opacity: 0.13;
+        mix-blend-mode: overlay;
+        pointer-events: none;
+      }
+      .vig {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          78% 62% at 50% 46%,
+          rgba(10, 11, 12, 0) 0%,
+          rgba(10, 11, 12, 0.16) 62%,
+          rgba(10, 11, 12, 0.58) 100%
+        );
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="10"
+      data-width="1080"
+      data-height="1920"
+    >
+      <!-- ============ 1 · OUVERTURE ============ -->
+      <section id="s-open" class="clip scene" data-start="0" data-duration="2.3" data-track-index="1">
+        <div class="plate" data-layout-allow-overflow><img class="ph" src="assets/photos/hero.jpg" alt="" /></div>
+        <div class="scrim-t"></div>
+        <div class="scrim-b"></div>
+        <div class="hud">
+          <div class="rail rail-t"><span>Planche 01</span><span>Sélection 2024 / 2026</span></div>
+          <div class="open-block">
+            <div class="tag">Photographe sportif — Rouen, Normandie</div>
+            <h1 class="wordmark" data-layout-allow-overlap>
+              <span class="ln" data-layout-allow-overlap data-layout-allow-overflow><i data-layout-allow-overlap data-layout-allow-overflow>Edouard</i></span><span class="ln" data-layout-allow-overlap data-layout-allow-overflow><i data-layout-allow-overlap data-layout-allow-overflow>Richard</i></span>
+            </h1>
+            <div class="hr"></div>
+            <div class="open-meta">
+              <span>19 vues</span><span>4 séries</span><span>Livraison 48 h</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 2 · HOCKEY ============ -->
+      <section id="s-hockey" class="clip scene" data-start="2.3" data-duration="1" data-track-index="1">
+        <div class="frame" data-layout-allow-overflow><div class="card"><img class="ph" src="assets/photos/s1-hockey.jpg" alt="" /></div></div>
+        <div class="scrim-t2"></div>
+        <div class="scrim-b2"></div>
+        <div class="hud">
+          <div class="rail rail-t"><span>Série I / IV</span><span>Rouen · Amiens — 2025</span></div>
+          <div class="num">I</div>
+          <div class="serie-block">
+            <h2 class="serie-title">Hockey sur glace</h2>
+            <div class="cap">
+              <span class="cap-n">05</span><span class="cap-t">Filé sur un joueur lancé</span
+              ><span class="cap-m">10.11.25</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 3 · BASKET ============ -->
+      <section id="s-basket" class="clip scene" data-start="3.3" data-duration="1" data-track-index="1">
+        <div class="frame" data-layout-allow-overflow><div class="card"><img class="ph" src="assets/photos/s2-basket.jpg" alt="" /></div></div>
+        <div class="scrim-t2"></div>
+        <div class="scrim-b2"></div>
+        <div class="hud">
+          <div class="rail rail-t"><span>Série II / IV</span><span>Rouen · Caen — 2024 / 2025</span></div>
+          <div class="num">II</div>
+          <div class="serie-block">
+            <h2 class="serie-title">Basketball</h2>
+            <div class="cap">
+              <span class="cap-n">05</span><span class="cap-t">Tir en suspension</span
+              ><span class="cap-m">Caen · 24.04.24</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 4 · FOOTBALL ============ -->
+      <section id="s-foot" class="clip scene" data-start="4.3" data-duration="1" data-track-index="1">
+        <div class="frame" data-layout-allow-overflow><div class="card"><img class="ph" src="assets/photos/s3-foot.jpg" alt="" /></div></div>
+        <div class="scrim-t2"></div>
+        <div class="scrim-b2"></div>
+        <div class="hud">
+          <div class="rail rail-t"><span>Série III / IV</span><span>Caen — 2025</span></div>
+          <div class="num">III</div>
+          <div class="serie-block">
+            <h2 class="serie-title">Football</h2>
+            <div class="cap">
+              <span class="cap-n">01</span><span class="cap-t">Frappe depuis le corner</span
+              ><span class="cap-m">07.11.25</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 5 · BOXE ============ -->
+      <section id="s-boxe" class="clip scene" data-start="5.3" data-duration="1" data-track-index="1">
+        <div class="frame" data-layout-allow-overflow><div class="card"><img class="ph" src="assets/photos/s4-boxe.jpg" alt="" /></div></div>
+        <div class="scrim-t2"></div>
+        <div class="scrim-b2"></div>
+        <div class="hud">
+          <div class="rail rail-t"><span>Série IV / IV</span><span>Gala — 2024</span></div>
+          <div class="num">IV</div>
+          <div class="serie-block">
+            <h2 class="serie-title">Boxe</h2>
+            <div class="cap">
+              <span class="cap-n">01</span><span class="cap-t">Montée sur le ring</span
+              ><span class="cap-m">Gala · 14.03.24</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 6 · PLANCHE CONTACT ============ -->
+      <section id="s-sheet" class="clip scene" data-start="6.3" data-duration="1.85" data-track-index="1">
+        <div class="sheet-cam" data-layout-allow-overflow>
+          <div class="sheet">
+            <div class="cell"><img src="assets/thumbs/t01.jpg" alt="" /></div>
+            <div class="cell"><img src="assets/thumbs/t02.jpg" alt="" /></div>
+            <div class="cell"><img src="assets/thumbs/t03.jpg" alt="" /></div>
+            <div class="cell"><img src="assets/thumbs/t04.jpg" alt="" /></div>
+            <div class="cell"><img src="assets/thumbs/t05.jpg" alt="" /></div>
+            <div class="cell"><img src="assets/thumbs/t06.jpg" alt="" /></div>
+            <div class="cell"><img src="assets/thumbs/t07.jpg" alt="" /></div>
+            <div class="cell"><img src="assets/thumbs/t08.jpg" alt="" /></div>
+            <div class="cell"><img src="assets/thumbs/t09.jpg" alt="" /></div>
+            <div class="cell"><img src="assets/thumbs/t10.jpg" alt="" /></div>
+            <div class="cell"><img src="assets/thumbs/t11.jpg" alt="" /></div>
+            <div class="cell"><img src="assets/thumbs/t12.jpg" alt="" /></div>
+            <div class="cell"><img src="assets/thumbs/t13.jpg" alt="" /></div>
+            <div class="cell"><img src="assets/thumbs/t14.jpg" alt="" /></div>
+            <div class="cell"><img src="assets/thumbs/t15.jpg" alt="" /></div>
+            <div class="cell"><img src="assets/thumbs/t16.jpg" alt="" /></div>
+          </div>
+        </div>
+        <div class="scrim-t2"></div>
+        <div class="scrim-b2"></div>
+        <div class="hud">
+          <div class="rail rail-t"><span>Planche contact</span><span>2024 / 2026</span></div>
+          <div class="sheet-foot"><span>19 vues</span><span>4 séries</span></div>
+        </div>
+      </section>
+
+      <!-- ============ 7 · CARTE DE FIN ============ -->
+      <section id="s-end" class="clip scene" data-start="8.15" data-duration="1.85" data-track-index="1">
+        <div class="plate" data-layout-allow-overflow><img class="ph" src="assets/photos/final.jpg" alt="" /></div>
+        <div class="veil"></div>
+        <div class="hud end-hud">
+          <div class="rail rail-t"><span>Planche 01</span><span>Fin</span></div>
+          <div class="end-block">
+            <h2 class="wordmark" data-layout-allow-overlap>
+              <span class="ln" data-layout-allow-overlap data-layout-allow-overflow><i data-layout-allow-overlap data-layout-allow-overflow>Edouard</i></span><span class="ln" data-layout-allow-overlap data-layout-allow-overflow><i data-layout-allow-overlap data-layout-allow-overflow>Richard</i></span>
+            </h2>
+            <div class="hr"></div>
+            <div class="tag end-tag">Photographe sportif — Rouen, Normandie</div>
+            <div class="url">edouardrichard.mypixieset.com</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="grain"></div>
+      <div class="vig"></div>
+    </div>
+
+    <script>
+      /* ====================================================================
+         COURANT DU FILM : Z avant. d(scale)/dt > 0 des deux côtés de chaque
+         coupe — aucune couture ne renverse le signe, aucun fondu enchaîné.
+         Voir STORYBOARD.md.
+         ==================================================================== */
+      const OUT = "power3.in"; // sortie : accélère dans la coupe
+      const IN = "power3.out"; // entrée : reprend à mi-vol puis décélère
+
+      function build() {
+        const tl = gsap.timeline({ paused: true });
+
+        /* ---------- 1 · OUVERTURE (0 → 2.30) ---------- */
+        tl.fromTo("#s-open .plate", { scale: 1.0 }, { scale: 1.09, duration: 1.45, ease: "power2.out" }, 0)
+          .to("#s-open .plate", { scale: 1.26, duration: 0.85, ease: OUT }, 1.45)
+          .from("#s-open .rail-t", { autoAlpha: 0, y: -26, duration: 0.5, ease: IN }, 0.12)
+          .from("#s-open .tag", { autoAlpha: 0, y: 26, duration: 0.5, ease: IN }, 0.3)
+          .from(
+            "#s-open .wordmark .ln i",
+            { yPercent: 108, autoAlpha: 0, duration: 0.72, ease: IN, stagger: 0.09 },
+            0.38
+          )
+          .from("#s-open .hr", { scaleX: 0, duration: 0.62, ease: IN }, 0.74)
+          .from(
+            "#s-open .open-meta span",
+            { autoAlpha: 0, y: 22, duration: 0.46, ease: IN, stagger: 0.07 },
+            0.86
+          );
+
+        /* ---------- 2 à 5 · LES SÉRIES (2.30 → 6.30) ---------- */
+        const series = ["#s-hockey", "#s-basket", "#s-foot", "#s-boxe"];
+        series.forEach((id, i) => {
+          const t0 = 2.3 + i * 1.0;
+          // la caméra ne s'arrête jamais : 1.14 → 1.21 → 1.36
+          tl.fromTo(id + " .frame", { scale: 1.14 }, { scale: 1.21, duration: 0.55, ease: IN }, t0)
+            .to(id + " .frame", { scale: 1.36, duration: 0.45, ease: OUT }, t0 + 0.55)
+            .from(id + " .rail-t", { autoAlpha: 0, y: -18, duration: 0.36, ease: IN }, t0 + 0.04)
+            .from(id + " .num", { autoAlpha: 0, x: -34, duration: 0.44, ease: IN }, t0 + 0.02)
+            .from(id + " .serie-title", { autoAlpha: 0, yPercent: 42, duration: 0.5, ease: IN }, t0 + 0.06)
+            .from(
+              id + " .cap > span",
+              { autoAlpha: 0, y: 20, duration: 0.38, ease: IN, stagger: 0.06 },
+              t0 + 0.2
+            );
+        });
+
+        /* ---------- 6 · PLANCHE CONTACT (6.30 → 8.15) ---------- */
+        const S = 6.3;
+        tl.fromTo("#s-sheet .sheet-cam", { scale: 1.1 }, { scale: 1.16, duration: 0.9, ease: IN }, S)
+          .from("#s-sheet .rail-t", { autoAlpha: 0, y: -18, duration: 0.36, ease: IN }, S + 0.02)
+          // cascade : les vignettes arrivent en planche, pas en bloc
+          .from(
+            "#s-sheet .cell",
+            { autoAlpha: 0, scale: 0.86, duration: 0.42, ease: IN, stagger: { each: 0.035, from: "start" } },
+            S + 0.02
+          )
+          .from("#s-sheet .sheet-foot span", { autoAlpha: 0, y: 18, duration: 0.4, ease: IN, stagger: 0.08 }, S + 0.5)
+          // immobilité 0,25 s — la virgule dramatique — puis la caméra entre
+          .to("#s-sheet .sheet-cam", { scale: 1.52, x: -115, y: 230, duration: 0.7, ease: OUT }, S + 1.15)
+          .to("#s-sheet .sheet-foot", { autoAlpha: 0, duration: 0.3, ease: OUT }, S + 1.3)
+          .to("#s-sheet .rail-t", { autoAlpha: 0, duration: 0.3, ease: OUT }, S + 1.3);
+
+        /* ---------- 7 · CARTE DE FIN (8.15 → 10.00) ---------- */
+        const E = 8.15;
+        tl.fromTo("#s-end .plate", { scale: 1.05 }, { scale: 1.12, duration: 1.85, ease: "power2.out" }, E)
+          .from("#s-end .rail-t", { autoAlpha: 0, y: -18, duration: 0.4, ease: IN }, E + 0.06)
+          // vecteur réservé : élévation, à une frontière de chapitre
+          .from(
+            "#s-end .wordmark .ln i",
+            { yPercent: 112, autoAlpha: 0, duration: 0.66, ease: IN, stagger: 0.08 },
+            E + 0.1
+          )
+          .from("#s-end .hr", { scaleX: 0, duration: 0.55, ease: IN }, E + 0.44)
+          .from("#s-end .end-tag", { autoAlpha: 0, y: 24, duration: 0.44, ease: IN }, E + 0.56)
+          .from("#s-end .url", { autoAlpha: 0, y: 30, duration: 0.5, ease: IN }, E + 0.74);
+
+        return tl;
+      }
+
+      /* Les polices sont embarquées : on attend qu'elles soient prêtes pour que
+         les mesures de texte soient stables, puis on enregistre la timeline —
+         jamais avant la fin de la construction. */
+      document.fonts.ready.then(() => {
+        window.__timelines["main"] = build();
+        if (window.__hfForceTimelineRebind) window.__hfForceTimelineRebind();
+      });
+    </script>
+  </body>
+</html>
