@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Edouard Richard — Photographe sportif</title>
+<meta name="description" content="Edouard Richard, photographe de sport. Couverture de matchs, portraits d'athlètes et coulisses : football, basketball, boxe, hockey, handball. Base à Rouen, déplacements en France.">
+<meta name="theme-color" content="#0A0B0C">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20fill%3D%22%230A0B0C%22%2F%3E%3Crect%20x%3D%225%22%20y%3D%228%22%20width%3D%2222%22%20height%3D%2216%22%20fill%3D%22none%22%20stroke%3D%22%23E8E6E2%22%20stroke-width%3D%222.5%22%2F%3E%3Crect%20x%3D%2213%22%20y%3D%2214%22%20width%3D%226%22%20height%3D%224%22%20fill%3D%22%23E8E6E2%22%2F%3E%3C%2Fsvg%3E">
+<meta name="robots" content="index,follow">
+<!-- URL absolues : requises pour que les apercus de lien soient lus par les reseaux
+     sociaux. A remplacer ici si le site passe sur un domaine personnalise. -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Edouard Richard">
+<meta property="og:title" content="Edouard Richard — Photographe sportif">
+<meta property="og:description" content="Couverture de matchs, portraits d'athlètes et coulisses. Football, basketball, boxe, hockey, handball.">
+<meta property="og:image" content="https://edouardrchd.github.io/erchd.photos/photos/er-hero-v2.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="560">
+<meta property="og:image:alt" content="Photographie de sport en noir et blanc, signee Edouard Richard">
+<meta property="og:url" content="https://edouardrchd.github.io/erchd.photos/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Edouard Richard — Photographe sportif">
+<meta name="twitter:description" content="Couverture de matchs, portraits d'athlètes et coulisses. Football, basketball, boxe, hockey, handball.">
+<meta name="twitter:image" content="https://edouardrchd.github.io/erchd.photos/photos/er-hero-v2.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;600&family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&family=Archivo:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --grain-opacity: 0.07;
+    --rest-filter: none;
+    --hover-filter: brightness(1.06);
+    --gap: 20px;
+    --hero-font: 'Big Shoulders Display','Archivo Narrow',sans-serif;
+    --hero-weight: 600;
+  }
+  html, body { margin: 0; padding: 0; background: #0A0B0C; }
+  body { -webkit-font-smoothing: antialiased; }
+  * { border-radius: 0 !important; box-sizing: border-box; }
+  img { display: block; }
+  ::selection { background: #F2F0EC; color: #0A0B0C; }
+  a { color: #F2F0EC; text-decoration: none; }
+  a:hover { color: #E8E6E2; }
+  @keyframes erUp { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+  @keyframes erLine { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @keyframes erPulse { 0%,100% { opacity: 0.35; } 50% { opacity: 1; } }
+  @keyframes erDrift { from { transform: translateX(0); } to { transform: translateX(132px); } }
+  @keyframes erBreathe { 0%, 100% { opacity: 0.5; transform: scale(1) translateY(0); } 50% { opacity: 1; transform: scale(1.08) translateY(-1.5%); } }
+  @keyframes erLeaderOut { 0%, 62% { transform: translateY(0); } 100% { transform: translateY(-101%); } }
+  @keyframes erLeaderInner { 0%, 58% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-14px); } }
+  @keyframes erLeaderBar { 0% { transform: scaleX(0); } 62%, 100% { transform: scaleX(1); } }
+  .hv1:hover{color:#0A0B0C !important;background:oklch(0.84 0.08 44) !important;border-color:oklch(0.84 0.08 44) !important}
+  .hv2:hover{color:#FFFDF8 !important;text-shadow:0 0 18px oklch(0.84 0.08 44 / 0.85), 0 0 42px oklch(0.84 0.08 44 / 0.45) !important}
+  .hv3:hover{color:#F2F0EC !important}
+  .hv4:hover{filter:var(--hover-filter,none) !important;border-color:oklch(0.74 0.08 44 / 0.55) !important}
+  .hv5:hover{opacity:1 !important;color:oklch(0.8 0.09 44) !important}
+  .hv6:hover{filter:var(--hover-filter,none) !important;border-color:oklch(0.78 0.05 150 / 0.55) !important}
+  .hv7:hover{color:#F2F0EC !important;border-color:#F2F0EC !important}
+  .hv8:hover{color:#E8E6E2 !important}
+
+  @media (max-width: 900px) {
+    [data-hero-grid], [data-about-grid] { grid-template-columns: minmax(0,1fr) !important; }
+    [data-stats] { grid-template-columns: repeat(2,minmax(0,1fr)) !important; }
+    [data-gallery] > div:not([data-reveal]) { grid-template-columns: repeat(2,minmax(0,1fr)) !important; }
+    [data-table] { height: min(58vh,440px) !important; }
+  }
+  @media (max-width: 560px) {
+    [data-gallery] > div:not([data-reveal]) { grid-template-columns: minmax(0,1fr) !important; }
+    [data-gallery] > div[data-reveal] { grid-template-columns: minmax(0,1fr) !important; }
+    [data-table] { height: min(48vh,360px) !important; }
+    [data-hero-title] { font-size: clamp(44px,13vw,72px) !important; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-wash], [data-leader] > div, [data-hero] [style*="erDrift"] { animation: none !important; }
+  }
+</style>
+</head>
+<body>
+<div data-er-root="" style="background: #0A0B0C; color: #E8E6E2; font-family: Archivo,Helvetica,sans-serif; font-weight: 300; min-height: 100vh; position: relative">
+
+  <div style="position:fixed;inset:0;z-index:60;pointer-events:none;opacity:var(--grain-opacity,0.07);mix-blend-mode:overlay;background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxODAnIGhlaWdodD0nMTgwJz48ZmlsdGVyIGlkPSduJz48ZmVUdXJidWxlbmNlIHR5cGU9J2ZyYWN0YWxOb2lzZScgYmFzZUZyZXF1ZW5jeT0nMC45JyBudW1PY3RhdmVzPSc0JyBzdGl0Y2hUaWxlcz0nc3RpdGNoJy8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9JzE4MCcgaGVpZ2h0PScxODAnIGZpbHRlcj0ndXJsKCNuKScvPjwvc3ZnPg==');background-size:180px 180px"></div>
+  <div style="position:fixed;inset:0;z-index:59;pointer-events:none;background:radial-gradient(120% 90% at 50% 45%, rgba(0,0,0,0) 48%, rgba(0,0,0,0.5) 100%)"></div>
+  <div data-leader="" style="position: fixed; inset: 0; z-index: 95; background: #07080A; display: flex; align-items: center; justify-content: center; animation: erLeaderOut 1700ms cubic-bezier(0.76,0,0.24,1) both; pointer-events: none">
+    <div style="display:grid;gap:18px;justify-items:center;animation:erLeaderInner 1700ms ease both">
+      <span style="font-family:'Big Shoulders Display','Archivo Narrow',sans-serif;font-weight:600;font-size:clamp(38px,6vw,86px);line-height:0.9;letter-spacing:0.02em;text-transform:uppercase;color:#F2F0EC">Edouard <span style="font-family:'Instrument Serif',Didot,serif;font-weight:400;font-style:italic;text-transform:none;letter-spacing:-0.015em;color:oklch(0.86 0.075 46)">Richard</span></span>
+      <span style="width:min(280px,44vw);height:2px;background:#F2F0EC;transform-origin:left;animation:erLeaderBar 1700ms cubic-bezier(0.4,0,0.2,1) both"></span>
+      <span style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:#8A8783">Photographe sportif · Saison 2026 / 2027</span>
+    </div>
+  </div>
+  <div data-progress="" style="position:fixed;left:0;top:0;height:2px;width:100%;z-index:58;pointer-events:none;background:linear-gradient(90deg, oklch(0.72 0.07 232), oklch(0.74 0.08 44));transform:scaleX(0);transform-origin:left"></div>
+
+  <header style="position:sticky;top:0;z-index:50;background:rgba(10,11,12,0.9);backdrop-filter:blur(10px);border-bottom:1px solid rgba(232,230,226,0.12)">
+    <div style="border-bottom:1px solid rgba(232,230,226,0.08);background:rgba(7,8,10,0.5)">
+      <div style="max-width:1440px;margin:0 auto;padding:9px clamp(20px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase">
+        <span style="display:flex;align-items:center;gap:10px;color:#8A8783">
+          <span style="width:7px;height:7px;background:oklch(0.74 0.09 150);clip-path:circle(50%);box-shadow:0 0 10px oklch(0.74 0.09 150 / 0.55)"></span>
+          <span>Disponible partout en France</span>
+        </span>
+        <div style="display:flex;align-items:center;gap:8px">
+          <a data-social="" data-link="instagram" href="https://instagram.com/" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;padding:6px 12px;border:1px solid rgba(232,230,226,0.16);color:#C6C3BE;font:inherit;letter-spacing:inherit;text-transform:inherit;transition:color 300ms ease,border-color 300ms ease,background 300ms ease" class="hv1">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4.1"></circle><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"></circle></svg>
+            <span>Instagram</span>
+          </a>
+          <a data-social="" data-link="linktree" href="https://linktr.ee/" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;padding:6px 12px;border:1px solid rgba(232,230,226,0.16);color:#C6C3BE;font:inherit;letter-spacing:inherit;text-transform:inherit;transition:color 300ms ease,border-color 300ms ease,background 300ms ease" class="hv1">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M12 10.4V21"></path><path d="M4.6 6.2 12 10.4l7.4-4.2"></path><path d="M4.6 13.6 12 10.4l7.4 3.2"></path><path d="M12 3.2v7.2"></path></svg>
+            <span>Linktree</span>
+          </a>
+          <a data-social="" data-mail="" href="mailto:edouard.rchd@gmail.com" style="display:flex;align-items:center;gap:8px;padding:6px 12px;border:1px solid oklch(0.84 0.08 44 / 0.5);color:oklch(0.84 0.08 44);font:inherit;letter-spacing:inherit;text-transform:inherit;transition:color 300ms ease,border-color 300ms ease,background 300ms ease" class="hv1">edouard.rchd@gmail.com</a>
+        </div>
+      </div>
+    </div>
+    <div style="max-width:1440px;margin:0 auto;padding:16px clamp(20px,5vw,72px);display:flex;align-items:baseline;justify-content:space-between;gap:32px">
+      <div style="display:flex;align-items:baseline;gap:16px">
+        <span style="font-family:'Instrument Serif','Bodoni Moda',Didot,serif;font-size:19px;letter-spacing:0.01em">Edouard Richard</span>
+        <span style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#8A8783">Photographie de sport</span>
+      </div>
+      <nav style="display:flex;gap:clamp(16px,2.6vw,36px);font-family:'Space Mono','IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase">
+        <a href="#galeries" style="color:#D8D5D0;padding:6px 2px;transition:color 260ms ease,text-shadow 260ms ease" class="hv2">Galeries</a>
+        <a href="#apropos" style="color:#D8D5D0;padding:6px 2px;transition:color 260ms ease,text-shadow 260ms ease" class="hv2">À propos</a>
+        <a href="#contact" style="color:#D8D5D0;padding:6px 2px;transition:color 260ms ease,text-shadow 260ms ease" class="hv2">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section data-hero="" style="position:relative;width:100%;overflow:hidden;border-bottom:1px solid rgba(232,230,226,0.12)">
+    <div data-wash="" style="position:absolute;inset:-20% -10%;z-index:0;pointer-events:none;background:radial-gradient(44% 50% at 28% 16%, rgba(232,230,226,0.11), rgba(10,11,12,0) 72%), radial-gradient(42% 48% at 78% 22%, oklch(0.72 0.07 232 / 0.14), rgba(10,11,12,0) 74%), radial-gradient(40% 46% at 60% 92%, oklch(0.74 0.08 44 / 0.10), rgba(10,11,12,0) 76%);filter:blur(4px);will-change:transform;animation:erBreathe 19s ease-in-out infinite"></div>
+    <div data-tint="a" style="position:absolute;inset:-28% -14%;z-index:0;pointer-events:none;opacity:0;mix-blend-mode:screen;filter:blur(14px);will-change:opacity;transition:opacity 1500ms cubic-bezier(0.4,0,0.2,1)"></div>
+    <div data-tint="b" style="position:absolute;inset:-28% -14%;z-index:0;pointer-events:none;opacity:0;mix-blend-mode:screen;filter:blur(14px);will-change:opacity;transition:opacity 1500ms cubic-bezier(0.4,0,0.2,1)"></div>
+  <div style="position:absolute;inset:0 -140px;z-index:1;pointer-events:none;opacity:0.55;background:repeating-linear-gradient(90deg, rgba(232,230,226,0.055) 0 1px, rgba(232,230,226,0) 1px 132px);animation:erDrift 22s linear infinite"></div>
+
+    <div data-hero-grid="" style="position:relative;z-index:2;max-width:1440px;margin:0 auto;padding:clamp(34px,5vw,78px) clamp(20px,5vw,72px) clamp(26px,3.5vw,52px);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,4vw,64px);align-items:center">
+      <div>
+        <div style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#C6C3BE;display:flex;gap:14px;align-items:center;margin-bottom:clamp(16px,2.2vw,28px);animation:erUp 900ms cubic-bezier(0.2,0.7,0.2,1) both 120ms">
+          <span style="width:38px;height:1px;background:#F2F0EC;display:inline-block;transform-origin:left;animation:erLine 900ms cubic-bezier(0.2,0.7,0.2,1) both 200ms"></span>
+          <span>Saison 2025 / 2026</span>
+        </div>
+        <h1 data-hero-title="" style="font-family:var(--hero-font,'Big Shoulders Display','Archivo Narrow',sans-serif);font-weight:var(--hero-weight,600);font-size:clamp(52px,7.8vw,132px);line-height:0.88;letter-spacing:0.005em;text-transform:uppercase;margin:0;color:#F2F0EC;display:grid;gap:clamp(2px,0.5vw,8px);animation:erUp 1000ms cubic-bezier(0.2,0.7,0.2,1) both 240ms">
+          <span style="display:block">Edouard</span>
+          <span style="display:flex;align-items:center;gap:clamp(12px,1.6vw,26px)"><span style="flex:0 0 auto;width:clamp(28px,4vw,86px);height:2px;background:oklch(0.84 0.08 44);opacity:0.75"></span><span style="font-family:'Instrument Serif',Didot,serif;font-weight:400;font-style:italic;text-transform:none;letter-spacing:-0.015em;color:oklch(0.86 0.075 46);padding-right:0.08em">Richard</span></span>
+        </h1>
+        <p style="font-size:clamp(15px,1.15vw,18px);line-height:1.65;color:#C6C3BE;max-width:40ch;margin:clamp(20px,2.6vw,32px) 0 0;text-wrap:pretty;animation:erUp 1000ms cubic-bezier(0.2,0.7,0.2,1) both 360ms">Cinq disciplines, huit images chacune, et une série hors-terrain. Matchs, portraits et coulisses, du district au national.</p>
+        <div data-hero-readout="" style="display:grid;gap:9px;margin-top:clamp(24px,3vw,40px);font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.16em;text-transform:uppercase;animation:erUp 1000ms cubic-bezier(0.2,0.7,0.2,1) both 480ms">
+          <span data-readout-meta="" style="color:#F2F0EC">Football · Stade René-Gaillard, Niort</span>
+          <span data-hero-hint="" style="color:#605E5B">Faites tourner les tirages — cliquez pour ouvrir la discipline</span>
+        </div>
+      </div>
+
+      <div data-table="" style="position:relative;touch-action:pan-y;cursor:grab;height:min(66vh,660px);min-height:340px;animation:erUp 1200ms cubic-bezier(0.2,0.7,0.2,1) both 300ms">
+        <figure data-print="" data-slug="football" style="position:absolute;left:0;top:0;margin:0;background:#101112;border:1px solid rgba(232,230,226,0.12);box-shadow:0 26px 60px rgba(0,0,0,0.5);overflow:hidden;cursor:pointer;transform-origin:50% 100%;will-change:transform;transition:transform 1000ms cubic-bezier(0.2,0.7,0.2,1),filter 700ms ease,box-shadow 700ms ease,opacity 700ms ease">
+            <img src="photos/er-burst-01.jpg" alt="Tirage 01 — Football" width="453" height="680" loading="eager" decoding="async" fetchpriority="high" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+            <figcaption data-print-cap="" style="position:absolute;left:0;right:0;bottom:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 12px;background:linear-gradient(to top,rgba(7,8,10,0.9),rgba(7,8,10,0));font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.16em;text-transform:uppercase;color:#C6C3BE;opacity:0;transition:opacity 500ms ease;pointer-events:none"><span>Football</span><span data-print-cta="" style="color:oklch(0.84 0.08 44)">Voir la galerie →</span></figcaption>
+          </figure>
+        
+          <figure data-print="" data-slug="basketball" style="position:absolute;left:0;top:0;margin:0;background:#101112;border:1px solid rgba(232,230,226,0.12);box-shadow:0 26px 60px rgba(0,0,0,0.5);overflow:hidden;cursor:pointer;transform-origin:50% 100%;will-change:transform;transition:transform 1000ms cubic-bezier(0.2,0.7,0.2,1),filter 700ms ease,box-shadow 700ms ease,opacity 700ms ease">
+            <img src="photos/er-burst-02.jpg" alt="Tirage 02 — Basketball" width="453" height="680" loading="eager" decoding="async" fetchpriority="high" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+            <figcaption data-print-cap="" style="position:absolute;left:0;right:0;bottom:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 12px;background:linear-gradient(to top,rgba(7,8,10,0.9),rgba(7,8,10,0));font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.16em;text-transform:uppercase;color:#C6C3BE;opacity:0;transition:opacity 500ms ease;pointer-events:none"><span>Basketball</span><span data-print-cta="" style="color:oklch(0.84 0.08 44)">Voir la galerie →</span></figcaption>
+          </figure>
+        
+          <figure data-print="" data-slug="boxe" style="position:absolute;left:0;top:0;margin:0;background:#101112;border:1px solid rgba(232,230,226,0.12);box-shadow:0 26px 60px rgba(0,0,0,0.5);overflow:hidden;cursor:pointer;transform-origin:50% 100%;will-change:transform;transition:transform 1000ms cubic-bezier(0.2,0.7,0.2,1),filter 700ms ease,box-shadow 700ms ease,opacity 700ms ease">
+            <img src="photos/er-burst-03.jpg" alt="Tirage 03 — Boxe" width="651" height="814" loading="eager" decoding="async" fetchpriority="high" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+            <figcaption data-print-cap="" style="position:absolute;left:0;right:0;bottom:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 12px;background:linear-gradient(to top,rgba(7,8,10,0.9),rgba(7,8,10,0));font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.16em;text-transform:uppercase;color:#C6C3BE;opacity:0;transition:opacity 500ms ease;pointer-events:none"><span>Boxe</span><span data-print-cta="" style="color:oklch(0.84 0.08 44)">Voir la galerie →</span></figcaption>
+          </figure>
+        
+          <figure data-print="" data-slug="hockey" style="position:absolute;left:0;top:0;margin:0;background:#101112;border:1px solid rgba(232,230,226,0.12);box-shadow:0 26px 60px rgba(0,0,0,0.5);overflow:hidden;cursor:pointer;transform-origin:50% 100%;will-change:transform;transition:transform 1000ms cubic-bezier(0.2,0.7,0.2,1),filter 700ms ease,box-shadow 700ms ease,opacity 700ms ease">
+            <img src="photos/er-burst-04.webp" alt="Tirage 04 — Hockey" width="453" height="680" loading="eager" decoding="async" fetchpriority="high" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+            <figcaption data-print-cap="" style="position:absolute;left:0;right:0;bottom:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 12px;background:linear-gradient(to top,rgba(7,8,10,0.9),rgba(7,8,10,0));font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.16em;text-transform:uppercase;color:#C6C3BE;opacity:0;transition:opacity 500ms ease;pointer-events:none"><span>Hockey</span><span data-print-cta="" style="color:oklch(0.84 0.08 44)">Voir la galerie →</span></figcaption>
+          </figure>
+        
+          <figure data-print="" data-slug="handball" style="position:absolute;left:0;top:0;margin:0;background:#101112;border:1px solid rgba(232,230,226,0.12);box-shadow:0 26px 60px rgba(0,0,0,0.5);overflow:hidden;cursor:pointer;transform-origin:50% 100%;will-change:transform;transition:transform 1000ms cubic-bezier(0.2,0.7,0.2,1),filter 700ms ease,box-shadow 700ms ease,opacity 700ms ease">
+            <img src="photos/er-burst-05.jpg" alt="Tirage 05 — Handball" width="453" height="680" loading="eager" decoding="async" fetchpriority="high" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+            <figcaption data-print-cap="" style="position:absolute;left:0;right:0;bottom:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 12px;background:linear-gradient(to top,rgba(7,8,10,0.9),rgba(7,8,10,0));font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.16em;text-transform:uppercase;color:#C6C3BE;opacity:0;transition:opacity 500ms ease;pointer-events:none"><span>Handball</span><span data-print-cta="" style="color:oklch(0.84 0.08 44)">Voir la galerie →</span></figcaption>
+          </figure>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1440px;margin:0 auto;padding:clamp(28px,4vw,52px) clamp(20px,5vw,72px) clamp(28px,4vw,52px)">
+    <div data-stats="" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,2.5vw,40px);font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.13em;text-transform:uppercase;color:#8A8783;border-top:1px solid rgba(232,230,226,0.14);padding-top:18px">
+      <div style="display: none; gap: 8px"><span style="color:#605E5B">Disciplines</span><span style="color:#C6C3BE">05</span></div>
+      <div style="display: none; gap: 8px"><span style="color:#605E5B">Images en ligne</span><span style="color:#C6C3BE">75</span></div>
+      <div style="display: none; gap: 8px"><span style="color:#605E5B">Fichiers</span><span style="color:#C6C3BE">Haute résolution sur demande</span></div>
+      <div style="display: none; gap: 8px"><span style="color:#605E5B">Base</span><span style="color:#C6C3BE">Niort · déplacements FR</span></div>
+    </div>
+  </section>
+
+  <div id="galeries" style="position:sticky;top:62px;z-index:45;background:rgba(10,11,12,0.92);backdrop-filter:blur(12px);border-top:1px solid rgba(232,230,226,0.12);border-bottom:1px solid rgba(232,230,226,0.12)">
+        <div style="max-width:1440px;margin:0 auto;padding:16px clamp(20px,5vw,72px) 0;display:flex;align-items:end;gap:clamp(24px,4vw,64px);flex-wrap:wrap">
+      <button data-branch-btn="sport" style="background:none;border:0;padding:0 0 10px;cursor:pointer;display:grid;gap:7px;justify-items:start;text-align:left;color:#F2F0EC;transition:color 400ms ease" class="hv3">
+        <span style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;color:#4A4845;line-height:1">A</span>
+        <span style="display:flex;align-items:baseline;gap:12px">
+          <span style="font-family:'Instrument Serif','Bodoni Moda',Didot,serif;font-size:clamp(20px,2.3vw,34px);letter-spacing:-0.015em;line-height:1;color:inherit">Sport</span>
+          <span style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:#605E5B">5 disciplines</span>
+        </span>
+        <span data-brule="" style="width:100%;height:2px;background:oklch(0.84 0.08 44);transform:scaleX(1);transform-origin:left;transition:transform 620ms cubic-bezier(0.2,0.7,0.2,1)"></span>
+      </button>
+      <span style="width:1px;align-self:stretch;background:rgba(232,230,226,0.14);margin-bottom:10px"></span>
+      <button data-branch-btn="hors" style="background:none;border:0;padding:0 0 10px;cursor:pointer;display:grid;gap:7px;justify-items:start;text-align:left;color:#605E5B;transition:color 400ms ease" class="hv3">
+        <span style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;color:#4A4845;line-height:1">B</span>
+        <span style="display:flex;align-items:baseline;gap:12px">
+          <span style="font-family:'Instrument Serif','Bodoni Moda',Didot,serif;font-size:clamp(20px,2.3vw,34px);letter-spacing:-0.015em;line-height:1;color:inherit">Hors-terrain</span>
+          <span style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:#605E5B">paysage · portrait</span>
+        </span>
+        <span data-brule="" style="width:100%;height:2px;background:oklch(0.84 0.08 44);transform:scaleX(0);transform-origin:left;transition:transform 620ms cubic-bezier(0.2,0.7,0.2,1)"></span>
+      </button>
+    </div>
+    <div data-tabs="sport" style="max-width:1440px;margin:0 auto;padding:14px clamp(20px,5vw,72px) 0;display:flex;align-items:end;gap:clamp(18px,3.4vw,56px);flex-wrap:wrap">
+      <button data-filter="all" style="background:none;border:0;padding:0 0 11px;cursor:pointer;display:grid;gap:8px;justify-items:start;color:#F2F0EC;transition:color 400ms ease" class="hv3">
+        <span style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;color:#605E5B;line-height:1">···</span>
+        <span style="font-family:'Instrument Serif','Bodoni Moda',Didot,serif;font-size:clamp(17px,1.7vw,25px);letter-spacing:-0.01em;line-height:1">Tout</span>
+        <span data-rule="" style="width:100%;height:2px;background:#F2F0EC;transform:scaleX(1);transform-origin:left;transition:transform 620ms cubic-bezier(0.2,0.7,0.2,1)"></span>
+      </button>
+      <button data-filter="football" style="background:none;border:0;padding:0 0 11px;cursor:pointer;display:grid;gap:8px;justify-items:start;color:#8A8783;transition:color 400ms ease" class="hv3">
+        <span style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;color:#605E5B;line-height:1">01</span>
+        <span style="font-family:'Instrument Serif','Bodoni Moda',Didot,serif;font-size:clamp(17px,1.7vw,25px);letter-spacing:-0.01em;line-height:1">Football</span>
+        <span data-rule="" style="width:100%;height:3px;background:#F2F0EC;transform:scaleX(0);transform-origin:left;transition:transform 620ms cubic-bezier(0.2,0.7,0.2,1)"></span>
+      </button>
+      <button data-filter="basketball" style="background:none;border:0;padding:0 0 11px;cursor:pointer;display:grid;gap:8px;justify-items:start;color:#8A8783;transition:color 400ms ease" class="hv3">
+        <span style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;color:#605E5B;line-height:1">02</span>
+        <span style="font-family:'Instrument Serif','Bodoni Moda',Didot,serif;font-size:clamp(17px,1.7vw,25px);letter-spacing:-0.01em;line-height:1">Basketball</span>
+        <span data-rule="" style="width:100%;height:0;border-top:3px dashed #F2F0EC;transform:scaleX(0);transform-origin:left;transition:transform 620ms cubic-bezier(0.2,0.7,0.2,1)"></span>
+      </button>
+      <button data-filter="boxe" style="background:none;border:0;padding:0 0 11px;cursor:pointer;display:grid;gap:8px;justify-items:start;color:#8A8783;transition:color 400ms ease" class="hv3">
+        <span style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;color:#605E5B;line-height:1">03</span>
+        <span style="font-family:'Instrument Serif','Bodoni Moda',Didot,serif;font-size:clamp(17px,1.7vw,25px);letter-spacing:-0.01em;line-height:1">Boxe</span>
+        <span data-rule="" style="width:100%;height:0;border-top:4px double #F2F0EC;transform:scaleX(0);transform-origin:left;transition:transform 620ms cubic-bezier(0.2,0.7,0.2,1)"></span>
+      </button>
+      <button data-filter="hockey" style="background:none;border:0;padding:0 0 11px;cursor:pointer;display:grid;gap:8px;justify-items:start;color:#8A8783;transition:color 400ms ease" class="hv3">
+        <span style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;color:#605E5B;line-height:1">04</span>
+        <span style="font-family:'Instrument Serif','Bodoni Moda',Didot,serif;font-size:clamp(17px,1.7vw,25px);letter-spacing:-0.01em;line-height:1">Hockey</span>
+        <span data-rule="" style="width:100%;height:0;border-top:3px dotted #F2F0EC;transform:scaleX(0);transform-origin:left;transition:transform 620ms cubic-bezier(0.2,0.7,0.2,1)"></span>
+      </button>
+      <button data-filter="handball" style="background:none;border:0;padding:0 0 11px;cursor:pointer;display:grid;gap:8px;justify-items:start;color:#8A8783;transition:color 400ms ease" class="hv3">
+        <span style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;color:#605E5B;line-height:1">05</span>
+        <span style="font-family:'Instrument Serif','Bodoni Moda',Didot,serif;font-size:clamp(17px,1.7vw,25px);letter-spacing:-0.01em;line-height:1">Handball</span>
+        <span data-rule="" style="width:100%;height:1px;background:#F2F0EC;box-shadow:0 4px 0 0 #F2F0EC;transform:scaleX(0);transform-origin:left;transition:transform 620ms cubic-bezier(0.2,0.7,0.2,1)"></span>
+      </button>
+    </div>
+    <div data-tabs="hors" style="display:none;max-width:1440px;margin:0 auto;padding:14px clamp(20px,5vw,72px) 0;align-items:end;gap:clamp(18px,3.4vw,56px);flex-wrap:wrap">
+      <button data-filter="hors-all" style="background:none;border:0;padding:0 0 11px;cursor:pointer;display:grid;gap:8px;justify-items:start;color:#F2F0EC;transition:color 400ms ease" class="hv3">
+        <span style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;color:#605E5B;line-height:1">···</span>
+        <span style="font-family:'Instrument Serif','Bodoni Moda',Didot,serif;font-size:clamp(17px,1.7vw,25px);letter-spacing:-0.01em;line-height:1">Tout</span>
+        <span data-rule="" style="width:100%;height:2px;background:#F2F0EC;transform:scaleX(1);transform-origin:left;transition:transform 620ms cubic-bezier(0.2,0.7,0.2,1)"></span>
+      </button>
+      <button data-filter="paysage" style="background:none;border:0;padding:0 0 11px;cursor:pointer;display:grid;gap:8px;justify-items:start;color:#8A8783;transition:color 400ms ease" class="hv3">
+        <span style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;color:#605E5B;line-height:1">01</span>
+        <span style="font-family:'Instrument Serif','Bodoni Moda',Didot,serif;font-size:clamp(17px,1.7vw,25px);letter-spacing:-0.01em;line-height:1">Paysage</span>
+        <span data-rule="" style="width:100%;height:1px;background:#F2F0EC;box-shadow:0 3px 0 0 rgba(242,240,236,0.35);transform:scaleX(0);transform-origin:left;transition:transform 620ms cubic-bezier(0.2,0.7,0.2,1)"></span>
+      </button>
+      </div>
+    <div data-hors-note="" style="display:none;max-width:1440px;margin:0 auto;padding:12px clamp(20px,5vw,72px) 0">
+      <span style="display:inline-flex;align-items:center;gap:10px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.15em;text-transform:uppercase;color:#7C7975">
+        <span style="width:18px;height:1px;background:#4A4845"></span>
+        <span data-hors-note-text="">Série d'exercice — fichiers RAW trouvés en ligne, développés et retouchés par mes soins</span>
+      </span>
+    </div>
+  </div>
+
+  <main style="max-width:1440px;margin:0 auto;padding:0 clamp(20px,5vw,72px)">
+
+    <section data-gallery="football" data-branch="sport" style="padding:clamp(56px,7vw,110px) 0 0">
+      <div data-reveal="" style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:end;border-top:1px solid oklch(0.72 0.07 232 / 0.4);padding-top:18px;margin-bottom:clamp(22px,3vw,40px)">
+        <div>
+          <div style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:oklch(0.84 0.08 44);margin-bottom:12px">Discipline 01</div>
+          <h2 style="font-family:'Instrument Serif','Bodoni Moda',Didot,serif;font-weight:400;font-size:clamp(40px,5.6vw,82px);line-height:0.92;letter-spacing:-0.025em;margin:0;color:#F6F1E8">Football</h2>
+        </div>
+        <div style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;text-align:right;display:grid;gap:6px">
+          <span>Ligue 2 · National · districts</span>
+          <span style="color:#605E5B">8 images · verticales</span>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap,20px);align-items:start;margin-bottom:var(--gap,20px)">
+        <figure data-photo="" data-sport="Football" data-num="101" data-lieu="Stade René-Gaillard, Niort" data-date="12.10.2025" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:3/4;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                
+<!-- Variantes responsives : les fichiers -800/-1400/-2000.webp seront generes ensuite avec sharp.
+     Le fichier d origine reste dans src comme repli. Tant que les variantes n existent pas, le
+     gestionnaire d erreur en bas de page retire srcset et l image retombe sur src.
+     Aucune variante plus large que l original n est declaree : on n agrandit pas. -->
+<img src="photos/er-fb-01.jpg" alt="Football 01" width="800" height="1200" srcset="photos/er-fb-01-800.webp 800w" sizes="(max-width:560px) 92vw,(max-width:900px) 46vw,30vw" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:8px 12px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:12px"><span style="color:#C6C3BE">№ 101</span><span>Stade René-Gaillard, Niort</span><span>12.10.2025</span></figcaption>
+            </div>
+          </figure>
+        
+          <figure data-photo="" data-sport="Football" data-num="102" data-lieu="Vestiaire" data-date="26.10.2025" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:3/4;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-fb-02.jpg" alt="Football 02" width="800" height="1200" srcset="photos/er-fb-02-800.webp 800w" sizes="(max-width:560px) 92vw,(max-width:900px) 46vw,30vw" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:8px 12px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:12px"><span style="color:#C6C3BE">№ 102</span><span>Vestiaire</span><span>26.10.2025</span></figcaption>
+            </div>
+          </figure>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap,20px);align-items:start">
+        <figure data-photo="" data-sport="Football" data-num="103" data-lieu="Tribune nord" data-date="03.11.2025" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:4/5;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-fb-03.webp" alt="Football 03" width="787" height="1180" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:7px 10px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:11px"><span style="color:#C6C3BE">№ 103</span><span>Tribune nord</span></figcaption>
+            </div>
+          </figure>
+        
+          <figure data-photo="" data-sport="Football" data-num="104" data-lieu="Entraînement" data-date="12.10.2025" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:4/5;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-fb-04.jpg" alt="Football 04" width="491" height="614" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:7px 10px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:11px"><span style="color:#C6C3BE">№ 104</span><span>Entraînement</span></figcaption>
+            </div>
+          </figure>
+        
+          <figure data-photo="" data-sport="Football" data-num="105" data-lieu="Stade René-Gaillard, Niort" data-date="26.10.2025" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:4/5;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-fb-05.webp" alt="Football 05" width="787" height="1180" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:7px 10px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:11px"><span style="color:#C6C3BE">№ 105</span><span>Stade René-Gaillard, Niort</span></figcaption>
+            </div>
+          </figure>
+        
+          <figure data-photo="" data-sport="Football" data-num="106" data-lieu="Vestiaire" data-date="03.11.2025" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:4/5;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-fb-06.jpg" alt="Football 06" width="491" height="614" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:7px 10px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:11px"><span style="color:#C6C3BE">№ 106</span><span>Vestiaire</span></figcaption>
+            </div>
+          </figure>
+        
+          <figure data-photo="" data-sport="Football" data-num="107" data-lieu="Tribune nord" data-date="12.10.2025" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:4/5;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-fb-07.webp" alt="Football 07" width="787" height="1180" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:7px 10px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:11px"><span style="color:#C6C3BE">№ 107</span><span>Tribune nord</span></figcaption>
+            </div>
+          </figure>
+        
+          <figure data-photo="" data-sport="Football" data-num="108" data-lieu="Entraînement" data-date="26.10.2025" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:4/5;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-fb-08.webp" alt="Football 08" width="787" height="1180" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:7px 10px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:11px"><span style="color:#C6C3BE">№ 108</span><span>Entraînement</span></figcaption>
+            </div>
+          </figure>
+        
+          
+        
+        
+        
+        
+        
+        
+        </div>
+    </section>
+
+    <section data-gallery="basketball" data-branch="sport" style="padding:clamp(56px,7vw,110px) 0 0">
+      <div data-reveal="" style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:end;border-top:1px solid oklch(0.72 0.07 232 / 0.4);padding-top:18px;margin-bottom:clamp(22px,3vw,40px)">
+        <div>
+          <div style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:oklch(0.84 0.08 44);margin-bottom:12px">Discipline 02</div>
+          <h2 style="font-family:'Instrument Serif','Bodoni Moda',Didot,serif;font-weight:400;font-size:clamp(40px,5.6vw,82px);line-height:0.92;letter-spacing:-0.025em;margin:0;color:#F6F1E8">Basketball</h2>
+        </div>
+        <div style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;text-align:right;display:grid;gap:6px">
+          <span>Salle · lumière artificielle</span>
+          <span style="color:#605E5B">8 images · verticales</span>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap,20px);align-items:start;margin-bottom:var(--gap,20px);align-items:start">
+        <figure data-photo="" data-sport="Basketball" data-num="201" data-lieu="Halle des sports, Niort" data-date="18.01.2026" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:3/4;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-bk-01.jpg" alt="Basket 01" width="556" height="834" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:8px 12px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:12px"><span style="color:#C6C3BE">№ 201</span><span>Halle des sports, Niort</span><span>18.01.2026</span></figcaption>
+            </div>
+          </figure>
+        
+          <figure data-photo="" data-sport="Basketball" data-num="202" data-lieu="Banc" data-date="01.02.2026" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:3/4;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-bk-02.jpg" alt="Basket 02" width="556" height="834" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:8px 12px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:12px"><span style="color:#C6C3BE">№ 202</span><span>Banc</span><span>01.02.2026</span></figcaption>
+            </div>
+          </figure>
+        
+          <figure data-photo="" data-sport="Basketball" data-num="203" data-lieu="Couloir" data-date="18.01.2026" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:3/4;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-bk-03.jpg" alt="Basket 03" width="556" height="834" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:8px 12px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:12px"><span style="color:#C6C3BE">№ 203</span><span>Couloir</span><span>18.01.2026</span></figcaption>
+            </div>
+          </figure>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap,20px);align-items:start">
+        <figure data-photo="" data-sport="Basketball" data-num="204" data-lieu="Parquet" data-date="01.02.2026" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:4/5;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-bk-04.jpg" alt="Basket 04" width="409" height="614" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:7px 10px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:11px"><span style="color:#C6C3BE">№ 204</span><span>Parquet</span></figcaption>
+            </div>
+          </figure>
+        
+          <figure data-photo="" data-sport="Basketball" data-num="205" data-lieu="Halle des sports, Niort" data-date="18.01.2026" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:4/5;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-bk-05.jpg" alt="Basket 05" width="409" height="614" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:7px 10px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:11px"><span style="color:#C6C3BE">№ 205</span><span>Halle des sports, Niort</span></figcaption>
+            </div>
+          </figure>
+        
+          <figure data-photo="" data-sport="Basketball" data-num="206" data-lieu="Banc" data-date="01.02.2026" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:4/5;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-bk-06.jpg" alt="Basket 06" width="409" height="614" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:7px 10px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:11px"><span style="color:#C6C3BE">№ 206</span><span>Banc</span></figcaption>
+            </div>
+          </figure>
+        
+          <figure data-photo="" data-sport="Basketball" data-num="207" data-lieu="Couloir" data-date="18.01.2026" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:4/5;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-bk-07.jpg" alt="Basket 07" width="409" height="614" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:7px 10px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:11px"><span style="color:#C6C3BE">№ 207</span><span>Couloir</span></figcaption>
+            </div>
+          </figure>
+        
+          <figure data-photo="" data-sport="Basketball" data-num="208" data-lieu="Parquet" data-date="01.02.2026" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:4/5;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-bk-08.jpg" alt="Basket 08" width="409" height="614" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:7px 10px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:11px"><span style="color:#C6C3BE">№ 208</span><span>Parquet</span></figcaption>
+            </div>
+          </figure>
+        
+          
+        
+        
+        
+        
+        
+        
+        </div>
+    </section>
+
+    <section data-gallery="boxe" data-branch="sport" style="padding:clamp(56px,7vw,110px) 0 0">
+      <div data-reveal="" style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:end;border-top:1px solid oklch(0.72 0.07 232 / 0.4);padding-top:18px;margin-bottom:clamp(22px,3vw,40px)">
+        <div>
+          <div style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:oklch(0.84 0.08 44);margin-bottom:12px">Discipline 03</div>
+          <h2 style="font-family:'Instrument Serif','Bodoni Moda',Didot,serif;font-weight:400;font-size:clamp(40px,5.6vw,82px);line-height:0.92;letter-spacing:-0.025em;margin:0;color:#F6F1E8">Boxe</h2>
+        </div>
+        <div style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;text-align:right;display:grid;gap:6px">
+          <span>Gala amateur · salle</span>
+          <span style="color:#605E5B">8 images · verticales</span>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;margin-bottom:var(--gap,20px)">
+        <figure data-photo="" data-sport="Boxe" data-num="301" data-lieu="Gymnase Barbusse" data-date="22.11.2025" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:2/3;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-bx-01.webp" alt="Boxe 01" width="800" height="1200" srcset="photos/er-bx-01-800.webp 800w" sizes="(max-width:560px) 92vw,(max-width:900px) 46vw,30vw" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:8px 12px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:12px"><span style="color:#C6C3BE">№ 301</span><span>Gymnase Barbusse</span><span>22.11.2025</span></figcaption>
+            </div>
+          </figure>
+        
+          <figure data-photo="" data-sport="Boxe" data-num="302" data-lieu="Coin rouge" data-date="13.12.2025" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:2/3;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-bx-02.webp" alt="Boxe 02" width="800" height="1200" srcset="photos/er-bx-02-800.webp 800w" sizes="(max-width:560px) 92vw,(max-width:900px) 46vw,30vw" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:8px 12px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:12px"><span style="color:#C6C3BE">№ 302</span><span>Coin rouge</span><span>13.12.2025</span></figcaption>
+            </div>
+          </figure>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px">
+        <figure data-photo="" data-sport="Boxe" data-num="303" data-lieu="Vestiaire" data-date="22.11.2025" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:2/3;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-bx-03.webp" alt="Boxe 03" width="787" height="1180" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:7px 10px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:11px"><span style="color:#C6C3BE">№ 303</span><span>Vestiaire</span></figcaption>
+            </div>
+          </figure>
+        
+          <figure data-photo="" data-sport="Boxe" data-num="304" data-lieu="Après le gala" data-date="13.12.2025" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:2/3;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-bx-04.webp" alt="Boxe 04" width="683" height="854" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:7px 10px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:11px"><span style="color:#C6C3BE">№ 304</span><span>Après le gala</span></figcaption>
+            </div>
+          </figure>
+        
+          <figure data-photo="" data-sport="Boxe" data-num="305" data-lieu="Gymnase Barbusse" data-date="22.11.2025" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:2/3;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-bx-05.webp" alt="Boxe 05" width="683" height="854" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:7px 10px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:11px"><span style="color:#C6C3BE">№ 305</span><span>Gymnase Barbusse</span></figcaption>
+            </div>
+          </figure>
+        
+          <figure data-photo="" data-sport="Boxe" data-num="306" data-lieu="Coin rouge" data-date="13.12.2025" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:2/3;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-bx-06.webp" alt="Boxe 06" width="683" height="854" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:7px 10px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:11px"><span style="color:#C6C3BE">№ 306</span><span>Coin rouge</span></figcaption>
+            </div>
+          </figure>
+        
+          <figure data-photo="" data-sport="Boxe" data-num="307" data-lieu="Vestiaire" data-date="22.11.2025" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:2/3;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-bx-07.webp" alt="Boxe 07" width="854" height="569" srcset="photos/er-bx-07-800.webp 800w" sizes="(max-width:560px) 92vw,(max-width:900px) 46vw,30vw" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:7px 10px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:11px"><span style="color:#C6C3BE">№ 307</span><span>Vestiaire</span></figcaption>
+            </div>
+          </figure>
+        
+          <figure data-photo="" data-sport="Boxe" data-num="308" data-lieu="Après le gala" data-date="13.12.2025" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:2/3;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-bx-08.webp" alt="Boxe 08" width="569" height="854" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:7px 10px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:11px"><span style="color:#C6C3BE">№ 308</span><span>Après le gala</span></figcaption>
+            </div>
+          </figure>
+        
+          
+        
+        
+        
+        
+        
+        
+        </div>
+    </section>
+
+    <section data-gallery="hockey" data-branch="sport" style="padding:clamp(56px,7vw,110px) 0 0">
+      <div data-reveal="" style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:end;border-top:1px solid oklch(0.72 0.07 232 / 0.4);padding-top:18px;margin-bottom:clamp(22px,3vw,40px)">
+        <div>
+          <div style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:oklch(0.84 0.08 44);margin-bottom:12px">Discipline 04</div>
+          <h2 style="font-family:'Instrument Serif','Bodoni Moda',Didot,serif;font-weight:400;font-size:clamp(40px,5.6vw,82px);line-height:0.92;letter-spacing:-0.025em;margin:0;color:#F6F1E8">Hockey</h2>
+        </div>
+        <div style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;text-align:right;display:grid;gap:6px">
+          <span>Glace · patinoire</span>
+          <span style="color:#605E5B">8 images · verticales</span>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap,20px);align-items:start;margin-bottom:var(--gap,20px)">
+        <figure data-photo="" data-sport="Hockey" data-num="401" data-lieu="Patinoire de Poitiers" data-date="07.12.2025" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:3/4;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-hk-01.webp" alt="Hockey 01" width="556" height="834" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:8px 12px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:12px"><span style="color:#C6C3BE">№ 401</span><span>Patinoire de Poitiers</span><span>07.12.2025</span></figcaption>
+            </div>
+          </figure>
+        
+          <figure data-photo="" data-sport="Hockey" data-num="402" data-lieu="Banc" data-date="18.12.2025" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:3/4;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-hk-02.jpg" alt="Hockey 02" width="556" height="834" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:8px 12px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:12px"><span style="color:#C6C3BE">№ 402</span><span>Banc</span><span>18.12.2025</span></figcaption>
+            </div>
+          </figure>
+        
+          <figure data-photo="" data-sport="Hockey" data-num="403" data-lieu="Gardien" data-date="07.12.2025" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:3/4;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-hk-03.webp" alt="Hockey 03" width="556" height="834" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:8px 12px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:12px"><span style="color:#C6C3BE">№ 403</span><span>Gardien</span><span>07.12.2025</span></figcaption>
+            </div>
+          </figure>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap,20px);align-items:start">
+        <figure data-photo="" data-sport="Hockey" data-num="404" data-lieu="Surfaceuse" data-date="18.12.2025" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:4/5;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-hk-04.webp" alt="Hockey 04" width="556" height="834" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:6px 9px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:11px"><span style="color:#C6C3BE">№ 404</span> · Surfaceuse</figcaption>
+            </div>
+          </figure>
+        
+          <figure data-photo="" data-sport="Hockey" data-num="405" data-lieu="Patinoire de Poitiers" data-date="07.12.2025" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:4/5;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-hk-05.webp" alt="Hockey 05" width="556" height="834" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:6px 9px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:11px"><span style="color:#C6C3BE">№ 405</span> · Patinoire de Poitiers</figcaption>
+            </div>
+          </figure>
+        
+          <figure data-photo="" data-sport="Hockey" data-num="406" data-lieu="Banc" data-date="18.12.2025" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:4/5;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-hk-06.webp" alt="Hockey 06" width="556" height="834" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:6px 9px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:11px"><span style="color:#C6C3BE">№ 406</span> · Banc</figcaption>
+            </div>
+          </figure>
+        
+          <figure data-photo="" data-sport="Hockey" data-num="407" data-lieu="Gardien" data-date="07.12.2025" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:4/5;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-hk-07.webp" alt="Hockey 07" width="556" height="834" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:6px 9px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:11px"><span style="color:#C6C3BE">№ 407</span> · Gardien</figcaption>
+            </div>
+          </figure>
+        
+          <figure data-photo="" data-sport="Hockey" data-num="408" data-lieu="Surfaceuse" data-date="18.12.2025" style="margin:0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:4/5;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-hk-08.webp" alt="Hockey 08" width="556" height="834" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:6px 9px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:11px"><span style="color:#C6C3BE">№ 408</span> · Surfaceuse</figcaption>
+            </div>
+          </figure>
+        
+          
+        
+        
+        
+        
+        
+        
+        </div>
+    </section>
+
+    <section data-gallery="handball" data-branch="sport" style="padding:clamp(56px,7vw,110px) 0 0">
+      <div data-reveal="" style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:end;border-top:1px solid oklch(0.72 0.07 232 / 0.4);padding-top:18px;margin-bottom:clamp(22px,3vw,40px)">
+        <div>
+          <div style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:oklch(0.84 0.08 44);margin-bottom:12px">Discipline 05</div>
+          <h2 style="font-family:'Instrument Serif','Bodoni Moda',Didot,serif;font-weight:400;font-size:clamp(40px,5.6vw,82px);line-height:0.92;letter-spacing:-0.025em;margin:0;color:#F6F1E8">Handball</h2>
+        </div>
+        <div style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;text-align:right;display:grid;gap:6px">
+          <span>Championnat régional</span>
+          <span style="color:#605E5B">8 images · verticales</span>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap,20px);align-items:start;align-items:start">
+        <figure data-photo="" data-sport="Handball" data-num="501" data-lieu="Salle Pierre-Mendès-France" data-date="25.01.2026" style="margin:0px 0 0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:3/4;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-hb-01.webp" alt="Hand 01" width="556" height="834" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:8px 12px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:11px"><span style="color:#C6C3BE">№ 501</span><span>Salle Pierre-Mendès-France</span><span>25.01.2026</span></figcaption>
+            </div>
+          </figure>
+        
+          <figure data-photo="" data-sport="Handball" data-num="502" data-lieu="Tir en suspension" data-date="08.02.2026" style="margin:clamp(20px,3vw,56px) 0 0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:3/4;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-hb-02.webp" alt="Hand 02" width="667" height="834" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:8px 12px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:11px"><span style="color:#C6C3BE">№ 502</span><span>Tir en suspension</span><span>08.02.2026</span></figcaption>
+            </div>
+          </figure>
+        
+          <figure data-photo="" data-sport="Handball" data-num="503" data-lieu="Défense" data-date="25.01.2026" style="margin:clamp(40px,6vw,104px) 0 0">
+            <div data-reveal="">
+              <div data-frame="" style="position:relative;width:100%;aspect-ratio:3/4;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+                <img src="photos/er-hb-03.webp" alt="Hand 03" width="667" height="834" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:8px 12px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+              </div>
+              <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:11px"><span style="color:#C6C3BE">№ 503</span><span>Défense</span><span>25.01.2026</span></figcaption>
+            </div>
+          </figure>
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        
+        
+        
+        
+        
+        </div>
+    </section>
+
+    <section data-gallery="paysage" data-branch="hors" style="display:none;padding:clamp(56px,7vw,110px) 0 0">
+      <div data-reveal="" style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:end;border-top:1px solid oklch(0.78 0.05 150 / 0.4);padding-top:18px;margin-bottom:clamp(22px,3vw,40px)">
+        <div>
+          <div style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:oklch(0.84 0.08 44);margin-bottom:12px">Série 01</div>
+          <h2 style="font-family:'Instrument Serif','Bodoni Moda',Didot,serif;font-weight:400;font-size:clamp(40px,5.6vw,82px);line-height:0.92;letter-spacing:-0.025em;margin:0;color:#F6F1E8">Paysage</h2>
+        </div>
+        <div style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;text-align:right;display:grid;gap:6px">
+          <span>Littoral · marais · arrière-pays</span>
+          <span style="color:#605E5B">6 images · horizontales</span>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap,20px);align-items:start;margin-bottom:var(--gap,20px)">
+        <figure data-photo="" data-sport="Paysage" data-num="601" data-lieu="Marais poitevin" data-date="04.01.2026" style="margin:0">
+          <div data-reveal="">
+            <div data-frame="" style="position:relative;width:100%;aspect-ratio:3/2;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv6">
+              <img src="photos/er-py-01.jpg" alt="Paysage 01" width="1200" height="675" srcset="photos/er-py-01-800.webp 800w" sizes="(max-width:560px) 92vw,(max-width:900px) 46vw,30vw" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block">
+                <button data-expand="" style="position:absolute;right:0;bottom:0;z-index:6;background:rgba(10,11,12,0.82);border:1px solid rgba(232,230,226,0.2);border-right:0;border-bottom:0;color:#E8E6E2;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:8px 12px;cursor:pointer;opacity:0.55;transition:opacity 300ms ease,color 300ms ease" class="hv5">Plein écran</button>
+            </div>
+            <figcaption style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:12px"><span style="color:#C6C3BE">№ 601</span><span>Marais poitevin</span><span>04.01.2026</span></figcaption>
+          </div>
+        </figure>
+        
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap,20px);align-items:start;margin-bottom:var(--gap,20px)">
+        
+        
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap,20px);align-items:start">
+        
+        
+      </div>
+    </section>
+
+    
+
+    <section id="apropos" style="padding:clamp(72px,9vw,140px) 0 clamp(56px,7vw,110px)">
+      <div data-reveal="" style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;border-bottom:1px solid rgba(232,230,226,0.18);padding-bottom:16px;margin-bottom:clamp(28px,4vw,48px)">
+        <h2 style="font-family:'Instrument Serif','Bodoni Moda',Didot,serif;font-weight:400;font-size:clamp(26px,3vw,40px);letter-spacing:-0.01em;margin:0">À propos</h2>
+        <span style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#8A8783">Edouard Richard</span>
+      </div>
+      <div data-about-grid="" style="display:grid;grid-template-columns:minmax(0,3fr) minmax(0,5fr);gap:clamp(28px,5vw,72px);align-items:start">
+        <div data-reveal="">
+          <div data-frame="" style="position:relative;width:100%;aspect-ratio:4/5;background:#0D1013;cursor:zoom-in;border:1px solid rgba(232,230,226,0.1);filter:var(--rest-filter,grayscale(1) contrast(1.06) brightness(0.94));transition:filter 700ms cubic-bezier(0.2,0.7,0.2,1)" class="hv4">
+            <img src="photos/er-portrait-v2.jpg" alt="Portrait — bord de terrain" width="590" height="885" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+          </div>
+          <div style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;padding-top:11px">Portrait</div>
+        </div>
+        <div data-reveal="" style="display:grid;gap:22px;max-width:56ch">
+          <p style="font-size:16px;line-height:1.75;color:#C6C3BE;margin:0;text-wrap:pretty">Photographe de sport. Couverture de matchs, portraits d'athlètes et coulisses, en salle comme en extérieur, du district au niveau national.</p>
+          <p style="font-size:16px;line-height:1.75;color:#A5A29D;margin:0;text-wrap:pretty">Chaque reportage est livré en haute résolution, sélection éditée et légendée. Cadrages d'origine conservés, retouche limitée à la densité et à la balance des couleurs.</p>
+          <div style="border-top:1px solid rgba(232,230,226,0.12);padding-top:20px;margin-top:4px;display:grid;gap:14px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#8A8783">
+            <div style="display:grid;grid-template-columns:130px 1fr;gap:20px"><span style="color:#605E5B">Disciplines</span><span>Football · Basketball · Boxe · Hockey · Handball</span></div>
+            <div style="display:grid;grid-template-columns:130px 1fr;gap:20px"><span style="color:#605E5B">Prestations</span><span>Match · portrait · reportage club</span></div>
+            <div style="display:grid;grid-template-columns:130px 1fr;gap:20px"><span style="color:#605E5B">Livraison</span><span>Galerie privée · fichiers HD · tirages</span></div>
+            <div style="display:grid;grid-template-columns:130px 1fr;gap:20px"><span style="color:#605E5B">Zone</span><span>Rouen · France · déplacements</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact" style="border-top:1px solid rgba(232,230,226,0.18)">
+    <div style="max-width:1440px;margin:0 auto;padding:clamp(44px,7vw,96px) clamp(20px,5vw,72px) 40px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(28px,5vw,64px);align-items:end">
+      <div>
+        <div style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#8A8783;margin-bottom:20px">Contact</div>
+        <a data-mail="" href="mailto:edouard.rchd@gmail.com" style="font-family:'Instrument Serif','Bodoni Moda',Didot,serif;font-size:clamp(24px,4vw,56px);letter-spacing:-0.015em;color:#E8E6E2;display:inline-block;border-bottom:1px solid rgba(242,240,236,0.45);padding-bottom:6px;transition:color 400ms ease,border-color 400ms ease" class="hv7">edouard.rchd@gmail.com</a>
+        <div style="font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;margin-top:26px">Accréditations, reportages club, tirages</div>
+      </div>
+      <div style="display:grid;gap:12px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;justify-items:end">
+        <a href="#" style="color:#8A8783" class="hv8">Instagram</a>
+        <a href="#galeries" style="color:#8A8783" class="hv8">Galeries</a>
+      </div>
+    </div>
+    <div style="max-width:1440px;margin:0 auto;padding:0 clamp(20px,5vw,72px) clamp(28px,4vw,56px);display:flex;justify-content:space-between;gap:24px;font-family:'Space Mono','IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.16em;text-transform:uppercase;color:#605E5B;border-top:1px solid rgba(232,230,226,0.1);padding-top:20px">
+      <span>© Edouard Richard — Tous droits réservés</span>
+      <span>Rouen</span>
+    </div>
+  </footer>
+</div>
+<script>
+(function () {
+  var d = document;
+
+  /* --- ecran d'ouverture : une seule fois par session --- */
+  var leader = d.querySelector('[data-leader]');
+  if (leader) {
+    try {
+      if (sessionStorage.getItem('er-leader') === '1') { leader.parentNode.removeChild(leader); leader = null; }
+      else sessionStorage.setItem('er-leader', '1');
+    } catch (e) {}
+    if (leader) setTimeout(function () { if (leader.parentNode) leader.parentNode.removeChild(leader); }, 1800);
+  }
+
+  /* --- repli si une variante -800/-1400/-2000.webp n'existe pas encore --- */
+  Array.prototype.forEach.call(d.querySelectorAll('img[srcset]'), function (im) {
+    im.addEventListener('error', function () {
+      if (im.getAttribute('srcset')) { im.removeAttribute('srcset'); im.removeAttribute('sizes'); }
+    });
+  });
+
+  /* --- barre de progression --- */
+  var bar = d.querySelector('[data-progress]');
+  if (bar) {
+    var onScroll = function () {
+      var max = d.documentElement.scrollHeight - window.innerHeight;
+      bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, window.scrollY / max) : 0).toFixed(4) + ')';
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+  }
+
+  /* --- apparition au scroll --- */
+  if (typeof IntersectionObserver !== 'undefined') {
+    var vh = window.innerHeight;
+    var hidden = Array.prototype.filter.call(d.querySelectorAll('[data-reveal]'), function (n) {
+      return n.getBoundingClientRect().top > vh * 0.9;
+    });
+    hidden.forEach(function (n) {
+      n.style.opacity = '0';
+      n.style.transform = 'translateY(22px)';
+      n.style.transition = 'opacity 900ms cubic-bezier(0.2,0.7,0.2,1), transform 900ms cubic-bezier(0.2,0.7,0.2,1)';
+    });
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'none';
+        io.unobserve(e.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.04 });
+    hidden.forEach(function (n) { io.observe(n); });
+  }
+
+  /* --- navigation : branche (Sport / Hors-terrain) puis discipline --- */
+  var branch = 'sport';
+  var pick = { sport: 'all', hors: 'hors-all' };
+  var branchBtns = [].slice.call(d.querySelectorAll('[data-branch-btn]'));
+  var rows = [].slice.call(d.querySelectorAll('[data-tabs]'));
+  var sections = [].slice.call(d.querySelectorAll('[data-gallery]'));
+  function applyFilter() {
+    branchBtns.forEach(function (b) {
+      var on = b.getAttribute('data-branch-btn') === branch;
+      b.style.color = on ? '#F2F0EC' : '#605E5B';
+      var r = b.querySelector('[data-brule]');
+      if (r) r.style.transform = on ? 'scaleX(1)' : 'scaleX(0)';
+    });
+    rows.forEach(function (r) { r.style.display = r.getAttribute('data-tabs') === branch ? 'flex' : 'none'; });
+    var note = d.querySelector('[data-hors-note]');
+    if (note) note.style.display = branch === 'hors' ? '' : 'none';
+    rows.forEach(function (r) {
+      var br = r.getAttribute('data-tabs');
+      [].slice.call(r.querySelectorAll('[data-filter]')).forEach(function (o) {
+        var on = o.getAttribute('data-filter') === pick[br];
+        o.style.color = on ? '#F2F0EC' : '#8A8783';
+        var rule = o.querySelector('[data-rule]');
+        if (rule) rule.style.transform = on ? 'scaleX(1)' : 'scaleX(0)';
+      });
+    });
+    sections.forEach(function (s) {
+      var br = s.getAttribute('data-branch');
+      var f = pick[br];
+      var show = br === branch && (f === 'all' || f === 'hors-all' || s.getAttribute('data-gallery') === f);
+      s.style.display = show ? '' : 'none';
+    });
+  }
+  branchBtns.forEach(function (b) {
+    b.addEventListener('click', function () { branch = b.getAttribute('data-branch-btn'); applyFilter(); });
+  });
+  rows.forEach(function (r) {
+    var br = r.getAttribute('data-tabs');
+    [].slice.call(r.querySelectorAll('[data-filter]')).forEach(function (b) {
+      b.addEventListener('click', function () { branch = br; pick[br] = b.getAttribute('data-filter'); applyFilter(); });
+    });
+  });
+  applyFilter();
+
+  function goToGallery(slug) {
+    var tab = d.querySelector('[data-tabs="sport"] [data-filter="' + slug + '"]');
+    if (tab) tab.click();
+    var sec = d.querySelector('[data-gallery="' + slug + '"]');
+    if (sec) window.scrollTo({ top: Math.max(0, window.scrollY + sec.getBoundingClientRect().top - 100), behavior: 'smooth' });
+  }
+
+  /* --- hero : cinq tirages sur un anneau lent --- */
+  (function () {
+    var hero = d.querySelector('[data-hero]');
+    var table = hero && hero.querySelector('[data-table]');
+    if (!table) return;
+    var meta = hero.querySelector('[data-readout-meta]');
+    var prints = [].slice.call(table.querySelectorAll('[data-print]'));
+    var ring = [
+      { x: 0.28, y: 0.00, rot: 0.0, s: 1.00, z: 9, depth: 26, dim: 'none' },
+      { x: 0.60, y: 0.13, rot: 3.2, s: 0.80, z: 7, depth: 18, dim: 'saturate(0.38) brightness(0.6)' },
+      { x: 0.82, y: 0.27, rot: 5.6, s: 0.62, z: 5, depth: 11, dim: 'saturate(0.28) brightness(0.48)' },
+      { x: 0.01, y: 0.27, rot: -5.6, s: 0.62, z: 4, depth: 11, dim: 'saturate(0.28) brightness(0.48)' },
+      { x: 0.12, y: 0.13, rot: -3.2, s: 0.80, z: 6, depth: 18, dim: 'saturate(0.38) brightness(0.6)' }
+    ];
+    var imgOf = function (p) { return p.querySelector('img'); };
+    var ratioOf = function (p) {
+      var img = imgOf(p);
+      return (img && img.naturalWidth && img.naturalHeight) ? img.naturalWidth / img.naturalHeight : 0.72;
+    };
+    var active = 0, hovered = -1, mx = 0, my = 0, W = 0, H = 0;
+    var slotOf = function (i) { return (i - active + prints.length * 2) % prints.length; };
+
+    /* Le fond emprunte ses deux teintes dominantes au tirage en main.
+       Lecture de pixels via canvas : servie en HTTP c'est autorise, en file://
+       getImageData leve une SecurityError et l'on garde la teinte de repli. */
+    var tints = [].slice.call(hero.querySelectorAll('[data-tint]'));
+    var fallback = {
+      football: ['oklch(0.72 0.07 232 / 0.20)', 'oklch(0.78 0.05 210 / 0.13)'],
+      basketball: ['oklch(0.76 0.10 44 / 0.20)', 'oklch(0.70 0.08 30 / 0.13)'],
+      boxe: ['oklch(0.66 0.13 25 / 0.20)', 'oklch(0.74 0.07 60 / 0.12)'],
+      hockey: ['oklch(0.80 0.06 205 / 0.20)', 'oklch(0.70 0.05 250 / 0.13)'],
+      handball: ['oklch(0.74 0.09 150 / 0.19)', 'oklch(0.76 0.06 120 / 0.12)']
+    };
+    var tintCache = {};
+    var liftTo = function (c, peak) { var k = peak / Math.max(1, c[0], c[1], c[2]); return c.map(function (v) { return Math.min(255, Math.round(v * k)); }); };
+    var rgba = function (c, a) { return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + a + ')'; };
+    var tintOf = function (p) {
+      var img = imgOf(p);
+      var key = (img && img.naturalWidth && (img.currentSrc || img.src)) ? (img.currentSrc || img.src).slice(0, 96) : 'ph:' + p.dataset.slug;
+      if (tintCache[key]) return tintCache[key];
+      var out = fallback[p.dataset.slug] || fallback.football;
+      if (img && img.naturalWidth) {
+        try {
+          var n = 20, cv = d.createElement('canvas');
+          cv.width = n; cv.height = n;
+          var cx = cv.getContext('2d');
+          cx.drawImage(img, 0, 0, n, n);
+          var da = cx.getImageData(0, 0, n, n).data;
+          var rs = 0, gs = 0, bs = 0, w = 0, mr = 0, mg = 0, mb = 0, c = 0;
+          for (var i = 0; i < da.length; i += 4) {
+            var r = da[i], g = da[i + 1], b = da[i + 2];
+            mr += r; mg += g; mb += b; c++;
+            var hi = Math.max(r, g, b), lo = Math.min(r, g, b);
+            var wt = Math.pow((hi - lo) / 255, 2) * 1.1 + (hi / 255) * 0.22;
+            rs += r * wt; gs += g * wt; bs += b * wt; w += wt;
+          }
+          var avg = [mr / c, mg / c, mb / c];
+          var dom = w > 0.01 ? [rs / w, gs / w, bs / w] : avg;
+          out = [rgba(liftTo(dom, 232), 0.22), rgba(liftTo(avg, 196), 0.14)];
+        } catch (e) { /* canvas restreint : on garde la teinte de la discipline */ }
+      }
+      tintCache[key] = out;
+      return out;
+    };
+    var tintFace = 0, tinted = -1;
+    var paintTint = function (force) {
+      if (!tints.length) return;
+      var p = prints[active];
+      if (!p) return;
+      var key = active + ':' + tintOf(p).join('|');
+      if (!force && key === tinted) return;
+      tinted = key;
+      var pair = tintOf(p), a = pair[0], b = pair[1];
+      var next = tints[tintFace ^ 1];
+      next.style.background = 'radial-gradient(48% 54% at 68% 22%, ' + a + ', rgba(10,11,12,0) 72%),' +
+        'radial-gradient(44% 50% at 26% 34%, ' + b + ', rgba(10,11,12,0) 74%),' +
+        'radial-gradient(64% 42% at 56% 98%, ' + a + ', rgba(10,11,12,0) 78%)';
+      next.style.opacity = '1';
+      tints[tintFace].style.opacity = '0';
+      tintFace ^= 1;
+    };
+
+    var place = function () {
+      prints.forEach(function (p, i) {
+        var k = ring[slotOf(i) % ring.length];
+        var on = slotOf(i) === 0;
+        var up = hovered === i && on;
+        var w = p.offsetWidth || 0;
+        var x = Math.min(W * k.x, Math.max(0, W - w * k.s)) + mx * k.depth;
+        var y = H * k.y + my * k.depth * 0.55;
+        p.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0) rotate(' + (up ? 0 : k.rot) + 'deg) scale(' + (k.s * (up ? 1.04 : 1)).toFixed(3) + ')';
+        p.style.filter = k.dim;
+        p.style.zIndex = String(k.z);
+        p.style.opacity = on ? '1' : '0.92';
+        p.style.boxShadow = on ? '0 40px 90px rgba(0,0,0,0.6)' : '0 22px 52px rgba(0,0,0,0.45)';
+        p.style.borderColor = on ? 'oklch(0.74 0.08 44 / 0.55)' : 'rgba(232,230,226,0.1)';
+        var cap = p.querySelector('[data-print-cap]');
+        if (cap) cap.style.opacity = on ? '1' : '0';
+      });
+      var front = prints[active];
+      if (front && meta) {
+        var lab = (front.querySelector('[data-print-cap] span') || {}).textContent || '';
+        meta.textContent = String(active + 1).replace(/^(\d)$/, '0$1') + ' — ' + lab.trim();
+        meta.style.color = 'oklch(0.84 0.08 44)';
+      }
+      paintTint(false);
+    };
+    var layout = function () {
+      H = table.clientHeight; W = table.clientWidth;
+      prints.forEach(function (p) {
+        var h = Math.round(H * 0.86);
+        p.style.height = h + 'px';
+        p.style.width = Math.round(h * ratioOf(p)) + 'px';
+      });
+      place();
+    };
+    var turn = function (dir) { active = (active + dir + prints.length) % prints.length; place(); };
+
+    var downX = null, dragged = false;
+    prints.forEach(function (p, i) {
+      p.addEventListener('pointerenter', function () { hovered = i; place(); });
+      p.addEventListener('pointerleave', function () { if (hovered === i) { hovered = -1; place(); } });
+      p.addEventListener('click', function () {
+        if (dragged) return;
+        if (slotOf(i) !== 0) { active = i; place(); return; }
+        goToGallery(p.dataset.slug);
+      });
+      var im = imgOf(p);
+      if (im) im.addEventListener('load', function () { layout(); paintTint(true); });
+    });
+    table.addEventListener('pointerdown', function (e) { downX = e.clientX; dragged = false; table.style.cursor = 'grabbing'; });
+    var release = function () { downX = null; table.style.cursor = 'grab'; setTimeout(function () { dragged = false; }, 60); };
+    window.addEventListener('pointerup', release);
+    table.addEventListener('pointercancel', release);
+    var wheelLock = 0;
+    table.addEventListener('wheel', function (e) {
+      if (Math.abs(e.deltaX) < 12 || Date.now() < wheelLock) return;
+      e.preventDefault();
+      wheelLock = Date.now() + 520;
+      turn(e.deltaX > 0 ? 1 : -1);
+    }, { passive: false });
+    hero.addEventListener('pointermove', function (e) {
+      var r = hero.getBoundingClientRect();
+      mx = (e.clientX - r.left) / r.width - 0.5;
+      my = (e.clientY - r.top) / r.height - 0.5;
+      if (downX !== null) {
+        var dx = e.clientX - downX;
+        if (Math.abs(dx) > 58) { turn(dx < 0 ? 1 : -1); downX = e.clientX; dragged = true; }
+      }
+      place();
+    });
+    hero.addEventListener('pointerleave', function () { mx = 0; my = 0; hovered = -1; place(); });
+    window.addEventListener('resize', layout);
+    layout();
+    setTimeout(layout, 400);
+    setTimeout(layout, 1600);
+    setInterval(function () {
+      if (hovered === -1 && downX === null && table.getBoundingClientRect().bottom > 60) turn(1);
+    }, 5200);
+  })();
+
+  /* --- plein ecran --- */
+  (function () {
+    var open = null, neutralized = [];
+    var figs = function () {
+      return [].slice.call(d.querySelectorAll('[data-photo]')).filter(function (f) { return f.offsetParent !== null || open === f; });
+    };
+    var back = d.createElement('div');
+    back.style.cssText = 'position:fixed;inset:0;z-index:75;background:#07080A;opacity:0;pointer-events:none;transition:opacity 420ms ease';
+    var bar2 = d.createElement('div');
+    bar2.style.cssText = "position:fixed;left:0;right:0;bottom:0;z-index:82;display:none;align-items:center;justify-content:space-between;gap:24px;padding:16px clamp(20px,4vw,48px);font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#8A8783;background:linear-gradient(to top,rgba(7,8,10,0.95),rgba(7,8,10,0))";
+    bar2.innerHTML = '<span data-meta style="color:#C6C3BE"></span><span style="display:flex;gap:18px;align-items:center"><button data-prev style="background:none;border:1px solid rgba(232,230,226,0.2);color:#E8E6E2;font:inherit;letter-spacing:inherit;text-transform:inherit;padding:8px 12px;cursor:pointer">← Préc.</button><button data-next style="background:none;border:1px solid rgba(232,230,226,0.2);color:#E8E6E2;font:inherit;letter-spacing:inherit;text-transform:inherit;padding:8px 12px;cursor:pointer">Suiv. →</button><button data-close style="background:none;border:1px solid rgba(232,230,226,0.2);color:#8A8783;font:inherit;letter-spacing:inherit;text-transform:inherit;padding:8px 12px;cursor:pointer">Fermer ✕</button></span>';
+    d.body.appendChild(back);
+    d.body.appendChild(bar2);
+
+    var ratioOf = function (frame) {
+      var img = frame.querySelector('img');
+      if (img) {
+        var wa = +img.getAttribute('width'), ha = +img.getAttribute('height');
+        if (wa && ha) return wa / ha;
+        if (img.naturalWidth && img.naturalHeight) return img.naturalWidth / img.naturalHeight;
+      }
+      var rc = frame.getBoundingClientRect();
+      return rc.width && rc.height ? rc.width / rc.height : 0.75;
+    };
+    var size = function (frame, forced) {
+      var r = forced || ratioOf(frame);
+      var maxW = window.innerWidth * 0.92, maxH = window.innerHeight * 0.82;
+      var w = maxW, h = w / r;
+      if (h > maxH) { h = maxH; w = h * r; }
+      frame.style.width = Math.round(w) + 'px';
+      frame.style.height = Math.round(h) + 'px';
+      frame.style.left = Math.round((window.innerWidth - w) / 2) + 'px';
+      frame.style.top = Math.round((window.innerHeight - h) / 2 - 14) + 'px';
+    };
+    var collapse = function () {
+      if (!open) return;
+      var fig = open, frame = fig.querySelector('[data-frame]');
+      frame.style.removeProperty('filter');
+      frame.setAttribute('style', frame.dataset.prev || '');
+      fig.style.minHeight = '';
+      neutralized.forEach(function (s) {
+        var el = s[0];
+        el.style.transform = s[2] || '';
+        el.style.filter = s[3] || '';
+        el.style.perspective = s[4] || '';
+        el.style.opacity = s[5] || '';
+        void el.offsetHeight;
+        el.style.transition = s[1] || '';
+      });
+      neutralized = [];
+      open = null;
+      back.style.opacity = '0';
+      back.style.pointerEvents = 'none';
+      bar2.style.display = 'none';
+    };
+    var expand = function (fig) {
+      if (!fig) return;
+      if (open) collapse();
+      var frame = fig.querySelector('[data-frame]');
+      // ratio releve AVANT de passer le cadre en position:fixed, sinon le cadre
+      // n'a plus que la hauteur de ses bordures quand l'image est en attente.
+      var ratio = ratioOf(frame);
+      var im = frame.querySelector('img');
+      if (im && !im.complete) {
+        im.setAttribute('loading', 'eager');
+        im.addEventListener('load', function () { if (open === fig) size(frame, ratio); }, { once: true });
+      }
+      fig.style.minHeight = fig.getBoundingClientRect().height + 'px';
+      neutralized = [];
+      for (var el = frame.parentElement; el && el !== d.body; el = el.parentElement) {
+        var cs = getComputedStyle(el);
+        if (cs.transform !== 'none' || cs.filter !== 'none' || cs.perspective !== 'none' || cs.opacity !== '1') {
+          neutralized.push([el, el.style.transition, el.style.transform, el.style.filter, el.style.perspective, el.style.opacity]);
+          el.style.transition = 'none';
+          el.style.transform = 'none';
+          el.style.filter = 'none';
+          el.style.perspective = 'none';
+          el.style.opacity = '1';
+        }
+      }
+      void frame.offsetHeight;
+      frame.dataset.prev = frame.getAttribute('style');
+      frame.style.position = 'fixed';
+      frame.style.zIndex = '80';
+      frame.style.aspectRatio = 'auto';
+      frame.style.setProperty('filter', 'none', 'important');
+      frame.style.borderColor = 'rgba(232,230,226,0.22)';
+      frame.style.margin = '0';
+      size(frame, ratio);
+      back.style.opacity = '1';
+      back.style.pointerEvents = 'auto';
+      bar2.style.display = 'flex';
+      bar2.querySelector('[data-meta]').textContent =
+        '№ ' + fig.dataset.num + '  ·  ' + fig.dataset.sport + '  ·  ' + fig.dataset.lieu + '  ·  ' + fig.dataset.date;
+      open = fig;
+    };
+    var step = function (dir) {
+      if (!open) return;
+      var list = figs(), i = list.indexOf(open);
+      var next = list[(i + dir + list.length) % list.length];
+      collapse();
+      if (!next) return;
+      var r = next.getBoundingClientRect();
+      window.scrollTo({ top: Math.max(0, window.scrollY + r.top - (window.innerHeight - r.height) / 2), behavior: 'auto' });
+      expand(next);
+    };
+    d.addEventListener('click', function (e) {
+      if (!e.target.closest) return;
+      var btn = e.target.closest('[data-expand]');
+      if (btn) { e.preventDefault(); e.stopPropagation(); expand(btn.closest('[data-photo]')); return; }
+      if (e.target.closest('a,button')) return;
+      var frame = e.target.closest('[data-photo] [data-frame]');
+      if (!frame || open) return;
+      if (!frame.querySelector('img')) return;
+      e.preventDefault();
+      expand(frame.closest('[data-photo]'));
+    });
+    back.addEventListener('click', collapse);
+    bar2.querySelector('[data-close]').addEventListener('click', collapse);
+    bar2.querySelector('[data-prev]').addEventListener('click', function () { step(-1); });
+    bar2.querySelector('[data-next]').addEventListener('click', function () { step(1); });
+    window.addEventListener('keydown', function (e) {
+      if (!open) return;
+      if (e.key === 'Escape') collapse();
+      if (e.key === 'ArrowRight') step(1);
+      if (e.key === 'ArrowLeft') step(-1);
+    });
+    window.addEventListener('resize', function () { if (open) size(open.querySelector('[data-frame]')); });
+  })();
+})();
+</script>
+</body>
+</html>

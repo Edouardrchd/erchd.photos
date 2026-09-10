@@ -1,14 +1,20 @@
-node_modules/
-dist/
-.astro/
-
-# Fichiers d'environnement
-.env
-.env.*
-
-# Systeme / editeurs
+# Systeme
 .DS_Store
 Thumbs.db
-*.log
-.vscode/
-.idea/
+
+# Dependances
+node_modules/
+
+# Script de generation des variantes d'images (outil, pas contenu du site)
+generate-variants.mjs
+.variants-report.json
+
+# Fichiers de travail de l'outil d'edition : ne pas deployer
+.image-slots.state.json
+.thumbnail
+uploads/
+mobile/
+*.dc.html
+support.js
+image-slot.js
+photos/index.json

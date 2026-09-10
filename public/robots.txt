@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://edouardvisuals.com/sitemap-index.xml
