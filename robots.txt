@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://edouardrchd.github.io/erchd.photos/sitemap.xml

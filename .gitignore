@@ -5,9 +5,19 @@ Thumbs.db
 # Dependances
 node_modules/
 
-# Script de generation des variantes d'images (outil, pas contenu du site)
-generate-variants.mjs
+# Outils de fabrication : scripts, manifestes et planches de travail.
+# Ils produisent le site, ils n'en font pas partie.
+*.mjs
+*.py
+fonts.css
+manifest.json
+classement*.json
+import-*.json
+legendes-a-remplir.txt
 .variants-report.json
+gal/
+sheets/
+shots/
 
 # Fichiers de travail de l'outil d'edition : ne pas deployer
 .image-slots.state.json
